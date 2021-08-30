@@ -1,4 +1,7 @@
 const passport = require('passport');
+const mongoose = require('mongoose');
+
+const User = mongoose.model('users');
 
 module.exports = (app) => {
   app.get(
@@ -25,6 +28,7 @@ module.exports = (app) => {
   })
 
   app.patch('/api/current_user/:id', (req, res) => {
-    console.log(req.user)
+    const user = User.findOne(req.user._id)
+    console.log(user)
   });
 }
