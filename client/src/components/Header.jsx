@@ -20,7 +20,7 @@ const Header = (props) => {
     <nav>
       <div className="nav-wrapper">
         <Link 
-          to={props.auth ? '/profile' : '/'} 
+          to={props.auth ? `/profile/${props.auth._id}` : '/'} 
           className="left brand-logo"
         >
           Loosamax

@@ -8,6 +8,6 @@ export const fetchUser = () => async (dispatch) =>
 };
 
 export const changePseudo = (id) => async (dispatch) => {
- const res = axios.post(`/profiles/${id}`)
+ const res = axios.patch(`/api/current_user/${id}`)
  dispatch({ type: UPDATE_PSEUDO, payload: res.data })
 }

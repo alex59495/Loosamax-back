@@ -24,7 +24,7 @@ module.exports = (app) => {
     res.send(req.user);
   })
 
-  app.post('/profiles/:id', (req, res) => {
-    
+  app.patch('/api/current_user/:id', (req, res) => {
+    console.log(req.user)
   });
 }

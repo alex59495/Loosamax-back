@@ -1,9 +1,9 @@
 import React, {useState} from 'react';
 import { connect } from 'react-redux';
 
-import {changePseudo} from '../actions/index'
+import * as actions from '../actions/index'
 
-const Profile = ({auth}) => {
+const Profile = ({auth, changePseudo}) => {
   const [openEdit, setOpenEdit] = useState(false)
 
   const renderForm = () => {
@@ -11,7 +11,7 @@ const Profile = ({auth}) => {
       return (
         <>
           <input type="text" name="pseudo" placeholder="Change ton pseudo.."/>
-          <button type="submit" onClick={() => changePseudo(auth.id)}>Changer</button>
+          <button type="submit" onClick={() => changePseudo(auth._id)}>Changer</button>
         </>
       )
     }
@@ -33,4 +33,4 @@ const mapStateToProps = ({auth}) => {
   }
 }
 
-export default connect(mapStateToProps)(Profile)
+export default connect(mapStateToProps, actions)(Profile)
