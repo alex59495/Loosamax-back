@@ -1,0 +1,27 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "server": "nodemon --delay 1500ms index.js",
+    "client": "yarn --cwd client start",
+    "dev": "concurrently \"yarn run server\" \"yarn run client\" ",
+    "client-install": "yarn --cwd client install",
+    "client-build": "yarn --cwd client build",
+    "heroku-postbuild": "YARN_PRODUCTION=false yarn client-install && yarn client-build"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "concurrently": "^6.2.1",
+    "cookie-session": "^1.4.0",
+    "express": "^4.17.1",
+    "mongoose": "^6.0.2",
+    "nodemon": "^2.0.12",
+    "passport": "^0.4.1",
+    "passport-google-oauth20": "^2.0.0",
+    "react-redux": "^7.2.4",
+    "redux": "^4.1.1"
+  }
+}
