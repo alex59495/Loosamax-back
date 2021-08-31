@@ -28,7 +28,10 @@ module.exports = (app) => {
   })
 
   app.patch('/api/current_user/:id', (req, res) => {
-    const user = User.findOne(req.user._id)
-    console.log(user)
+    console.log(req.body)
+    
+    const user = User.updateOne({
+      _id: req.user._id
+    })
   });
 }
