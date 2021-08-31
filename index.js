@@ -4,6 +4,7 @@ const keys = require('./config/keys');
 const bodyParser = require('body-parser')
 const cookieSession = require('cookie-session');
 const passport = require('passport');
+const fetchResult = require('./jobs/fetchResults')
 
 // models
 require('./models/User');
@@ -13,11 +14,7 @@ require('./routes/authRoutes');
 
 const schedule = require('node-schedule');
 
-const job = schedule.scheduleJob('*/1 * * * *', function(){
-  console.log('The answer to life, the universe, and everything!');
-});
-
-job;
+const job = schedule.scheduleJob('00 00 00 * * 0,1', fetchResult);
 
 const app = express();
 
