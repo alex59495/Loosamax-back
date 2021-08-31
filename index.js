@@ -11,6 +11,14 @@ require('./models/User');
 require('./services/passport');
 require('./routes/authRoutes');
 
+const schedule = require('node-schedule');
+
+const job = schedule.scheduleJob('*/1 * * * *', function(){
+  console.log('The answer to life, the universe, and everything!');
+});
+
+job;
+
 const app = express();
 
 app.use(bodyParser.json());
