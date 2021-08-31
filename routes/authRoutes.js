@@ -27,11 +27,19 @@ module.exports = (app) => {
     res.send(req.user);
   })
 
-  app.patch('/api/current_user/:id', (req, res) => {
-    console.log(req.body)
-    
-    const user = User.updateOne({
-      _id: req.user._id
-    })
+  app.patch('/api/current_user/:id', async (req, res) => {
+    const id = req.params.id
+    const pseudo = req.body.pseudo
+
+    try {
+      const user = await User.updateOne({
+        _id: id
+      },
+      {$set: { pseudo: pseudo }});
+
+      res.send(user)
+    } catch(err) {
+      res.status(422).send(err);
+    }
   });
 }
