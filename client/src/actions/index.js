@@ -7,7 +7,16 @@ export const fetchUser = () => async (dispatch) =>
   dispatch({ type: FETCH_USER, payload: res.data })
 };
 
-export const changePseudo = (id) => async (dispatch) => {
- const res = axios.patch(`/api/current_user/${id}`)
- dispatch({ type: UPDATE_PSEUDO, payload: res.data })
+export const changePseudo = (user) => {
+  axios({
+    method: 'patch',
+    url: `/api/current_user/${user._id}`,
+    data: {
+      pseudo: 'magebite'
+    }
+  })
+  return {
+    type: UPDATE_PSEUDO,
+    payload: 'coucou'
+  }
 }

@@ -11,7 +11,7 @@ const Profile = ({auth, changePseudo}) => {
       return (
         <>
           <input type="text" name="pseudo" placeholder="Change ton pseudo.."/>
-          <button type="submit" onClick={() => changePseudo(auth._id)}>Changer</button>
+          <button type="submit" onClick={() => changePseudo(auth)}>Changer</button>
         </>
       )
     }
