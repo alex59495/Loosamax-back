@@ -40,6 +40,7 @@ require('./routes/userRoutes')(app);
 require('./routes/gamesRoutes')(app);
 require('./routes/betRoutes')(app);
 
+
 if(process.env.NODE_ENV === 'production') {
   // Express will serve up production assets like main.css or main.js
   app.use(express.static('client/build'));

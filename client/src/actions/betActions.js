@@ -20,7 +20,7 @@ export const createBet = ({choice, team, user_id, game}, history) => async (disp
 
       switch(res.data) {
         case 'Fire redirect':
-          dispatch({ type: CREATE_BET, payload: {game: game} });
+          dispatch({ type: CREATE_BET, payload: {choice: choice, game: game} });
           history.push(`/profile/${user_id}`);
           break;
         case 'Existing game':
