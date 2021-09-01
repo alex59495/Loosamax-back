@@ -21,7 +21,7 @@ const Header = (props) => {
       <div className="nav-wrapper">
         <Link 
           to={props.auth ? `/profile/${props.auth._id}` : '/'} 
-          className="left brand-logo"
+          className="banner-blue"
         >
           Loosamax
         </Link>

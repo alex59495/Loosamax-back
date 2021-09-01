@@ -51,9 +51,9 @@
     hoist-non-react-statics "^3.3.0"
 
 "@types/node@*":
-  version "16.7.7"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-16.7.7.tgz#73b345af160b495716cf7e2b54b68f701320f08b"
-  integrity sha512-bxWC4rgIF/FjM7JsPvpk6ZKGITgw27qsYCbi6h4kWZWYpchOLENgvFaRBZUc64Q/M1y+X2EteahRbyo8QFCKdw==
+  version "16.7.8"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-16.7.8.tgz#2448be5f24fe6b77114632b6350fcd219334651e"
+  integrity sha512-8upnoQU0OPzbIkm+ZMM0zCeFCkw2s3mS0IWdx0+AAaWqm4fkBb0UJp8Edl7FVKRamYbpJC/aVsHpKWBIbiC7Zg==
 
 "@types/normalize-package-data@^2.4.0":
   version "2.4.1"
@@ -158,13 +158,6 @@ array-flatten@1.1.1:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/array-flatten/-/array-flatten-1.1.1.tgz#9a5f699051b1e7073328f2a008968b64ea2955d2"
   integrity sha1-ml9pkFGx5wczKPKgCJaLZOopVdI=
-
-axios@^0.21.1:
-  version "0.21.1"
-  resolved "https://registry.yarnpkg.com/axios/-/axios-0.21.1.tgz#22563481962f4d6bde9a76d516ef0e5d3c09b2b8"
-  integrity sha512-dKQiRHxGD9PPRIUNIWvZhPTPpl1rf/OxTYKsqKUDjBwYylTvV7SjSHJb9ratfyzM6wCdLCOYLzs73qpg5c4iGA==
-  dependencies:
-    follow-redirects "^1.10.0"
 
 balanced-match@^1.0.0:
   version "1.0.2"
@@ -630,11 +623,6 @@ finalhandler@~1.1.2:
     statuses "~1.5.0"
     unpipe "~1.0.0"
 
-follow-redirects@^1.10.0:
-  version "1.14.2"
-  resolved "https://registry.yarnpkg.com/follow-redirects/-/follow-redirects-1.14.2.tgz#cecb825047c00f5e66b142f90fed4f515dec789b"
-  integrity sha512-yLR6WaE2lbF0x4K2qE2p9PEXKLDjUjnR/xmjS3wHAYxtlsI9MLLBJUZirAHKzUZDGLxje7w/cXR49WOUo4rbsA==
-
 forwarded@0.2.0:
   version "0.2.0"
   resolved "https://registry.yarnpkg.com/forwarded/-/forwarded-0.2.0.tgz#2269936428aad4c15c7ebe9779a84bf0b2a81811"
@@ -1058,9 +1046,9 @@ mongodb@4.1.1:
     saslprep "^1.0.0"
 
 mongoose@^6.0.2:
-  version "6.0.2"
-  resolved "https://registry.yarnpkg.com/mongoose/-/mongoose-6.0.2.tgz#f04bbc5aae83e34910ee8cfe2c3bd87a60a31082"
-  integrity sha512-4zrCcScAItE9aefaPMeG9+IPLaJJ2c8sFLXlLvTVPdArZija10rto61qkzIxmhf6zkDmW2W9bh3DS59KuTPCfQ==
+  version "6.0.3"
+  resolved "https://registry.yarnpkg.com/mongoose/-/mongoose-6.0.3.tgz#81e8cc1b17d6787f95bddf37390b644895bc1daa"
+  integrity sha512-0gu3Z34j3VdvGnqcs0lZdRnE0agiuERvXKkSrKjGqXsZS+ym5v9Oq1dQUuhtOYPQGtlpHpeVYjHHY+2sn5CMrg==
   dependencies:
     bson "^4.2.2"
     kareem "2.3.2"

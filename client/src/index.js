@@ -6,7 +6,7 @@ import thunk from 'redux-thunk';
 
 // CSS
 import 'materialize-css/dist/css/materialize.min.css'
-import './css/index.css';
+import './scss/index.scss'
 
 // Internal imports
 import App from './components/App';
