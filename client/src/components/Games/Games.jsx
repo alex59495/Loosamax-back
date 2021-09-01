@@ -7,7 +7,7 @@ import { snakeToCamel } from '../../utils/snakeToCamel';
 
 const Games = () => {
   const renderLeagues = LEAGUES.map(league => {
-    return <li><Link to={`/games/${league}`} key={league}>{snakeToCamel(league)}</Link></li>
+    return <li key={league}><Link to={`/games/${league}`}>{snakeToCamel(league)}</Link></li>
   })
 
   return (

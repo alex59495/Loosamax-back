@@ -2,7 +2,11 @@ import React, {useState} from 'react';
 import { connect } from 'react-redux';
 import { Formik } from 'formik';
 
-import * as actions from '../actions/userActions';
+// Components
+import MyBet from './MyBet';
+
+// Redux actions
+import * as actions from '../../actions/userActions';
 
 const Profile = ({auth, changePseudo}) => {
   const [openEdit, setOpenEdit] = useState(false)
@@ -61,6 +65,8 @@ const Profile = ({auth, changePseudo}) => {
       {auth.pseudo}
       <div onClick={() => setOpenEdit(!openEdit)}>Edit</div>
       {renderForm()}
+      <h1>Ton Pari</h1>
+      <MyBet />
     </div>
   )
 }

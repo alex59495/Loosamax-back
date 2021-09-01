@@ -3,7 +3,7 @@ import { BrowserRouter, Route } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 import Header from './Header';
-import Profile from './Profile';
+import Profile from './Profile/Profile';
 import Games from './Games/Games';
 import ListGames from './Games/ListGames';
 
@@ -21,7 +21,7 @@ const App = (props) => {
   }, [])
 
   const renderLeagues = LEAGUES.map(league => {
-    return <Route exact path={`/games/${league}`} render={(props) => <ListGames {...props} league={`${league}`} key={league}/>} />
+    return <Route exact path={`/games/${league}`} key={league} render={(props) => <ListGames {...props} league={`${league}`}/>} />
   })
 
   return (
