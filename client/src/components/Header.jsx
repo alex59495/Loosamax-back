@@ -12,7 +12,7 @@ const Header = (props) => {
       default:
         return (
           <div className='d-flex'>
-            <a href={`/profiles/${props.auth._id}`}>Mon profil</a>
+            <a href={`/profile/${props.auth._id}`}>Mon profil</a>
             <a href="/api/logout">Déconnexion</a>
           </div>
         )
