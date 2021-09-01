@@ -18,7 +18,7 @@ const ListGames = ({league ,fetchGames, games}) => {
       return (
         <GameOdd
           key={game._id}
-          id={game._id}
+          _id={game._id}
           home_team={game.home_team}
           away_team={game.away_team}
           commence_time={game.commence_time}

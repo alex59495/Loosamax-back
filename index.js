@@ -5,16 +5,10 @@ const bodyParser = require('body-parser')
 const cookieSession = require('cookie-session');
 const passport = require('passport');
 
-// Connect DB
-mongoose.connect(keys.mongoURI,  {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-});
-
 // models
-require('./models/Bet');
 require('./models/User');
 require('./models/Game');
+require('./models/Bet');
 
 // service
 require('./services/passport');
@@ -33,6 +27,12 @@ app.use(
 
 app.use(passport.initialize());
 app.use(passport.session());
+
+// Connect DB
+mongoose.connect(keys.mongoURI,  {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+});
 
 // Routes
 // Require export une fonction qu'on appelle directement avec l'argument app

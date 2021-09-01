@@ -12,6 +12,7 @@
     text-align: center;
     flex-direction: column;
     justify-content: center;
+    cursor: pointer;
     .team {
       height: 18px;
       overflow: hidden;
@@ -51,7 +52,7 @@
 }
 
 .active-odd {
-  background-color: $green-light;
+  background-color: $salmon;
   border-radius: 8px;
   border: $green-dark;
   padding: 8px;

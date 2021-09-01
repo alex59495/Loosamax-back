@@ -3,7 +3,6 @@ const mongoose = require('mongoose');
 
 const User = mongoose.model('users');
 const Bet = mongoose.model('bets');
-const Game = mongoose.model('games');
 
 module.exports = (app) => {
   app.get(
@@ -37,7 +36,6 @@ module.exports = (app) => {
       {$unwind: {path: '$game'}},
       {$match: {'game.result': null}}
     ]);
-
 
     const user = {
       _id: req.user._id, 

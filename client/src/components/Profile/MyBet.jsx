@@ -1,7 +1,10 @@
 import React from 'react';
 import {connect} from 'react-redux';
 
-const MyBet = ({user}) => {
+// redux actions
+import * as actions from '../../actions/betActions';
+
+const MyBet = ({user, deleteBet}) => {
 
   const oddRisk = (oddValue) => {
     if (oddValue > 2.5) { return "risk" }
@@ -16,20 +19,23 @@ const MyBet = ({user}) => {
       return 'Pas de match pour le moment'
     } else {
       return (
-        <div className="card-odd">
-          <div className={`card-odd-detail ${user.actualBet.choice === 1 ? 'active-odd' : null}`}>
-            <span className="team">{user.actualBet.game.home_team}</span>
-            <span className={oddRisk(user.actualBet.game.home_odd)}>{user.actualBet.game.home_odd}</span>
+        <>
+          <div className="card-odd">
+            <div className={`card-odd-detail ${user.actualBet.choice === 1 ? 'active-odd' : null}`}>
+              <span className="team">{user.actualBet.game.home_team}</span>
+              <span className={oddRisk(user.actualBet.game.home_odd)}>{user.actualBet.game.home_odd}</span>
+            </div>
+            <div className={`card-odd-detail ${user.actualBet.choice === 0 ? 'active-odd' : null}`}>
+              <span>Nul</span>
+              <span className={oddRisk(user.actualBet.game.draw_odd)}>{user.actualBet.game.draw_odd}</span>
+            </div>
+            <div className={`card-odd-detail ${user.actualBet.choice === 2 ? 'active-odd' : null}`}>
+              <span className="team">{user.actualBet.game.away_team}</span>
+              <span className={oddRisk(user.actualBet.game.away_odd)}>{user.actualBet.game.away_odd}</span>
+            </div>
           </div>
-          <div className={`card-odd-detail ${user.actualBet.choice === 0 ? 'active-odd' : null}`}>
-            <span>Nul</span>
-            <span className={oddRisk(user.actualBet.game.draw_odd)}>{user.actualBet.game.draw_odd}</span>
-          </div>
-          <div className={`card-odd-detail ${user.actualBet.choice === 2 ? 'active-odd' : null}`}>
-            <span className="team">{user.actualBet.game.away_team}</span>
-            <span className={oddRisk(user.actualBet.game.away_odd)}>{user.actualBet.game.away_odd}</span>
-          </div>
-        </div>
+          <button onClick={() => deleteBet(user.actualBet._id)}>Supprimer</button>
+        </>
       )
     }
   };
@@ -48,4 +54,4 @@ const mapStateToProps = ({user}) => {
   }
 }
 
-export default connect(mapStateToProps)(MyBet);
+export default connect(mapStateToProps, actions)(MyBet);

@@ -7,3 +7,4 @@ export const FETCH_GAMES = 'FETCH_GAMES';
 
 // Bets
 export const CREATE_BET = 'CREATE_BET';
+export const DELETE_BET = 'DELETE_BET';

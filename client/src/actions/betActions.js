@@ -1,14 +1,14 @@
 import axios from 'axios';
-import { CREATE_BET } from './types';
+import { CREATE_BET, DELETE_BET } from './types';
 
-export const createBet = ({choice, team, user_id, game_id}, history) => async (dispatch) => 
+export const createBet = ({choice, team, user_id, game}, history) => async (dispatch) => 
 {
   if(window.confirm(`Enregistrer ce pari (${team}) ?`)) {
 
     const data = {
       choice,
       user_id,
-      game_id
+      game_id: game._id
     }
 
     try {
@@ -18,12 +18,40 @@ export const createBet = ({choice, team, user_id, game_id}, history) => async (d
         data: data
       });
 
-      dispatch({ type: CREATE_BET, payload: [{game_id: game_id, choice: choice, user_id: user_id}] });
-
-      res.data === 'Fire redirect' ? history.push(`/profile/${user_id}`) : alert('Oops, il y a eu une erreur, essaie de ré-engistrer ton pari')
+      switch(res.data) {
+        case 'Fire redirect':
+          dispatch({ type: CREATE_BET, payload: {game: game} });
+          history.push(`/profile/${user_id}`);
+          break;
+        case 'Existing game':
+          alert('Tu as déjà un pari en cours, tu ne peux pas en créer un nouveau pour le moment. Pour supprimer ton pari actuel rends toi dans ton Profil');
+          break;
+        default:
+          alert('Oops, il y a eu une erreur, essaie de ré-engistrer ton pari.');
+      }
 
     } catch(err) {
       console.log(err)
     }
   }
 };
+
+export const deleteBet = (id) => async (dispatch) => 
+{
+  if(window.confirm('Tu veux supprimer ton pari ?')) {
+    try {
+      const res = await axios.delete(`/api/bets/${id}`);
+
+      switch(res.status) {
+        case 200:
+          dispatch({ type: DELETE_BET, payload: {}});
+          break;
+        default:
+          alert('Oops, il y a eu une erreur, réessaie de supprimer ton pari.');
+      }
+
+    } catch(err) {
+      alert('Oops, il y a eu une erreur, réessaie de supprimer ton pari.');
+    }
+  }
+}
