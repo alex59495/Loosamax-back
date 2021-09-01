@@ -2,6 +2,7 @@ const passport = require('passport');
 const mongoose = require('mongoose');
 
 const User = mongoose.model('users');
+const Bet = mongoose.model('bets');
 
 module.exports = (app) => {
   app.get(
@@ -23,8 +24,16 @@ module.exports = (app) => {
     res.redirect('/')
   })
 
-  app.get('/api/current_user', (req, res) => {
-    res.send(req.user);
+  app.get('/api/current_user', async (req, res) => {
+    const actualBet = await Bet.findOne({user: req.user._id}).populate('game')
+
+    const user = {
+      _id: req.user._id, 
+      googleId: req.user.googleId,
+      pseudo: req.user.pseudo
+    }
+
+    res.send({...user, actualBet});
   })
 
   app.patch('/api/current_user/:id', async (req, res) => {

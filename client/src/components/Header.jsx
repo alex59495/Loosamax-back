@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 
 const Header = (props) => {
   const renderContent = () => {
-    switch(props.auth) {
+    switch(props.user) {
       case null:
         return;
       case false:
@@ -12,7 +12,7 @@ const Header = (props) => {
       default:
         return (
           <div className='d-flex'>
-            <a href={`/profile/${props.auth._id}`}>Mon profil</a>
+            <a href={`/profile/${props.user._id}`}>Mon profil</a>
             <a href="/api/logout">Déconnexion</a>
           </div>
         )
@@ -23,7 +23,7 @@ const Header = (props) => {
     <nav>
       <div className="nav-wrapper">
         <Link 
-          to={props.auth ? `/games` : '/'} 
+          to={props.user ? `/games` : '/'} 
           className="banner-blue"
         >
           Loosamax
@@ -36,9 +36,9 @@ const Header = (props) => {
   )
 }
 
-const mapStateToProps = ({auth}) => {
+const mapStateToProps = ({user}) => {
   return { 
-    auth
+    user
   }
 } 
 

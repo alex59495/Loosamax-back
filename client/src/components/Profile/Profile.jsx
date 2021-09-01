@@ -8,7 +8,7 @@ import MyBet from './MyBet';
 // Redux actions
 import * as actions from '../../actions/userActions';
 
-const Profile = ({auth, changePseudo}) => {
+const Profile = ({user, changePseudo}) => {
   const [openEdit, setOpenEdit] = useState(false)
 
   const renderForm = () => {
@@ -25,7 +25,7 @@ const Profile = ({auth, changePseudo}) => {
           }}
           onSubmit={(values, { setSubmitting }) => {
             setTimeout(() => {
-              changePseudo(auth, values)
+              changePseudo(user, values)
               setSubmitting(false);
             }, 400);
           }}
@@ -62,7 +62,7 @@ const Profile = ({auth, changePseudo}) => {
   return (
     <div>
       <h1>Ton pseudo</h1>
-      {auth.pseudo}
+      {user.pseudo}
       <div onClick={() => setOpenEdit(!openEdit)}>Edit</div>
       {renderForm()}
       <h1>Ton Pari</h1>
@@ -71,9 +71,9 @@ const Profile = ({auth, changePseudo}) => {
   )
 }
 
-const mapStateToProps = ({auth}) => {
+const mapStateToProps = ({user}) => {
   return { 
-    auth
+    user
   }
 }
 

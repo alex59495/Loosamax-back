@@ -1,7 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 
-const MyBet = ({auth}) => {
+const MyBet = ({user}) => {
   return (
     <div>
       TON PARI !!!
@@ -9,9 +9,9 @@ const MyBet = ({auth}) => {
   )
 }
 
-const mapStateToProps = ({auth}) => {
+const mapStateToProps = ({user}) => {
   return {
-    auth
+    user
   }
 }
 
