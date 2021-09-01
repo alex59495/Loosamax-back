@@ -8,10 +8,13 @@ const Header = (props) => {
       case null:
         return;
       case false:
-        return <li><a href="/auth/google">Login with Google</a></li>
+        return <li><a href="/auth/google">Se connecter avec Google</a></li>
       default:
         return (
-          <a href="/api/logout">Logout</a>
+          <div className='d-flex'>
+            <a href={`/profiles/${props.auth._id}`}>Mon profil</a>
+            <a href="/api/logout">Déconnexion</a>
+          </div>
         )
     }
   }
@@ -20,7 +23,7 @@ const Header = (props) => {
     <nav>
       <div className="nav-wrapper">
         <Link 
-          to={props.auth ? `/profile/${props.auth._id}` : '/'} 
+          to={props.auth ? `/games` : '/'} 
           className="banner-blue"
         >
           Loosamax

@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const { Schema } = mongoose;
 
 const gameSchema = new Schema({
-  game_id: String,
+  _id: String,
   sport_key: String,
   home_team: String,
   away_team: String,

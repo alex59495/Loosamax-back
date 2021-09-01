@@ -1,11 +1,11 @@
 import axios from 'axios';
 import { FETCH_GAMES } from './types'; 
 
-export const fetchGames = () => async (dispatch) => 
+export const fetchGames = (league) => async (dispatch) => 
 {
-  const res = await axios.get('/api/games/ligue1')
+  const res = await axios.get(`/api/games/${league}`)
   const payload = {
-    "ligue_1": res.data
+    [league]: res.data
   }
   dispatch({ type: FETCH_GAMES, payload: payload })
 };
