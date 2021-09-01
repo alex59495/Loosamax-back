@@ -1,7 +1,8 @@
 import React, {useState} from 'react';
 import { connect } from 'react-redux';
+import { Formik } from 'formik';
 
-import * as actions from '../actions/index'
+import * as actions from '../actions/userActions';
 
 const Profile = ({auth, changePseudo}) => {
   const [openEdit, setOpenEdit] = useState(false)
@@ -9,10 +10,47 @@ const Profile = ({auth, changePseudo}) => {
   const renderForm = () => {
     if(openEdit) {
       return (
-        <>
-          <input type="text" name="pseudo" placeholder="Change ton pseudo.."/>
-          <button type="submit" onClick={() => changePseudo(auth)}>Changer</button>
-        </>
+        <Formik
+          initialValues={{ pseudo: '' }}
+          validate={values => {
+            const errors = {};
+            if (!values.pseudo) {
+              errors.pseudo = 'Required';
+            }
+            return errors;
+          }}
+          onSubmit={(values, { setSubmitting }) => {
+            setTimeout(() => {
+              changePseudo(auth, values)
+              setSubmitting(false);
+            }, 400);
+          }}
+        >
+          {({
+            values,
+            errors,
+            touched,
+            handleChange,
+            handleBlur,
+            handleSubmit,
+            isSubmitting,
+            /* and other goodies */
+          }) => (
+            <form onSubmit={handleSubmit}>
+              <input
+                type="pseudo"
+                name="pseudo"
+                onChange={handleChange}
+                onBlur={handleBlur}
+                value={values.pseudo}
+              />
+              {errors.pseudo && touched.pseudo && errors.pseudo}
+              <button type="submit" disabled={isSubmitting}>
+                Submit
+              </button>
+            </form>
+          )}
+        </Formik>
       )
     }
   }

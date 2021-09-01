@@ -7,6 +7,7 @@ const passport = require('passport');
 
 // models
 require('./models/User');
+require('./models/Game');
 
 require('./services/passport');
 require('./routes/authRoutes');
@@ -32,6 +33,7 @@ mongoose.connect(keys.mongoURI,  {
 
 // Require export une fonction qu'on appelle directement avec l'argument app
 require('./routes/authRoutes')(app);
+require('./routes/gamesRoutes')(app);
 
 if(process.env.NODE_ENV === 'production') {
   // Express will serve up production assets like main.css or main.js

@@ -4,10 +4,11 @@ import { connect } from 'react-redux';
 
 import Header from './Header';
 import Profile from './Profile';
+import GamesFR from './Games/GamesFR';
 
 // Redux functions
 // import * as actions from '../actions'
-import * as actions from '../actions'
+import * as actions from '../actions/userActions'
 
 const App = (props) => {
 
@@ -21,6 +22,7 @@ const App = (props) => {
         <>
           <Header />
           <Route exact path="/profile/:id" component={Profile} />
+          <Route exact path="/games/ligue1" component={GamesFR} />
         </>
       </BrowserRouter>
     </div>
