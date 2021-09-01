@@ -9,7 +9,7 @@ const ListGames = ({league ,fetchGames, games}) => {
 
   useEffect(() => {
     fetchGames(league)
-  }, [fetchGames, league])
+  }, [])
 
   const renderGames = () => {
     if(!games.hasOwnProperty(league)) {return null}

@@ -2,7 +2,7 @@
   background-color: white;
   padding: 5px;
   border-radius: 5px;
-  border: 2px solid red;
+  border: 2px solid $salmon;
   width: 300px;
   display: flex;
   justify-content: space-between;
@@ -21,13 +21,13 @@
       font-size: 2rem;
     }
     .risk {
-      color: red;
+      color: $risky;
     }
     .safe {
-      color: green
+      color: $safe
     }
     .intermediate {
-      color: orange
+      color: $intermediate
     }
   }
 }
@@ -40,7 +40,7 @@
   border-radius: 15px;
   font-size: 24px;
   a {
-    color: black;
+    color: $black;
     border-radius: inherit;
     height: 100%;
     display: flex;

@@ -7,11 +7,11 @@ import { snakeToCamel, capitalize } from '../../utils/textTransformation';
 
 const ListLeagues = () => {
 
-  const renderLeagues = LEAGUES.map(league => {
+  const renderLeagues = LEAGUES.map(({name, country}) => {
     return (
-      <div key={league.name} className="card-country" style={{backgroundImage: `linear-gradient(rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.1) 20%), url(/${league.country}.png)` }}>
-        <Link to={`/games/${league.name}`}>
-          {capitalize(snakeToCamel(league.name))}
+      <div key={name} className="card-country" style={{backgroundImage: `linear-gradient(rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.1) 20%), url(/${country}.png)` }}>
+        <Link to={`/games/${name}`}>
+          {capitalize(snakeToCamel(name))}
         </Link>
       </div>
     )
