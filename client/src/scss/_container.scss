@@ -1,3 +1,10 @@
 .container {
   margin: 20px;
 }
+
+.background {
+  background-image: url('../img/background.svg');
+  min-height: 100vh;
+  background-position: center;
+  background-size: cover;
+}

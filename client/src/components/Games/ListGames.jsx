@@ -3,12 +3,13 @@ import {connect} from 'react-redux'
 import * as actions from '../../actions/gamesActions';
 
 import GameOdd from './GameOdd';
+import { snakeToCamel, capitalize } from '../../utils/textTransformation';
 
 const ListGames = ({league ,fetchGames, games}) => {
 
   useEffect(() => {
     fetchGames(league)
-  }, [])
+  }, [fetchGames, league])
 
   const renderGames = () => {
     if(!games.hasOwnProperty(league)) {return null}
@@ -28,11 +29,14 @@ const ListGames = ({league ,fetchGames, games}) => {
   }
 
   return (
-    <div className="d-flex">
-      <div className="grid_wrap">
-        {renderGames()}
+    <>
+      <h1 className="text-center text-orange">{capitalize(snakeToCamel(league))}</h1>
+      <div className="d-flex">
+        <div className="grid_wrap">
+          {renderGames()}
+        </div>
       </div>
-    </div>
+    </>
   )
 }
 

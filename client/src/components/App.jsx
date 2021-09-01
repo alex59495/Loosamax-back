@@ -18,14 +18,14 @@ const App = (props) => {
 
   useEffect(() => {
     props.fetchUser()
-  }, [])
+  }, [props])
 
   const renderLeagues = LEAGUES.map(league => {
-    return <Route exact path={`/games/${league}`} key={league} render={(props) => <ListGames {...props} league={`${league}`} />} />
+    return <Route exact path={`/games/${league.name}`} key={league.name} render={(props) => <ListGames {...props} league={`${league.name}`} />} />
   })
 
   return (
-    <div className='test-background'>
+    <div className='background'>
       <BrowserRouter>
         <>
           <Header />
