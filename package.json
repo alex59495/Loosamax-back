@@ -8,12 +8,12 @@
     "client": "yarn --cwd client start",
     "dev": "concurrently \"yarn run server\" \"yarn run client\" ",
     "client-install": "yarn --cwd client install",
+    "inst-all": "yarn install && yarn --cwd client install",
     "client-build": "yarn --cwd client build",
     "heroku-postbuild": "YARN_PRODUCTION=false yarn client-install && yarn client-build"
   },
   "license": "MIT",
   "dependencies": {
-    "axios": "^0.21.1",
     "body-parser": "^1.19.0",
     "concurrently": "^6.2.1",
     "cookie-session": "^1.4.0",
