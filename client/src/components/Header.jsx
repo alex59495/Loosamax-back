@@ -12,7 +12,8 @@ const Header = (props) => {
       default:
         return (
           <div className='d-flex'>
-            <a href={`/profile/${props.auth._id}`}>Mon profil</a>
+            <Link to='/stats'>Mes Stats</Link>
+            <Link to={`/profile/${props.auth._id}`}>Mon profil</Link>
             <a href="/api/logout">Déconnexion</a>
           </div>
         )
@@ -23,7 +24,7 @@ const Header = (props) => {
     <nav>
       <div className="nav-wrapper">
         <Link 
-          to={props.auth ? `/games` : '/'} 
+          to={props.auth ? `/leagues` : '/'} 
           className="brand"
         >
           Loosamax

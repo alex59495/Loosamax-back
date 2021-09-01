@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import { connect } from 'react-redux';
 import { Formik } from 'formik';
+import { Link } from 'react-router-dom';
 
 import * as actions from '../actions/userActions';
 
@@ -35,7 +36,7 @@ const Profile = ({auth, changePseudo}) => {
             isSubmitting,
             /* and other goodies */
           }) => (
-            <form onSubmit={handleSubmit} className='mt-1'>
+            <form onSubmit={handleSubmit} className='mb-1'>
               <input
                 type="pseudo"
                 name="pseudo"
@@ -64,6 +65,7 @@ const Profile = ({auth, changePseudo}) => {
         <div className="ml-1 action" onClick={() => setOpenEdit(!openEdit)}>{openEdit ? "Fermer" : "Modifier"}</div>
       </div>
       {renderForm()}
+      <Link className='btn-orange' to='/leagues'>Voir les paris disponibles</Link>
     </div>
   )
 }
