@@ -6,8 +6,13 @@ const Game = mongoose.model('games');
 
 module.exports = (app) => {
 
-  app.get('/api/games/ligue1', async (req, res) => {
+  app.get('/api/games/ligue_1', async (req, res) => {
     const games = await Game.find({sport_key: "soccer_france_ligue_one"})
+    res.send(games)
+  });
+
+  app.get('/api/games/premier_league', async (req, res) => {
+    const games = await Game.find({sport_key: "soccer_epl"})
     res.send(games)
   });
 
@@ -42,12 +47,12 @@ module.exports = (app) => {
           }
         })
 
-        const existingGame = await Game.find({game_id: id})
+        const existingGame = await Game.find({_id: id})
 
         if(existingGame.length > 0) { return null }
 
         const newGame = new Game({
-          game_id: id,
+          _id: id,
           home_team: home_team,
           away_team: away_team,
           commence_time: commence_time,
@@ -66,4 +71,61 @@ module.exports = (app) => {
       res.status(422).send(err)
     }
   });
+
+
+  app.get('/api/fetch/games/soccer_epl', async (req, res) => { 
+
+    try {
+      const fetchGames = await axios({
+        method: 'get',
+        url: `https://api.the-odds-api.com/v4/sports/soccer_epl/odds/?apiKey=${keys.oddsApi}&regions=eu`
+      });
+      
+      const games = fetchGames.data
+      games.forEach(async game => {
+        const { id, home_team, away_team, commence_time, sport_key, bookmakers } = game
+        const unibet = bookmakers.find(bookmaker => bookmaker.key == 'unibet');
+
+        let home_odd = null
+        let away_odd = null
+        let draw_odd = null
+
+        const market = unibet.markets[0]
+
+        market.outcomes.forEach(({name, price}) => {
+          switch(name) {
+            case home_team:
+              return home_odd = price
+            case away_team:
+              return away_odd = price
+            default:
+              return draw_odd = price
+          }
+        })
+
+        const existingGame = await Game.find({_id: id})
+
+        if(existingGame.length > 0) { return null }
+
+        const newGame = new Game({
+          _id: id,
+          home_team: home_team,
+          away_team: away_team,
+          commence_time: commence_time,
+          sport_key: sport_key,
+          home_odd: home_odd,
+          away_odd: away_odd,
+          draw_odd: draw_odd,
+        })
+
+        newGame.save()
+      })
+
+      res.send({ok: 'Les matchs ont été actualisés'})
+
+    } catch(err) {
+      res.status(422).send(err)
+    }
+  });
+
 }

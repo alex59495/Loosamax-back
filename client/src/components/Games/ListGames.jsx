@@ -4,16 +4,16 @@ import * as actions from '../../actions/gamesActions';
 
 import Game from './Game';
 
-const GamesFR = ({fetchGames, games}) => {
+const ListGames = ({league ,fetchGames, games}) => {
 
   useEffect(() => {
-    fetchGames()
+    fetchGames(league)
   }, [])
 
   const renderGames = () => {
-    if(!games.hasOwnProperty('ligue_1')) {return null}
+    if(!games.hasOwnProperty(league)) {return null}
 
-    return games['ligue_1'].map(game => {
+    return games[league].map(game => {
       return (
         <Game
           key={game._id}
@@ -40,4 +40,4 @@ const mapStateToProps = ({games}) => {
   }
 }
 
-export default connect(mapStateToProps, actions)(GamesFR);
+export default connect(mapStateToProps, actions)(ListGames);
