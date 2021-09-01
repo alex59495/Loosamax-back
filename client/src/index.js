@@ -5,7 +5,6 @@ import { createStore, applyMiddleware, compose } from 'redux';
 import thunk from 'redux-thunk';
 
 // CSS
-import 'materialize-css/dist/css/materialize.min.css'
 import './scss/index.scss'
 
 // Internal imports

@@ -65,7 +65,6 @@ const Profile = ({user, changePseudo}) => {
       {user.pseudo}
       <div onClick={() => setOpenEdit(!openEdit)}>Edit</div>
       {renderForm()}
-      <h1>Ton Pari</h1>
       <MyBet />
     </div>
   )

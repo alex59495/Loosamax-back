@@ -1,0 +1,58 @@
+.card-odd {
+  background-color: white;
+  padding: 5px;
+  border-radius: 5px;
+  border: 2px solid $salmon;
+  width: 300px;
+  display: flex;
+  justify-content: space-between;
+  .card-odd-detail {
+    width: 33%;
+    display: flex;
+    text-align: center;
+    flex-direction: column;
+    justify-content: center;
+    .team {
+      height: 18px;
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+    }
+    .risk, .safe, .intermediate {
+      font-size: 2rem;
+    }
+    .risk {
+      color: $risky;
+    }
+    .safe {
+      color: $safe
+    }
+    .intermediate {
+      color: $intermediate
+    }
+  }
+}
+
+.card-country {
+  background-position: center;
+  background-size: cover;
+  width: 150px;
+  height: 100px;
+  border-radius: 15px;
+  font-size: 24px;
+  a {
+    color: $black;
+    border-radius: inherit;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+.active-odd {
+  background-color: $green-light;
+  border-radius: 8px;
+  border: $green-dark;
+  padding: 8px;
+}

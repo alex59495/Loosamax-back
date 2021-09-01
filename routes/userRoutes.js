@@ -3,6 +3,7 @@ const mongoose = require('mongoose');
 
 const User = mongoose.model('users');
 const Bet = mongoose.model('bets');
+const Game = mongoose.model('games');
 
 module.exports = (app) => {
   app.get(
@@ -25,7 +26,18 @@ module.exports = (app) => {
   })
 
   app.get('/api/current_user', async (req, res) => {
-    const actualBet = await Bet.findOne({user: req.user._id}).populate('game')
+
+    const actualBet = await Bet.aggregate([
+      {$lookup: {
+          from: 'games', 
+          localField: 'game', 
+          foreignField: '_id', 
+          as: 'game'}
+      },
+      {$unwind: {path: '$game'}},
+      {$match: {'game.result': null}}
+    ]);
+
 
     const user = {
       _id: req.user._id, 
@@ -33,7 +45,7 @@ module.exports = (app) => {
       pseudo: req.user.pseudo
     }
 
-    res.send({...user, actualBet});
+    res.send({...user, actualBet: actualBet[0]});
   })
 
   app.patch('/api/current_user/:id', async (req, res) => {

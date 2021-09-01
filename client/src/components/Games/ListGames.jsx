@@ -2,7 +2,8 @@ import React, {useEffect} from 'react';
 import {connect} from 'react-redux'
 import * as actions from '../../actions/gamesActions';
 
-import Game from './Game';
+import GameOdd from './GameOdd';
+import { snakeToCamel, capitalize } from '../../utils/textTransformation';
 
 const ListGames = ({league ,fetchGames, games}) => {
 
@@ -15,7 +16,7 @@ const ListGames = ({league ,fetchGames, games}) => {
 
     return games[league].map(game => {
       return (
-        <Game
+        <GameOdd
           key={game._id}
           id={game._id}
           home_team={game.home_team}
@@ -29,9 +30,14 @@ const ListGames = ({league ,fetchGames, games}) => {
   }
 
   return (
-    <div>
-      {renderGames()}
-    </div>
+    <>
+      <h1 className="text-center text-orange">{capitalize(snakeToCamel(league))}</h1>
+      <div className="d-flex">
+        <div className="grid_wrap">
+          {renderGames()}
+        </div>
+      </div>
+    </>
   )
 }
 

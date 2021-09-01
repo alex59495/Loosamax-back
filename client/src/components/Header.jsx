@@ -24,7 +24,7 @@ const Header = (props) => {
       <div className="nav-wrapper">
         <Link 
           to={props.user ? `/games` : '/'} 
-          className="banner-blue"
+          className="brand"
         >
           Loosamax
         </Link>
