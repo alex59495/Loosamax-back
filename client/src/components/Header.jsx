@@ -11,7 +11,7 @@ const Header = (props) => {
         return <li><a href="/auth/google">Se connecter avec Google</a></li>
       default:
         return (
-          <div className='nav-right'>
+          <div className='d-flex'>
             <a href={`/profiles/${props.auth._id}`}>Mon profil</a>
             <a href="/api/logout">Déconnexion</a>
           </div>
