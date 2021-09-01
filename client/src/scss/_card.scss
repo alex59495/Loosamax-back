@@ -11,6 +11,8 @@
     display: flex;
     text-align: center;
     flex-direction: column;
+    justify-content: center;
+    cursor: pointer;
     .team {
       height: 18px;
       overflow: hidden;
@@ -47,4 +49,11 @@
     align-items: center;
     justify-content: center;
   }
+}
+
+.active-odd {
+  background-color: $salmon;
+  border-radius: 8px;
+  border: $green-dark;
+  padding: 8px;
 }
