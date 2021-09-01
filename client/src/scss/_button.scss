@@ -1,0 +1,15 @@
+.action {
+  cursor: pointer;
+}
+
+.btn-salmon {
+  background-color: $salmon;
+  border-radius: 4px;
+  cursor: pointer;
+  padding: 4px;
+  &:hover {
+    transition: 0.5s;
+    background-color: $orange;
+  }
+}
+

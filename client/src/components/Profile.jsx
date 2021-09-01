@@ -15,15 +15,14 @@ const Profile = ({auth, changePseudo}) => {
           validate={values => {
             const errors = {};
             if (!values.pseudo) {
-              errors.pseudo = 'Required';
+              errors.pseudo = 'Tu dois avoir un joli petit nom.';
             }
             return errors;
           }}
           onSubmit={(values, { setSubmitting }) => {
-            setTimeout(() => {
-              changePseudo(auth, values)
-              setSubmitting(false);
-            }, 400);
+            changePseudo(auth, values);
+            setOpenEdit(false);
+            setSubmitting(false);
           }}
         >
           {({
@@ -36,7 +35,7 @@ const Profile = ({auth, changePseudo}) => {
             isSubmitting,
             /* and other goodies */
           }) => (
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={handleSubmit} className='mt-1'>
               <input
                 type="pseudo"
                 name="pseudo"
@@ -44,9 +43,11 @@ const Profile = ({auth, changePseudo}) => {
                 onBlur={handleBlur}
                 value={values.pseudo}
               />
-              {errors.pseudo && touched.pseudo && errors.pseudo}
-              <button type="submit" disabled={isSubmitting}>
-                Submit
+              <div className="form-error">
+                {errors.pseudo && touched.pseudo && errors.pseudo}
+              </div>
+              <button type="submit" disabled={isSubmitting} className='btn-salmon'>
+                Changer
               </button>
             </form>
           )}
@@ -56,10 +57,12 @@ const Profile = ({auth, changePseudo}) => {
   }
 
   return (
-    <div>
+    <div className='container w-50-center'>
       <h1>Ton pseudo</h1>
-      {auth.pseudo}
-      <div onClick={() => setOpenEdit(!openEdit)}>Edit</div>
+      <div className="d-flex justify-content-center align-items-center">
+        <h2>{auth.pseudo}</h2>
+        <div className="ml-1 action" onClick={() => setOpenEdit(!openEdit)}>{openEdit ? "Fermer" : "Modifier"}</div>
+      </div>
       {renderForm()}
     </div>
   )

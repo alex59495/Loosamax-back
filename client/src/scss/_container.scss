@@ -2,6 +2,12 @@
   margin: 20px;
 }
 
+.w-50-center {
+  width: 50%;
+  margin: 0 auto;
+  text-align: center;
+}
+
 .background {
   background-image: url('../img/background.svg');
   min-height: 100vh;
