@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 
 import Header from './Header';
 import Profile from './Profile';
-import Games from './Games/Games';
+import ListLeagues from './Games/ListLeagues';
 import ListGames from './Games/ListGames';
 
 // Redux functions
@@ -20,18 +20,20 @@ const App = (props) => {
     props.fetchUser()
   }, [])
 
-  const renderLeagues = LEAGUES.map(league => {
-    return <Route exact path={`/games/${league}`} render={(props) => <ListGames {...props} league={`${league}`} key={league}/>} />
+  const renderLeagues = LEAGUES.map(({name}) => {
+    return <Route exact path={`/games/${name}`} key={name} render={(props) => <ListGames {...props} league={`${name}`} />} />
   })
 
   return (
-    <div className='container test-background'>
+    <div className='background'>
       <BrowserRouter>
         <>
           <Header />
-          <Route exact path="/profile/:id" component={Profile} />
-          <Route exact path="/games" component={Games} />
-          {renderLeagues}
+          <div className="container">
+            <Route exact path="/profile/:id" component={Profile} />
+            <Route exact path="/games" component={ListLeagues} />
+            {renderLeagues}
+          </div>
         </>
       </BrowserRouter>
     </div>

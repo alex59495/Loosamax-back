@@ -1,6 +1,6 @@
 import { FETCH_USER, UPDATE_PSEUDO } from '../actions/types'
 
-export default function(state = {}, action) {
+export default function authReducer(state = {}, action) {
   switch(action.type) {
     case FETCH_USER:
       return action.payload || false
