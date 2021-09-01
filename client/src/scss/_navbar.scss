@@ -1,0 +1,33 @@
+.test-background {
+  background-image: url('../img/background.svg');
+  height: 100vh;
+  background-position: center;
+  background-size: cover;
+  width: 100vw;
+}
+
+nav {
+  color: #fff;
+  background-color: rgba(orange, 0.6);
+  width: 100%;
+  height: 56px;
+  line-height: 56px;
+  .nav-wrapper {
+    display: flex;
+    justify-content: space-between;
+    height: 100%;
+  }
+  .brand {
+    color: black;
+    transition: background-color .3s;
+    height: 100%;
+    padding: 0 15px;
+  }
+  a {
+    transition: background-color .3s;
+    font-size: 1rem;
+    display: block;
+    padding: 0 15px;
+    cursor: pointer;
+  }
+}

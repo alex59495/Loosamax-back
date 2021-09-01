@@ -5,9 +5,9 @@ import {Link} from 'react-router-dom';
 import {LEAGUES} from '../../constants/leagues';
 import { snakeToCamel } from '../../utils/snakeToCamel';
 
-const Games = () => {
+const ListLeagues = () => {
   const renderLeagues = LEAGUES.map(league => {
-    return <li><Link to={`/games/${league}`} key={league}>{snakeToCamel(league)}</Link></li>
+    return <li key={league}><Link to={`/games/${league}`}>{snakeToCamel(league)}</Link></li>
   })
 
   return (
@@ -20,4 +20,4 @@ const Games = () => {
   )
 }
 
-export default Games
+export default ListLeagues

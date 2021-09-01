@@ -1,0 +1,15 @@
+.card-odd {
+  background-color: rgba(orange, 0.6);
+  padding: 5px;
+  border-radius: 5px;
+  border: 2px solid red;
+  width: 300px;
+  display: flex;
+  justify-content: space-between;
+  .card-odd-detail {
+    width: 33%;
+    display: flex;
+    text-align: center;
+    flex-direction: column;
+  }
+}

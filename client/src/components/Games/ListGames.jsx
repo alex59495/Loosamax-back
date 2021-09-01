@@ -2,7 +2,7 @@ import React, {useEffect} from 'react';
 import {connect} from 'react-redux'
 import * as actions from '../../actions/gamesActions';
 
-import Game from './Game';
+import GameOdd from './GameOdd';
 
 const ListGames = ({league ,fetchGames, games}) => {
 
@@ -15,7 +15,7 @@ const ListGames = ({league ,fetchGames, games}) => {
 
     return games[league].map(game => {
       return (
-        <Game
+        <GameOdd
           key={game._id}
           home_team={game.home_team}
           away_team={game.away_team}
@@ -28,8 +28,10 @@ const ListGames = ({league ,fetchGames, games}) => {
   }
 
   return (
-    <div>
-      {renderGames()}
+    <div className="d-flex">
+      <div className="grid_wrap">
+        {renderGames()}
+      </div>
     </div>
   )
 }
