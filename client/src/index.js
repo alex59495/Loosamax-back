@@ -6,6 +6,7 @@ import thunk from 'redux-thunk';
 
 // CSS
 import './scss/index.scss'
+import 'react-loader-spinner/dist/loader/css/react-spinner-loader.css';
 
 // Internal imports
 import App from './components/App';

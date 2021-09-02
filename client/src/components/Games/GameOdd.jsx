@@ -21,7 +21,8 @@ const GameOdd = (props) => {
           choice: 1, 
           team: props.home_team, 
           game: {...props}, 
-          user_id: props.user._id
+          user_id: props.user._id,
+          odd: props.home_odd
         }, props.history)}
       >
         <span className="team">{props.home_team}</span>
@@ -33,7 +34,8 @@ const GameOdd = (props) => {
           choice: 0, 
           team: 'Match nul', 
           game: {...props}, 
-          user_id: props.user._id
+          user_id: props.user._id,
+          odd: props.draw_odd
         }, props.history)}
       >
         <span>Nul</span>
@@ -45,7 +47,8 @@ const GameOdd = (props) => {
           choice: 2, 
           team: props.away_team, 
           game: {...props},
-          user_id: props.user._id
+          user_id: props.user._id,
+          odd: props.away_odd
         }, props.history)}>
         <span className="team">{props.away_team}</span>
         <span className={oddRisk(props.away_odd)}>{props.away_odd}</span>

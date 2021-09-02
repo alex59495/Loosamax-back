@@ -8,9 +8,9 @@ const BetPreview = ({bet}) => {
     else { return "intermediate" }
   }
 
-  const result = (gameResult, odd) => {
-    if (gameResult === null) return;
-    if (gameResult === odd) {
+  const result = (betResult) => {
+    if (betResult === null) return;
+    if (betResult === "win") {
       return <BandResult result="Winner"/>
     } else {
       return <BandResult result="Looser"/>
@@ -30,7 +30,7 @@ const BetPreview = ({bet}) => {
         <span className="team">{bet.game.away_team}</span>
         <span className={oddRisk(bet.game.away_odd)}>{bet.game.away_odd}</span>
       </div>
-      {result(bet.game.result, bet.choice)}
+      {result(bet.result)}
     </div>
   )
 }
