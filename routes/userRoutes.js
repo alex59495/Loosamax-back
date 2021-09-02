@@ -41,7 +41,7 @@ module.exports = (app) => {
         as: 'user'}
       },
       {$unwind: {path: '$user'}},
-      {$match: {'user._id': req.user.id, 'game.result': null} },
+      {$match: {'user._id': req.user._id, 'game.result': null} },
     ]);
 
     const user = {
@@ -51,7 +51,7 @@ module.exports = (app) => {
     }
 
     res.send({...user, actualBet: {...actualBet[0]}});
-  })
+  });
 
   app.patch('/api/current_user/:id', async (req, res) => {
     const id = req.params.id
@@ -68,4 +68,14 @@ module.exports = (app) => {
       res.status(422).send(err);
     }
   });
+
+  app.get('/api/users', async (req, res) => {
+    try {
+      const users = await User.find();
+      res.send(users)
+
+    }catch(err) {
+      res.status(422).send(err)
+    }
+  })
 }

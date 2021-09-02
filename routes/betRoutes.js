@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 
 const Bet = mongoose.model('bets');
+const User = mongoose.model('users');
 
 module.exports = (app) => {
   app.post('/api/bets', async (req, res) => {
@@ -36,9 +37,9 @@ module.exports = (app) => {
         await bet.save()
   
         // Redirection
-        res.status(200).send('Fire redirect')
+        res.status(200).send({res: 'Fire redirect', _id: bet._id})
       } else {
-        res.status(200).send('Existing game')
+        res.status(200).send({res: 'Existing game'})
       }
       
 
@@ -58,5 +59,39 @@ module.exports = (app) => {
     } catch(err) {
       res.status(422).send(err)
     }
-  })
+  });
+
+  app.get('/api/weekbets', async(req, res) => {
+    try {
+      const weekBets = []
+      const usersFound = await User.find()
+      
+      for(const user of usersFound) {
+        await Bet.aggregate([
+          {$lookup: {
+            from: 'games', 
+            localField: 'game', 
+            foreignField: '_id', 
+            as: 'game'}
+          },
+          {$unwind: {path: '$game'}},
+          {$lookup: {
+            from: 'users',
+            localField: 'user',
+            foreignField: '_id',
+            as: 'user'}
+          },
+          {$unwind: {path: '$user'}},
+          {$match: {'user._id': user._id, 'game.result': null} },
+        ]).then(bet => {
+          if(bet[0]) weekBets.push(bet[0])
+        })
+      }
+
+      res.send(weekBets)
+
+    } catch(err){
+      res.status(422).send(err)
+    } 
+  });
 } 

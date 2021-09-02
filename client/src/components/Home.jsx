@@ -3,10 +3,8 @@ import {connect} from 'react-redux';
 
 const Home = ({user}) => {
   const renderContent = () => {
-    switch(user) {
-      case null:
-        return;
-      case false:
+    switch(user._id) {
+      case undefined:
         return (
           <button className='btn-orange-large'>
             <a href="/auth/google">Se connecter avec Google</a>

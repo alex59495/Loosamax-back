@@ -5,7 +5,7 @@ import {connect} from 'react-redux';
 import * as actions from '../../actions/betActions';
 
 const MyBet = ({user, deleteBet}) => {
-
+  
   const oddRisk = (oddValue) => {
     if (oddValue > 2.5) { return "risk" }
     else if (oddValue < 2) { return "safe" }

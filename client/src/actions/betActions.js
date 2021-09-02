@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { CREATE_BET, DELETE_BET } from './types';
+import { CREATE_BET, DELETE_BET, FETCH_WEEK_BETS } from './types';
 
 export const createBet = ({choice, team, user_id, game}, history) => async (dispatch) => 
 {
@@ -18,9 +18,9 @@ export const createBet = ({choice, team, user_id, game}, history) => async (disp
         data: data
       });
 
-      switch(res.data) {
+      switch(res.data.res) {
         case 'Fire redirect':
-          dispatch({ type: CREATE_BET, payload: {choice: choice, game: game} });
+          dispatch({ type: CREATE_BET, payload: {choice: choice, game: game, _id: res.data._id} });
           history.push(`/profile/${user_id}`);
           break;
         case 'Existing game':
@@ -55,3 +55,9 @@ export const deleteBet = (id) => async (dispatch) =>
     }
   }
 }
+
+export const fetchWeekBets = () => async (dispatch) => 
+{
+  const res = await axios.get('/api/weekbets')
+  dispatch({ type: FETCH_WEEK_BETS, payload: res.data })
+};
