@@ -6,7 +6,7 @@ const Bet = mongoose.model('bets');
 module.exports = (app) => {
   app.post('/api/bets', async (req, res) => {
 
-    const { choice, user_id, game_id } = req.body
+    const { choice, user_id, game_id, odd } = req.body
 
     try {
       const actualBet = await Bet.aggregate([
@@ -24,14 +24,15 @@ module.exports = (app) => {
           as: 'user'}
         },
         {$unwind: {path: '$user'}},
-        {$match: {'user._id': req.user.id, 'game.result': null} },
+        {$match: {'user._id': req.user._id, 'result': null} },
       ]);
 
       if(actualBet.length < 1) {
         const bet = await new Bet({
           choice,
           user: user_id,
-          game: game_id
+          game: game_id,
+          odd: odd
         })
     
         await bet.save()
@@ -67,7 +68,7 @@ module.exports = (app) => {
             as: 'user'}
         },
         {$unwind: {path: '$user'}},
-        {$match: {'user._id': ObjectId(userId), 'game.result': { $ne: null} }}
+        {$match: {'user._id': ObjectId(userId), 'result': { $ne: null} }}
       ]);
       res.status(200).send(userBets);
     } catch(err) {
