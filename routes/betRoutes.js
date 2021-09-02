@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const ObjectId = mongoose.Types.ObjectId;
 
 const Bet = mongoose.model('bets');
 
@@ -40,6 +41,25 @@ module.exports = (app) => {
       res.status(422).send(err)
     }
   });
+
+  app.get('/api/users/:userId/bets', async (req, res) => {
+    try {
+      const userId = req.params.userId
+      const userBets = await Bet.aggregate([
+        {$lookup: {
+            from: 'users', 
+            localField: 'user', 
+            foreignField: '_id', 
+            as: 'user'}
+        },
+        {$unwind: {path: '$user'}},
+        {$match: {'user._id': ObjectId(userId)}}
+      ]);
+      res.status(200).send(userBets);
+    } catch(err) {
+      res.status(422).send(err)
+    }
+  })
 
   app.delete('/api/bets/:id', async (req, res) => {
     const id = req.params.id
