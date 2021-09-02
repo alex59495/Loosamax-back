@@ -54,13 +54,20 @@ module.exports = (app) => {
       const userId = req.params.userId
       const userBets = await Bet.aggregate([
         {$lookup: {
+          from: 'games', 
+          localField: 'game', 
+          foreignField: '_id', 
+          as: 'game'}
+        },
+        {$unwind: {path: '$game'}},
+        {$lookup: {
             from: 'users', 
             localField: 'user', 
             foreignField: '_id', 
             as: 'user'}
         },
         {$unwind: {path: '$user'}},
-        {$match: {'user._id': ObjectId(userId)}}
+        {$match: {'user._id': ObjectId(userId), 'game.result': { $ne: null} }}
       ]);
       res.status(200).send(userBets);
     } catch(err) {

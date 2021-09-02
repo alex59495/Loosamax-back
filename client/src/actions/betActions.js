@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { CREATE_BET, DELETE_BET } from './types';
+import { CREATE_BET, DELETE_BET, GET_BETS } from './types';
 
 export const createBet = ({choice, team, user_id, game}, history) => async (dispatch) => 
 {
@@ -53,5 +53,23 @@ export const deleteBet = (id) => async (dispatch) =>
     } catch(err) {
       alert('Oops, il y a eu une erreur, réessaie de supprimer ton pari.');
     }
+  }
+}
+
+export const fetchBets = (userId) => async (dispatch) => 
+{
+  try {
+    const res = await axios.get(`/api/users/${userId}/bets`);
+
+    switch(res.status) {
+      case 200:
+        dispatch({ type: GET_BETS, payload: [...res.data]});
+        break;
+      default:
+        alert('Oops, il y a eu une erreur.');
+    }
+
+  } catch(err) {
+    alert('Oops, il y a eu une erreur');
   }
 }
