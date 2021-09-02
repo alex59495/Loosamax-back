@@ -1,14 +1,14 @@
 import axios from 'axios';
-import { CREATE_BET, DELETE_BET, FETCH_WEEK_BETS } from './types';
+import { CREATE_BET, DELETE_BET, GET_USER_BETS, FETCH_WEEK_BETS} from './types';
 
-export const createBet = ({choice, team, user_id, game}, history) => async (dispatch) => 
+export const createBet = ({choice, team, user_id, game, odd}, history) => async (dispatch) => 
 {
   if(window.confirm(`Enregistrer ce pari (${team}) ?`)) {
-
     const data = {
       choice,
       user_id,
-      game_id: game._id
+      game_id: game._id,
+      odd
     }
 
     try {
@@ -20,7 +20,7 @@ export const createBet = ({choice, team, user_id, game}, history) => async (disp
 
       switch(res.data.res) {
         case 'Fire redirect':
-          dispatch({ type: CREATE_BET, payload: {choice: choice, game: game, _id: res.data._id} });
+          dispatch({ type: CREATE_BET, payload: {choice: choice, game: game, _id: res.data._id, result: null} });
           history.push(`/profile/${user_id}`);
           break;
         case 'Existing game':
@@ -61,3 +61,22 @@ export const fetchWeekBets = () => async (dispatch) =>
   const res = await axios.get('/api/weekbets')
   dispatch({ type: FETCH_WEEK_BETS, payload: res.data })
 };
+
+
+export const fetchUserBets = (userId) => async (dispatch) => 
+{
+  try {
+    const res = await axios.get(`/api/users/${userId}/bets`);
+
+    switch(res.status) {
+      case 200:
+        dispatch({ type: GET_USER_BETS, payload: [...res.data]});
+        break;
+      default:
+        alert('Oops, il y a eu une erreur.');
+    }
+
+  } catch(err) {
+    alert('Oops, il y a eu une erreur');
+  }
+}

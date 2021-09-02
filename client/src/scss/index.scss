@@ -9,6 +9,7 @@
 @import "margin";
 @import "form";
 @import "button";
+@import "band";
 
 body {
   margin: 0;
@@ -42,4 +43,14 @@ ul:not(.browser-default) {
 
 .bold {
   font-weight: 700;
+}
+
+.looser {
+  border: 2px solid $risky;
+  color: $risky;
+}
+
+.winner {
+  border: 2px solid $green-dark;
+  color: $green-dark;
 }

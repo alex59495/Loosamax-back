@@ -5,6 +5,8 @@ import { Link } from 'react-router-dom';
 const Header = ({user}) => {
   const renderContent = () => {
     switch(user._id) {
+      case null:
+        return;
       case undefined:
         return <li><a href="/auth/google">Se connecter avec Google</a></li>
       default:

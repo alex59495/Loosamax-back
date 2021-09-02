@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheck, faTimes } from '@fortawesome/free-solid-svg-icons'
 
-import Bet from './Bet';
+import BetPreview from './BetPreview';
 
 import * as actions from '../../actions/betActions';
 
@@ -29,7 +29,10 @@ const WeeklyBets = ({bets, users, fetchWeekBets}) => {
 
   const renderBets = bets.map(bet => {
     return (
-      <Bet key={bet._id} user={bet.user} game={bet.game} choice={bet.choice} />
+      <>
+        <h3>{bet.user.pseudo}</h3>
+        <BetPreview bet={bet} />
+      </>
     )
   })
 
