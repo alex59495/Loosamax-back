@@ -1,10 +1,18 @@
 import React from 'react';
 import {connect} from 'react-redux';
+import Loader from "react-loader-spinner";
 
 const Home = ({user}) => {
   const renderContent = () => {
-    switch(user._id) {
-      case undefined:
+    switch(user) {
+      case null:
+        return <Loader
+                  type="BallTriangle"
+                  color="#00BFFF"
+                  height={100}
+                  width={100}
+                />
+      case false:
         return (
           <button className='btn-orange-large'>
             <a href="/auth/google">Se connecter avec Google</a>

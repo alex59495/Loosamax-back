@@ -1,7 +1,9 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import {connect} from 'react-redux';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCheck, faTimes } from '@fortawesome/free-solid-svg-icons'
+import { faCheck, faTimes } from '@fortawesome/free-solid-svg-icons';
+import Loader from "react-loader-spinner";
+
 
 import BetPreview from './BetPreview';
 
@@ -11,8 +13,14 @@ const WeeklyBets = ({bets, users, fetchWeekBets}) => {
 
   const usersBetDone = bets.map(bet => bet.user._id)
 
+  const [isLoading, setIsLoading] = useState(true)
+
   useEffect(() => {
-    fetchWeekBets()
+    async function fetchAsync() {    
+      await fetchWeekBets()
+      setIsLoading(false)
+    }
+    fetchAsync()
   }, [])
 
   const renderUsers = users.map(user => {
@@ -36,11 +44,33 @@ const WeeklyBets = ({bets, users, fetchWeekBets}) => {
     )
   })
 
+  const renderWeekBets = () => {
+    if(isLoading) {
+      return (
+        <div className="container-center" style={{height: "100%", width: "100%"}}>
+          <Loader
+          type="BallTriangle"
+          color="#00BFFF"
+          height={100}
+          width={100}
+        />
+      </div>
+      )
+    } else {
+      return (
+        <>
+          {renderUsers}
+          {renderBets}
+        </>
+      )
+    }
+  }
+
+
   return (
     <div className="container-center">
       <h1>Les paris de la semaine</h1>
-      {renderUsers}
-      {renderBets}
+      {renderWeekBets()}
     </div>
   )
 }

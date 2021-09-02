@@ -1,5 +1,7 @@
-import React, {useEffect} from 'react';
-import {connect} from 'react-redux'
+import React, {useEffect, useState} from 'react';
+import {connect} from 'react-redux';
+import Loader from "react-loader-spinner";
+
 import * as actions from '../../actions/gamesActions';
 
 import GameOdd from './GameOdd';
@@ -7,8 +9,14 @@ import { snakeToCamel, capitalize } from '../../utils/textTransformation';
 
 const ListGames = ({league ,fetchGames, games}) => {
 
+  const [isLoading, setIsLoading] = useState(true)
+
   useEffect(() => {
-    fetchGames(league)
+    async function fetchAsync() {    
+      await fetchGames(league)
+      setIsLoading(false)
+    }
+    fetchAsync()
   }, [])
 
   const renderGames = () => {
@@ -29,14 +37,35 @@ const ListGames = ({league ,fetchGames, games}) => {
     })
   }
 
+  const renderListGames = () => {
+    if(isLoading) {
+      return (
+        <div className="container-center" style={{height: "100%", width: "100%"}}>
+          <Loader
+            type="BallTriangle"
+            color="#00BFFF"
+            height={100}
+            width={100}
+          />
+        </div>
+      )
+    } else {
+      return (
+        <div className="d-flex">
+          <div className="grid_wrap">
+            {renderGames()}
+          </div>
+        </div>
+      )
+    }
+  }
+
+  
+
   return (
     <>
       <h1 className="text-center text-orange">{capitalize(snakeToCamel(league))}</h1>
-      <div className="d-flex">
-        <div className="grid_wrap">
-          {renderGames()}
-        </div>
-      </div>
+      {renderListGames()}
     </>
   )
 }
