@@ -1,15 +1,21 @@
-import React, {useEffect} from 'react'
+import React, {useEffect, useState} from 'react'
 import {connect} from 'react-redux';
 import  * as actions from '../../actions/betActions';
 import BetPreview from '../Bets/BetPreview'
 import Loader from "react-loader-spinner";
 
-const Stats = ({bets, fetchBets, user}) => {
+const Stats = ({bets, fetchUserBets, user}) => {
+
+  const [isLoading, setIsLoading] = useState(true)
 
   useEffect(() => {
-    if (user._id) {
-      fetchBets(user._id)
+    const fetchData = async () => {
+      if (user._id) {
+        await fetchUserBets(user._id)
+        setIsLoading(false)
+      }
     }
+    fetchData();
   }, [user])
 
   const renderBets = (bets) => {
@@ -23,7 +29,18 @@ const Stats = ({bets, fetchBets, user}) => {
   }
 
   const renderStats = (bets) => {
-    if (bets.length > 0) {
+    if (isLoading) {
+      return (
+        <div className="d-flex justify-content-center margin-auto" style={{height: "100%", width: "100%"}}>
+          <Loader
+          type="BallTriangle"
+          color="#00BFFF"
+          height={100}
+          width={100}
+        />
+        </div>
+      )
+    } else if (bets.length > 0) {
       return (
         <>
           {renderBets(bets)}
@@ -38,16 +55,7 @@ const Stats = ({bets, fetchBets, user}) => {
         </>
       )
     } else {
-      return (
-        <div className="d-flex justify-content-center margin-auto" style={{height: "100%", width: "100%"}}>
-          <Loader
-          type="BallTriangle"
-          color="#00BFFF"
-          height={100}
-          width={100}
-        />
-        </div>
-      )
+      return <div>Pas de paris</div>
     }
   }
 

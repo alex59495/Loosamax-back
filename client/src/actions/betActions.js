@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { CREATE_BET, DELETE_BET, GET_BETS } from './types';
+import { CREATE_BET, DELETE_BET, GET_USER_BETS } from './types';
 
 export const createBet = ({choice, team, user_id, game, odd}, history) => async (dispatch) => 
 {
@@ -57,14 +57,14 @@ export const deleteBet = (id) => async (dispatch) =>
   }
 }
 
-export const fetchBets = (userId) => async (dispatch) => 
+export const fetchUserBets = (userId) => async (dispatch) => 
 {
   try {
     const res = await axios.get(`/api/users/${userId}/bets`);
 
     switch(res.status) {
       case 200:
-        dispatch({ type: GET_BETS, payload: [...res.data]});
+        dispatch({ type: GET_USER_BETS, payload: [...res.data]});
         break;
       default:
         alert('Oops, il y a eu une erreur.');
