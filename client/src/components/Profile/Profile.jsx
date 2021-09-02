@@ -3,9 +3,13 @@ import { connect } from 'react-redux';
 import { Formik } from 'formik';
 import { Link } from 'react-router-dom';
 
-import * as actions from '../actions/userActions';
+// Components
+import MyBet from './MyBet';
 
-const Profile = ({auth, changePseudo}) => {
+// Redux actions
+import * as actions from '../../actions/userActions';
+
+const Profile = ({user, changePseudo}) => {
   const [openEdit, setOpenEdit] = useState(false)
 
   const renderForm = () => {
@@ -21,7 +25,7 @@ const Profile = ({auth, changePseudo}) => {
             return errors;
           }}
           onSubmit={(values, { setSubmitting }) => {
-            changePseudo(auth, values);
+            changePseudo(user, values);
             setOpenEdit(false);
             setSubmitting(false);
           }}
@@ -61,18 +65,19 @@ const Profile = ({auth, changePseudo}) => {
     <div className='container w-50-center'>
       <h1>Ton pseudo</h1>
       <div className="d-flex justify-content-center align-items-center">
-        <h2>{auth.pseudo}</h2>
+        <h2>{user.pseudo}</h2>
         <div className="ml-1 action" onClick={() => setOpenEdit(!openEdit)}>{openEdit ? "Fermer" : "Modifier"}</div>
       </div>
       {renderForm()}
+      <MyBet />
       <Link className='btn-orange' to='/leagues'>Voir les paris disponibles</Link>
     </div>
   )
 }
 
-const mapStateToProps = ({auth}) => {
+const mapStateToProps = ({user}) => {
   return { 
-    auth
+    user
   }
 }
 

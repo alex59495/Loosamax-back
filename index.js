@@ -8,12 +8,14 @@ const passport = require('passport');
 // models
 require('./models/User');
 require('./models/Game');
+require('./models/Bet');
 
+// service
 require('./services/passport');
-require('./routes/authRoutes');
 
 const app = express();
 
+// Middlewares
 app.use(bodyParser.json());
 app.use(
   cookieSession({
@@ -26,14 +28,18 @@ app.use(
 app.use(passport.initialize());
 app.use(passport.session());
 
+// Connect DB
 mongoose.connect(keys.mongoURI,  {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 });
 
+// Routes
 // Require export une fonction qu'on appelle directement avec l'argument app
-require('./routes/authRoutes')(app);
+require('./routes/userRoutes')(app);
 require('./routes/gamesRoutes')(app);
+require('./routes/betRoutes')(app);
+
 
 if(process.env.NODE_ENV === 'production') {
   // Express will serve up production assets like main.css or main.js

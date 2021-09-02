@@ -2,9 +2,9 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 
-const Header = (props) => {
+const Header = ({user}) => {
   const renderContent = () => {
-    switch(props.auth) {
+    switch(user) {
       case null:
         return;
       case false:
@@ -13,7 +13,7 @@ const Header = (props) => {
         return (
           <div className='d-flex'>
             <Link to='/stats'>Mes Stats</Link>
-            <Link to={`/profile/${props.auth._id}`}>Mon profil</Link>
+            <Link to={`/profile/${user._id}`}>Mon profil</Link>
             <a href="/api/logout">Déconnexion</a>
           </div>
         )
@@ -24,7 +24,7 @@ const Header = (props) => {
     <nav>
       <div className="nav-wrapper">
         <Link 
-          to={props.auth ? `/leagues` : '/'} 
+          to={user ? `/leagues` : '/'} 
           className="brand"
         >
           Loosamax
@@ -37,9 +37,9 @@ const Header = (props) => {
   )
 }
 
-const mapStateToProps = ({auth}) => {
+const mapStateToProps = ({user}) => {
   return { 
-    auth
+    user
   }
 } 
 

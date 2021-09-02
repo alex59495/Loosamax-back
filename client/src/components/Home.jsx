@@ -1,9 +1,9 @@
 import React from 'react';
 import {connect} from 'react-redux';
 
-const Home = ({auth}) => {
+const Home = ({user}) => {
   const renderContent = () => {
-    switch(auth) {
+    switch(user) {
       case null:
         return;
       case false:
@@ -15,7 +15,7 @@ const Home = ({auth}) => {
       default:
         return (
             <button className='btn-orange-large'>
-              <a href={`/profile/${auth._id}`}>Mon profil</a>
+              <a href={`/profile/${user._id}`}>Mon profil</a>
             </button>
         )
     }
@@ -30,9 +30,9 @@ const Home = ({auth}) => {
   )
 }
 
-const mapStateToProps = ({auth}) => {
+const mapStateToProps = ({user}) => {
   return {
-    auth
+    user
   }
 }
 

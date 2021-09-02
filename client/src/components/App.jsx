@@ -3,7 +3,7 @@ import { BrowserRouter, Route } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 import Header from './Header';
-import Profile from './Profile';
+import Profile from './Profile/Profile';
 import ListLeagues from './Games/ListLeagues';
 import ListGames from './Games/ListGames';
 import Home from './Home';
@@ -21,6 +21,7 @@ const App = (props) => {
   useEffect(() => {
     props.fetchUser()
   }, [])
+
 
   const renderLeagues = LEAGUES.map(({name}) => {
     return <Route exact path={`/games/${name}`} key={name} render={(props) => <ListGames {...props} league={`${name}`} />} />

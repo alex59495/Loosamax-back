@@ -2,6 +2,7 @@ const passport = require('passport');
 const mongoose = require('mongoose');
 
 const User = mongoose.model('users');
+const Bet = mongoose.model('bets');
 
 module.exports = (app) => {
   app.get(
@@ -23,8 +24,26 @@ module.exports = (app) => {
     res.redirect('/')
   })
 
-  app.get('/api/current_user', (req, res) => {
-    res.send(req.user);
+  app.get('/api/current_user', async (req, res) => {
+
+    const actualBet = await Bet.aggregate([
+      {$lookup: {
+          from: 'games', 
+          localField: 'game', 
+          foreignField: '_id', 
+          as: 'game'}
+      },
+      {$unwind: {path: '$game'}},
+      {$match: {'game.result': null}}
+    ]);
+
+    const user = {
+      _id: req.user._id, 
+      googleId: req.user.googleId,
+      pseudo: req.user.pseudo
+    }
+
+    res.send({...user, actualBet: actualBet[0]});
   })
 
   app.patch('/api/current_user/:id', async (req, res) => {
