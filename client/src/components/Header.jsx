@@ -2,9 +2,9 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 
-const Header = (props) => {
+const Header = ({user}) => {
   const renderContent = () => {
-    switch(props.user) {
+    switch(user) {
       case null:
         return;
       case false:
@@ -12,7 +12,8 @@ const Header = (props) => {
       default:
         return (
           <div className='d-flex'>
-            <a href={`/profile/${props.user._id}`}>Mon profil</a>
+            <Link to='/stats'>Mes Stats</Link>
+            <Link to={`/profile/${user._id}`}>Mon profil</Link>
             <a href="/api/logout">Déconnexion</a>
           </div>
         )
@@ -23,7 +24,7 @@ const Header = (props) => {
     <nav>
       <div className="nav-wrapper">
         <Link 
-          to={props.user ? `/games` : '/'} 
+          to={user ? `/leagues` : '/'} 
           className="brand"
         >
           Loosamax

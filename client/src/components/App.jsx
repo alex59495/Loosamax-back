@@ -6,6 +6,8 @@ import Header from './Header';
 import Profile from './Profile/Profile';
 import ListLeagues from './Games/ListLeagues';
 import ListGames from './Games/ListGames';
+import Home from './Home';
+import Stats from './Stats/Stats';
 
 // Redux functions
 import * as actions from '../actions/userActions';
@@ -23,7 +25,7 @@ const App = (props) => {
 
   const renderLeagues = LEAGUES.map(({name}) => {
     return <Route exact path={`/games/${name}`} key={name} render={(props) => <ListGames {...props} league={`${name}`} />} />
-  })
+  });
 
   return (
     <div className='background'>
@@ -31,8 +33,10 @@ const App = (props) => {
         <>
           <Header />
           <div className="container">
+            <Route exact path="/" component={Home} />
+            <Route exact path="/stats" component={Stats} />
             <Route exact path="/profile/:id" component={Profile} />
-            <Route exact path="/games" component={ListLeagues} />
+            <Route exact path="/leagues" component={ListLeagues} />
             {renderLeagues}
           </div>
         </>

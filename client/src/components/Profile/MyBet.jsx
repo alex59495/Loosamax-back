@@ -41,7 +41,7 @@ const MyBet = ({user, deleteBet}) => {
   };
 
   return (
-    <div>
+    <div className="mb-1">
       <h1>Ton Pari de cette semaine</h1>
       {renderMyBet()}
     </div>

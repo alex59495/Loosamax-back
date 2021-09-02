@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import { connect } from 'react-redux';
 import { Formik } from 'formik';
+import { Link } from 'react-router-dom';
 
 // Components
 import MyBet from './MyBet';
@@ -19,15 +20,14 @@ const Profile = ({user, changePseudo}) => {
           validate={values => {
             const errors = {};
             if (!values.pseudo) {
-              errors.pseudo = 'Required';
+              errors.pseudo = 'Tu dois avoir un joli petit nom.';
             }
             return errors;
           }}
           onSubmit={(values, { setSubmitting }) => {
-            setTimeout(() => {
-              changePseudo(user, values)
-              setSubmitting(false);
-            }, 400);
+            changePseudo(user, values);
+            setOpenEdit(false);
+            setSubmitting(false);
           }}
         >
           {({
@@ -40,7 +40,7 @@ const Profile = ({user, changePseudo}) => {
             isSubmitting,
             /* and other goodies */
           }) => (
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={handleSubmit} className='mb-1'>
               <input
                 type="pseudo"
                 name="pseudo"
@@ -48,9 +48,11 @@ const Profile = ({user, changePseudo}) => {
                 onBlur={handleBlur}
                 value={values.pseudo}
               />
-              {errors.pseudo && touched.pseudo && errors.pseudo}
-              <button type="submit" disabled={isSubmitting}>
-                Submit
+              <div className="form-error">
+                {errors.pseudo && touched.pseudo && errors.pseudo}
+              </div>
+              <button type="submit" disabled={isSubmitting} className='btn-salmon'>
+                Changer
               </button>
             </form>
           )}
@@ -60,12 +62,15 @@ const Profile = ({user, changePseudo}) => {
   }
 
   return (
-    <div>
+    <div className='container w-50-center'>
       <h1>Ton pseudo</h1>
-      {user.pseudo}
-      <div onClick={() => setOpenEdit(!openEdit)}>Edit</div>
+      <div className="d-flex justify-content-center align-items-center">
+        <h2>{user.pseudo}</h2>
+        <div className="ml-1 action" onClick={() => setOpenEdit(!openEdit)}>{openEdit ? "Fermer" : "Modifier"}</div>
+      </div>
       {renderForm()}
       <MyBet />
+      <Link className='btn-orange' to='/leagues'>Voir les paris disponibles</Link>
     </div>
   )
 }
