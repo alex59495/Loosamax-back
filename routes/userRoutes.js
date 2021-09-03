@@ -5,6 +5,7 @@ const User = mongoose.model('users');
 const Bet = mongoose.model('bets');
 
 module.exports = (app) => {
+
   app.get(
     '/auth/google', 
     passport.authenticate('google', {
@@ -13,7 +14,7 @@ module.exports = (app) => {
   );
   
   app.get('/auth/google/callback', 
-    passport.authenticate('google'),
+    passport.authenticate('google', { failureRedirect: '/', failureFlash: "Dejá 9 joueurs inscrits, tu ne peux pas t'inscrire." }),
     (req, res) => {
       res.redirect(`/profile/${req.user.id}`)
     }
@@ -25,9 +26,6 @@ module.exports = (app) => {
   })
 
   app.get('/api/current_user', async (req, res) => {
-
-    let user = {}
-
     if(req.user) {
       const actualBet = await Bet.aggregate([
         {$lookup: {
