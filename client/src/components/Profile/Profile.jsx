@@ -2,6 +2,8 @@ import React, {useState} from 'react';
 import { connect } from 'react-redux';
 import { Formik } from 'formik';
 import { Link } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPencilAlt } from '@fortawesome/free-solid-svg-icons';
 
 // Components
 import MyBet from './MyBet';
@@ -40,7 +42,7 @@ const Profile = ({user, changePseudo}) => {
             isSubmitting,
             /* and other goodies */
           }) => (
-            <form onSubmit={handleSubmit} className='mb-1'>
+            <form onSubmit={handleSubmit} className='container-center mb-1'>
               <input
                 type="pseudo"
                 name="pseudo"
@@ -66,7 +68,7 @@ const Profile = ({user, changePseudo}) => {
       <h1>Ton pseudo</h1>
       <div className="d-flex justify-content-center align-items-center">
         <h2>{user.pseudo}</h2>
-        <div className="ml-1 action" onClick={() => setOpenEdit(!openEdit)}>{openEdit ? "Fermer" : "Modifier"}</div>
+        <div className="ml-1 action" onClick={() => setOpenEdit(!openEdit)}>{openEdit ? "Fermer" : <FontAwesomeIcon icon={faPencilAlt} />}</div>
       </div>
       {renderForm()}
       <MyBet />

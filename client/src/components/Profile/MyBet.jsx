@@ -24,10 +24,10 @@ const MyBet = ({user, deleteBet}) => {
       return 'Pas de match pour le moment'
     } else {
       return (
-        <>
+        <div className="container-center">
           <BetPreview bet={user.actualBet} game={user.actualBet.game}/>
-          <button onClick={() => deleteBet(user.actualBet._id)}>Supprimer</button>
-        </>
+          <button className="btn-risky" onClick={() => deleteBet(user.actualBet._id)}>Supprimer</button>
+        </div>
       )
     }
   };
