@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { CREATE_BET, DELETE_BET, GET_USER_BETS, FETCH_WEEK_BETS} from './types';
+import { CREATE_BET, DELETE_BET, GET_BETS} from './types';
 
 export const createBet = ({choice, team, user_id, game, odd}, history) => async (dispatch) => 
 {
@@ -59,10 +59,10 @@ export const deleteBet = (id) => async (dispatch) =>
 export const fetchWeekBets = () => async (dispatch) => 
 {
   const res = await axios.get('/api/weekbets')
-  dispatch({ type: FETCH_WEEK_BETS, payload: res.data })
+  dispatch({ type: GET_BETS, payload: res.data })
 };
 
-
+// Cette action n'est pas une action "redux" elle renvoie directement une réponse (appelée dans UserStats) sans passer par le reducer
 export const fetchUserBets = (userId) => async (dispatch) => 
 {
   try {
@@ -70,8 +70,7 @@ export const fetchUserBets = (userId) => async (dispatch) =>
 
     switch(res.status) {
       case 200:
-        dispatch({ type: GET_USER_BETS, payload: [...res.data]});
-        break;
+        return res.data
       default:
         alert('Oops, il y a eu une erreur.');
     }

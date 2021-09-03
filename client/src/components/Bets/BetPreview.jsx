@@ -1,4 +1,5 @@
-import BandResult from './BandResult'
+import BandResult from './BandResult';
+import { formatDate } from '../../utils/textTransformation';
 
 const BetPreview = ({bet}) => {
 
@@ -18,19 +19,21 @@ const BetPreview = ({bet}) => {
   }
   return (
     <div className="card-odd">
-      <div className={`card-odd-detail ${bet.choice === 1 ? 'active-odd' : null}`}>
-        <span className="team">{bet.game.home_team}</span>
-        <span className={oddRisk(bet.game.home_odd)}>{bet.game.home_odd}</span>
+      <div className="match">
+        <div className={`card-odd-detail ${bet.choice === 1 ? 'active-odd' : null}`}>
+          <span className="team">{bet.game.home_team}</span>
+          <span className={oddRisk(bet.game.home_odd)}>{bet.game.home_odd}</span>
+        </div>
+        <div className={`card-odd-detail ${bet.choice === 0 ? 'active-odd' : null}`}>
+          <span>Nul</span>
+          <span className={oddRisk(bet.game.draw_odd)}>{bet.game.draw_odd}</span>
+        </div>
+        <div className={`card-odd-detail ${bet.choice === 2 ? 'active-odd' : null}`}>
+          <span className="team">{bet.game.away_team}</span>
+          <span className={oddRisk(bet.game.away_odd)}>{bet.game.away_odd}</span>
+        </div>
       </div>
-      <div className={`card-odd-detail ${bet.choice === 0 ? 'active-odd' : null}`}>
-        <span>Nul</span>
-        <span className={oddRisk(bet.game.draw_odd)}>{bet.game.draw_odd}</span>
-      </div>
-      <div className={`card-odd-detail ${bet.choice === 2 ? 'active-odd' : null}`}>
-        <span className="team">{bet.game.away_team}</span>
-        <span className={oddRisk(bet.game.away_odd)}>{bet.game.away_odd}</span>
-      </div>
-      {result(bet.result)}
+      <div className="date">{formatDate(bet.game.commence_time)}</div>
     </div>
   )
 }

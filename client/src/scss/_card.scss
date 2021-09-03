@@ -5,8 +5,14 @@
   border-radius: 5px;
   border: 2px solid $salmon;
   width: 300px;
-  display: flex;
-  justify-content: space-between;
+  .match {
+    display: flex;
+    justify-content: space-between;
+  }
+  .date {
+    text-align: center;
+    margin-top: 4px;
+  }
   .card-odd-detail {
     width: 33%;
     display: flex;
@@ -57,4 +63,20 @@
   border-radius: 8px;
   border: $green-dark;
   padding: 8px;
+}
+
+.card-stat {
+  padding: 4px;
+  width: 150px;
+  margin: 4px;
+  border-radius: 8px;
+  text-align: center;
+  border: 1px black solid;
+  .title {
+    font-weight: 700;
+  }
+  .content {
+    margin-top: 4px;
+    font-size: 2rem;
+  }
 }

@@ -7,8 +7,8 @@ import Profile from './Profile/Profile';
 import ListLeagues from './Games/ListLeagues';
 import ListGames from './Games/ListGames';
 import Home from './Home';
-import Stats from './Stats/Stats';
 import WeeklyBets from './Bets/WeeklyBets';
+import Stats from './Stats/Stats';
 
 // Redux functions
 import * as actions from '../actions/userActions';

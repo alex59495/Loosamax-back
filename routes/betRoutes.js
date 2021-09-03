@@ -110,7 +110,7 @@ module.exports = (app) => {
             as: 'user'}
           },
           {$unwind: {path: '$user'}},
-          {$match: {'user._id': user._id, 'game.result': null} },
+          {$match: {'user._id': user._id, 'result': null} },
         ]).then(bet => {
           if(bet[0]) weekBets.push(bet[0])
         })
@@ -122,4 +122,13 @@ module.exports = (app) => {
       res.status(422).send(err)
     } 
   });
+
+    app.get('/api/bets', async (req, res) => {
+      try {
+        const bets = await Bet.find({ result: { $ne: null }})
+        res.send(bets)
+      }catch(err){
+        res.status(422).send(err)
+      }
+    })
 } 
