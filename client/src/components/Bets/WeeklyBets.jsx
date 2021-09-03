@@ -26,21 +26,21 @@ const WeeklyBets = ({bets, users, fetchWeekBets}) => {
   const renderUsers = users.map(user => {
     if(usersBetDone.includes(user._id)) {
       return(
-        <div key={user._id} style={{color: 'green'}}><FontAwesomeIcon icon={faCheck} className='mr-1' />{user.pseudo}</div>
+        <div key={user._id} className="card-bet green"><FontAwesomeIcon icon={faCheck} className='mr-1' />{user.pseudo}</div>
       )
     } else {
       return(
-        <div key={user._id} style={{color: 'red'}} ><FontAwesomeIcon icon={faTimes} className='mr-1'/>{user.pseudo}</div>
+        <div key={user._id} className="card-bet red" ><FontAwesomeIcon icon={faTimes} className='mr-1'/>{user.pseudo}</div>
       )
     }
   })
 
   const renderBets = bets.map(bet => {
     return (
-      <>
+      <React.Fragment key={bet._id}>
         <h3>{bet.user.pseudo}</h3>
         <BetPreview bet={bet} />
-      </>
+      </ React.Fragment>
     )
   })
 
@@ -59,7 +59,9 @@ const WeeklyBets = ({bets, users, fetchWeekBets}) => {
     } else {
       return (
         <>
-          {renderUsers}
+          <div className="d-flex">
+            {renderUsers}
+          </div>
           {renderBets}
         </>
       )

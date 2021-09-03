@@ -4,14 +4,17 @@ import Loader from "react-loader-spinner";
 
 const Home = ({user}) => {
   const renderContent = () => {
+    if(user && Object.keys(user).length === 0) {
+      return (
+        <Loader
+          type="BallTriangle"
+          color="#00BFFF"
+          height={100}
+          width={100}
+        />
+      )
+    }
     switch(user) {
-      case null:
-        return <Loader
-                  type="BallTriangle"
-                  color="#00BFFF"
-                  height={100}
-                  width={100}
-                />
       case false:
         return (
           <button className='btn-orange-large'>

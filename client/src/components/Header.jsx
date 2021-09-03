@@ -4,10 +4,11 @@ import { Link } from 'react-router-dom';
 
 const Header = ({user}) => {
   const renderContent = () => {
+    if(user && Object.keys(user).length === 0) {
+      return null
+    }
 
     switch(user) {
-      case null:
-        return;
       case false:
         return <li><a href="/auth/google">Se connecter avec Google</a></li>
       default:

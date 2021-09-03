@@ -110,7 +110,7 @@ module.exports = (app) => {
             as: 'user'}
           },
           {$unwind: {path: '$user'}},
-          {$match: {'user._id': user._id, 'game.result': null} },
+          {$match: {'user._id': user._id, 'result': null} },
         ]).then(bet => {
           if(bet[0]) weekBets.push(bet[0])
         })
