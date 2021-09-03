@@ -1,6 +1,6 @@
 import { DELETE_BET, CREATE_BET, FETCH_USER, UPDATE_PSEUDO } from '../actions/types'
 
-export default function authReducer(state = {}, action) {
+export default function userReducer(state = {}, action) {
   switch(action.type) {
     case FETCH_USER:
       return action.payload || false
