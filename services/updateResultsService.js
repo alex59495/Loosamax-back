@@ -1,8 +1,10 @@
 const axios = require('axios')
+const keys = require('../config/keys')
 const leaguesIdentifiers = require('../helpers/leaguesIdentifiers')
 const teamNameStandard = require('../helpers/teamNameStandard')
 
 const mongoose = require('mongoose');
+const { keys } = require('../helpers/leaguesIdentifiers')
 
 const Game = mongoose.model('games');
 
@@ -25,7 +27,7 @@ module.exports = class UpdateResultsService {
     const matchLastDays = await axios({
         method: 'get',
         url: `https://api.football-data.org/v2/matches?dateFrom=${this.twoDaysAgo}&dateTo=${this.today}&status=FINISHED&competitions=${this.leaguesAlias}`,
-        headers: {'X-Auth-Token': '81d1390d9713461e8934c940e9ede544'}
+        headers: {'X-Auth-Token': keys.footballApiDataKey}
       })
 
     const matchLastDaysFormatted = matchLastDays.data.matches.map(item => {
