@@ -39,7 +39,7 @@ const WeeklyBets = ({bets, users, fetchWeekBets}) => {
     return (
       <React.Fragment key={bet._id}>
         <h3>{bet.user.pseudo}</h3>
-        <BetPreview bet={bet} />
+        <BetPreview bet={bet} game={bet.game}/>
       </React.Fragment>
     )
   })

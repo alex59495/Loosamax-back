@@ -25,7 +25,7 @@ const MyBet = ({user, deleteBet}) => {
     } else {
       return (
         <>
-          <BetPreview bet={user.actualBet}/>
+          <BetPreview bet={user.actualBet} game={user.actualBet.game}/>
           <button onClick={() => deleteBet(user.actualBet._id)}>Supprimer</button>
         </>
       )

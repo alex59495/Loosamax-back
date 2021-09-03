@@ -1,13 +1,31 @@
 import React, {useEffect, useState} from 'react'
 import {connect} from 'react-redux';
-import  * as actions from '../../actions/betActions';
-import BetPreview from '../Bets/BetPreview'
+import axios from 'axios';
+
 import Loader from "react-loader-spinner";
 
-const UserStats = ({fetchUserBets, user}) => {
+const UserStats = ({user}) => {
 
   const [isLoading, setIsLoading] = useState(true)
   const [bets, setBets] = useState([])
+
+
+  const fetchUserBets = async (userId) => 
+  {
+    try {
+      const res = await axios.get(`/api/users/${userId}/bets`);
+
+      switch(res.status) {
+        case 200:
+          return res.data
+        default:
+          alert('Oops, il y a eu une erreur.');
+      }
+
+    } catch(err) {
+      alert('Oops, il y a eu une erreur');
+    }
+  }
 
   useEffect(() => {
     const fetchData = async () => {
@@ -19,16 +37,6 @@ const UserStats = ({fetchUserBets, user}) => {
     }
     fetchData();
   }, [])
-
-  const renderBets = (bets) => {
-    return bets.map((bet) => {
-      return (
-        <div key={bet._id}>
-          <BetPreview bet={bet} />
-        </div>
-      )
-    })
-  }
 
   const colorResult = (result) => {
     if(result < 33) { return 'risky' }
@@ -51,7 +59,6 @@ const UserStats = ({fetchUserBets, user}) => {
     } else if (bets.length > 0) {
       return (
         <>
-          {renderBets(bets)}
           <div className="d-flex justify-content-center">
             <div className="card-stat">
               <div className="title">Perdu</div>
@@ -117,4 +124,4 @@ const UserStats = ({fetchUserBets, user}) => {
   )
 }
 
-export default connect(null, actions)(UserStats)
+export default connect(null)(UserStats)
