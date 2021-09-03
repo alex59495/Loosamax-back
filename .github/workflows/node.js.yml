@@ -18,6 +18,4 @@ jobs:
         cache: 'yarn'
     - name: Install dependencies
       run: yarn inst-all
-    - run: yarn client build --if-present
     - run: yarn test
-
