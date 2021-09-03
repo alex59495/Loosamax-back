@@ -10,7 +10,8 @@
     "client-install": "yarn --cwd client install",
     "inst-all": "yarn install && yarn --cwd client install",
     "client-build": "yarn --cwd client build",
-    "heroku-postbuild": "YARN_PRODUCTION=false yarn client-install && yarn client-build"
+    "heroku-postbuild": "YARN_PRODUCTION=false yarn client-install && yarn client-build",
+    "test": "yarn --cwd client jest"
   },
   "license": "MIT",
   "dependencies": {
