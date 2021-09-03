@@ -15,13 +15,13 @@ const Home = ({user}) => {
       case false:
         return (
           <button className='btn-orange-large'>
-            <a href="/auth/google">Se connecter avec Google</a>
+            <a href="/auth/google" data-test="button-login">Se connecter avec Google</a>
           </button>
         )
       default:
         return (
             <button className='btn-orange-large'>
-              <a href={`/profile/${user._id}`}>Mon profil</a>
+              <a href={`/profile/${user._id}`} data-test="button-profile">Mon profil</a>
             </button>
         )
     }

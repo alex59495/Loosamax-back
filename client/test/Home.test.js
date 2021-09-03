@@ -18,15 +18,19 @@ describe('user logged', () => {
   beforeEach(() => {
     wrapper = setup({user: {_id: '1234'}})
   })
-  test('render Home', () => {
+  test('render Home avec button profile', () => {
+    const buttonProfile = wrapper.find("[data-test='button-profile']")
+    expect(buttonProfile.length).toBe(1);
   })
 })
 
 describe('user unlogged', () => {
   let wrapper;
   beforeEach(() => {
-    wrapper = setup({user: {}})
+    wrapper = setup({user: false})
   })
-  test('render Home', () => {
+  test('render Home avec button login', () => {
+    const buttonProfile = wrapper.find("[data-test='button-login']")
+    expect(buttonProfile.length).toBe(1);
   })
 })
