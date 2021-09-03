@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import { connect } from 'react-redux';
 import { Formik } from 'formik';
 import { Link } from 'react-router-dom';
@@ -62,7 +62,7 @@ const Profile = ({user, changePseudo}) => {
   }
 
   return (
-    <div className='container w-50-center'>
+    <div className='d-flex container-center'>
       <h1>Ton pseudo</h1>
       <div className="d-flex justify-content-center align-items-center">
         <h2>{user.pseudo}</h2>

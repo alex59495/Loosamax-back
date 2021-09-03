@@ -31,7 +31,7 @@ const Stats = ({bets, fetchUserBets, user}) => {
   const renderStats = (bets) => {
     if (isLoading) {
       return (
-        <div className="d-flex justify-content-center margin-auto" style={{height: "100%", width: "100%"}}>
+        <div className="container-center" style={{height: "100%", width: "100%"}}>
           <Loader
           type="BallTriangle"
           color="#00BFFF"
@@ -55,7 +55,7 @@ const Stats = ({bets, fetchUserBets, user}) => {
         </>
       )
     } else {
-      return <div>Pas de paris</div>
+      return <h1 className="container-center">Pas de paris</h1>
     }
   }
 
