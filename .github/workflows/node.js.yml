@@ -17,6 +17,6 @@ jobs:
         node-version: '14'
         cache: 'yarn'
     - name: Install dependencies
-      run: yarn
-    - run: yarn run build --if-present
+      run: yarn inst-all
+    - run: yarn client build --if-present
     - run: yarn test
