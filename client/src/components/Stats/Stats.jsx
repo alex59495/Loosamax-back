@@ -60,18 +60,18 @@ const Stats = ({bets, fetchUserBets, user}) => {
   }
 
   const numberBets = bets.length
-  const numberLoose = bets.filter(bet => bet.result === "loose").length
-  const numberWin = bets.filter(bet => bet.result === "win").length
+  const numberLoose = bets.filter(bet => bet.game.result !== bet.choice).length
+  const numberWin = bets.filter(bet => bet.game.result === bet.choice).length
 
   const averageOddWin = (bets.reduce((sum, bet) => {
-    if (bet.result === "win") {
+    if (bet.game.result === bet.choice) {
       return sum + bet.odd
     }
     return sum
   }, 0) / numberWin).toFixed(2)
 
   const averageOddLoose = (bets.reduce((sum, bet) => {
-    if (bet.result === "loose") {
+    if (bet.game.result !== bet.choice) {
       return sum + bet.odd
     }
     return sum
