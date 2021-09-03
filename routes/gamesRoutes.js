@@ -260,7 +260,7 @@ module.exports = (app) => {
         method: 'get',
         url: `https://api.the-odds-api.com/v4/sports/soccer_spain_la_liga/odds/?apiKey=${keys.oddsApi}&regions=eu`
       });
-      
+
       const games = fetchGames.data
       games.forEach(async game => {
         const { id, home_team, away_team, commence_time, sport_key, bookmakers } = game

@@ -26,37 +26,36 @@ module.exports = (app) => {
   })
 
   app.get('/api/current_user', async (req, res) => {
+    if(req.user) {
+      const actualBet = await Bet.aggregate([
+        {$lookup: {
+          from: 'games', 
+          localField: 'game', 
+          foreignField: '_id', 
+          as: 'game'}
+        },
+        {$unwind: {path: '$game'}},
+        {$lookup: {
+          from: 'users', 
+          localField: 'user', 
+          foreignField: '_id', 
+          as: 'user'}
+        },
+        {$unwind: {path: '$user'}},
+        {$match: {'user._id': req.user._id, 'game.result': null} },
+      ]);
 
-  
-      if(req.user) {
-        const actualBet = await Bet.aggregate([
-          {$lookup: {
-            from: 'games', 
-            localField: 'game', 
-            foreignField: '_id', 
-            as: 'game'}
-          },
-          {$unwind: {path: '$game'}},
-          {$lookup: {
-            from: 'users', 
-            localField: 'user', 
-            foreignField: '_id', 
-            as: 'user'}
-          },
-          {$unwind: {path: '$user'}},
-          {$match: {'user._id': req.user._id, 'result': null} },
-        ]);
-
-        const user = {
-          _id: req.user._id, 
-          googleId: req.user.googleId,
-          pseudo: req.user.pseudo
-        }
-
-        res.send({...user, actualBet: {...actualBet[0]}});
+      user = {
+        _id: req.user._id, 
+        googleId: req.user.googleId,
+        pseudo: req.user.pseudo
       }
 
-      res.send(null);
+      res.send({...user, actualBet: {...actualBet[0]}});
+    }
+
+    res.send(false);
+    
   });
 
   app.patch('/api/current_user/:id', async (req, res) => {
