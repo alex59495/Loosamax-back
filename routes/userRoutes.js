@@ -41,7 +41,7 @@ module.exports = (app) => {
         as: 'user'}
       },
       {$unwind: {path: '$user'}},
-      {$match: {'user._id': req.user._id, 'result': null} },
+      {$match: {'user._id': req.user._id, 'game.result': null} },
     ]);
 
     const user = {

@@ -68,7 +68,7 @@ module.exports = (app) => {
             as: 'user'}
         },
         {$unwind: {path: '$user'}},
-        {$match: {'user._id': ObjectId(userId), 'result': { $ne: null} }}
+        {$match: {'user._id': ObjectId(userId), 'game.result': { $ne: null} }}
       ]);
       res.status(200).send(userBets);
     } catch(err) {
