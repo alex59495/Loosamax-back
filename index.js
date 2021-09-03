@@ -14,9 +14,6 @@ require('./models/Bet');
 require('./services/passport');
 
 const app = express();
-const UpdateResultsService = require('./services/updateResultsService')
-
-new UpdateResultsService().call()
 
 // Middlewares
 app.use(bodyParser.json());
