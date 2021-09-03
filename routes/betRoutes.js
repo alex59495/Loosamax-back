@@ -25,7 +25,7 @@ module.exports = (app) => {
           as: 'user'}
         },
         {$unwind: {path: '$user'}},
-        {$match: {'user._id': req.user._id, 'result': null} },
+        {$match: {'user._id': req.user._id, 'game.result': null} },
       ]);
 
       if(actualBet.length < 1) {
@@ -69,7 +69,7 @@ module.exports = (app) => {
             as: 'user'}
         },
         {$unwind: {path: '$user'}},
-        {$match: {'user._id': ObjectId(userId), 'result': { $ne: null} }}
+        {$match: {'user._id': ObjectId(userId), 'game.result': { $ne: null} }}
       ]);
       res.status(200).send(userBets);
     } catch(err) {
@@ -110,7 +110,7 @@ module.exports = (app) => {
             as: 'user'}
           },
           {$unwind: {path: '$user'}},
-          {$match: {'user._id': user._id, 'result': null} },
+          {$match: {'user._id': user._id, 'game.result': null} },
         ]).then(bet => {
           if(bet[0]) weekBets.push(bet[0])
         })

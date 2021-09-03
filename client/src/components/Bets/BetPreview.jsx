@@ -9,9 +9,9 @@ const BetPreview = ({bet}) => {
     else { return "intermediate" }
   }
 
-  const result = (betResult) => {
-    if (betResult === null) return;
-    if (betResult === "win") {
+  const result = (bet) => {
+    if (bet.game.result === null) return;
+    if (bet.choice === bet.game.result) {
       return <BandResult result="Winner"/>
     } else {
       return <BandResult result="Looser"/>
@@ -34,6 +34,7 @@ const BetPreview = ({bet}) => {
         </div>
       </div>
       <div className="date">{formatDate(bet.game.commence_time)}</div>
+      {result(bet)}
     </div>
   )
 }
