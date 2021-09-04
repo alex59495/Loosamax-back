@@ -4,8 +4,6 @@ const leaguesIdentifiers = require('../helpers/leaguesIdentifiers')
 const teamNameStandard = require('../helpers/teamNameStandard')
 
 const mongoose = require('mongoose');
-const { keys } = require('../helpers/leaguesIdentifiers')
-
 const Game = mongoose.model('games');
 
 module.exports = class UpdateResultsService {
@@ -13,7 +11,8 @@ module.exports = class UpdateResultsService {
   constructor() {
     this.twoDaysAgo = new Date(new Date() - 1000 * 60 * 60 * 24 * 2).toISOString().slice(0, 10)
     this.today = new Date().toISOString().slice(0, 10)
-    this.leaguesAlias = leaguesIdentifiers.map(league => league.alias).join(',')
+    // On recupere les leagues alias pour le call API (Object entries + index 1 car la donnée est stocké sous forme d'object JS)
+    this.leaguesAlias = Object.entries(leaguesIdentifiers).map(league => league[1].alias).join(',')
   }
 
   setResult = (res) => {
