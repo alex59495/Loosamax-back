@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { BrowserRouter, Route } from 'react-router-dom';
 import { connect } from 'react-redux';
 
-import Header from './Header';
+import Header from './Header/Header';
 import Profile from './Profile/Profile';
 import ListLeagues from './Games/ListLeagues';
 import ListGames from './Games/ListGames';
@@ -17,11 +17,11 @@ import * as actions from '../actions/userActions';
 // utils
 import {LEAGUES} from '../constants/leagues';
 
-const App = (props) => {
+const App = ({fetchUser, fetchUsers}) => {
 
   useEffect(() => {
-    props.fetchUser()
-    props.fetchUsers()
+    fetchUser()
+    fetchUsers()
   }, [])
 
 
