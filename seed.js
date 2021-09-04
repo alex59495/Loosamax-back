@@ -1,13 +1,13 @@
 
-require('../models/User');
-require('../models/Game');
-require('../models/Bet');
+require('./models/User');
+require('./models/Game');
+require('./models/Bet');
 const mongoose = require("mongoose");
 const User = mongoose.model('users');
 const Game = mongoose.model('games');
 const Bet = mongoose.model('bets');
 
-const keys = require("../config/keys");
+const keys = require("./config/keys");
 
 const dbSeed = async () => {
   // Connect the database
@@ -69,7 +69,8 @@ const dbSeed = async () => {
       draw_odd: 6,
       result: 1,
       home_score: 2,
-      away_score: 1
+      away_score: 1,
+      date_result: new Date().toISOString().slice(0, 10)
     }))
   }
 
