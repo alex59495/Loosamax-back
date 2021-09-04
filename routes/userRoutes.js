@@ -26,7 +26,6 @@ module.exports = (app) => {
   })
 
   app.get('/api/current_user', async (req, res) => {
-
     if(req.user) {
       const actualBet = await Bet.aggregate([
         {$lookup: {

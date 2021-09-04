@@ -1,7 +1,6 @@
 import React, {useState} from 'react';
 import { connect } from 'react-redux';
 import { Formik } from 'formik';
-import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPencilAlt } from '@fortawesome/free-solid-svg-icons';
 
@@ -72,7 +71,6 @@ const Profile = ({user, changePseudo}) => {
       </div>
       {renderForm()}
       <MyBet />
-      <Link className='btn-orange' to='/leagues'>Voir les paris disponibles</Link>
     </div>
   )
 }

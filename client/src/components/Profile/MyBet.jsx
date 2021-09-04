@@ -1,6 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import Loader from "react-loader-spinner";
+import {Link} from 'react-router-dom';
 
 // redux actions
 import * as actions from '../../actions/betActions';
@@ -21,7 +22,12 @@ const MyBet = ({user, deleteBet}) => {
         </div>
       )
     } else if(user.actualBet && !user.actualBet.game)  {
-      return 'Pas de match pour le moment'
+      return (
+        <>
+          <p>Pas de match pour le moment</p>
+          <Link className='btn-orange' to='/leagues'>Voir les paris disponibles</Link>
+        </>
+      )
     } else {
       return (
         <div className="container-center">
@@ -33,7 +39,7 @@ const MyBet = ({user, deleteBet}) => {
   };
 
   return (
-    <div className="mb-1">
+    <div className="container-center mb-1">
       <h1>Ton Pari de cette semaine</h1>
       {renderMyBet()}
     </div>

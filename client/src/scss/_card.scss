@@ -80,3 +80,16 @@
     font-size: 2rem;
   }
 }
+
+.card-bet {
+  padding: 8px;
+  border-radius: 8px;
+  border: 1px solid black;
+  margin: 8px;
+  &.green {
+    color: green;
+  }
+  &.red {
+    color: red;
+  }
+}
