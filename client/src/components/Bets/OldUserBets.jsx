@@ -4,17 +4,20 @@ import Loader from "react-loader-spinner";
 
 import BetPreview from './BetPreview';
 
-import {fetchWeekBets} from '../../actions/betActions';
+import {fetchUserBets} from '../../actions/betActions';
 
-const OldUserBets = ({bets, fetchWeekBets}) => {
+const OldUserBets = ({user, bets, fetchUserBets}) => {
   const [isLoading, setIsLoading] = useState(true)
 
   useEffect(() => {
-    async function fetchData() {
-      await fetchWeekBets()
-      setIsLoading(false)
+    let isMounted = true
+    if (user._id) {
+      async function fetchData() {
+        await fetchUserBets(user._id)
+        if(isMounted) setIsLoading(false)
+      }
+      fetchData();
     }
-    fetchData();
   }, [])
 
   const renderBets = () => {
@@ -46,10 +49,11 @@ const OldUserBets = ({bets, fetchWeekBets}) => {
   )
 };
 
-const mapStateToProsp = ({bets}) => {
+const mapStateToProsp = ({user, bets}) => {
   return {
+    user,
     bets
   }
 }
 
-export default connect(mapStateToProsp, {fetchWeekBets})(OldUserBets);
+export default connect(mapStateToProsp, {fetchUserBets})(OldUserBets);
