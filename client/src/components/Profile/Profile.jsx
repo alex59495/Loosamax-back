@@ -1,7 +1,6 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState} from 'react';
 import { connect } from 'react-redux';
 import { Formik } from 'formik';
-import { Link } from 'react-router-dom';
 
 // Components
 import MyBet from './MyBet';
@@ -40,7 +39,7 @@ const Profile = ({user, changePseudo}) => {
             isSubmitting,
             /* and other goodies */
           }) => (
-            <form onSubmit={handleSubmit} className='mb-1'>
+            <form onSubmit={handleSubmit} className='container-center mb-1'>
               <input
                 type="pseudo"
                 name="pseudo"
@@ -70,7 +69,6 @@ const Profile = ({user, changePseudo}) => {
       </div>
       {renderForm()}
       <MyBet />
-      <Link className='btn-orange' to='/leagues'>Voir les paris disponibles</Link>
     </div>
   )
 }

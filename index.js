@@ -4,6 +4,7 @@ const keys = require('./config/keys');
 const bodyParser = require('body-parser')
 const cookieSession = require('cookie-session');
 const passport = require('passport');
+const flash = require('connect-flash');
 
 // models
 require('./models/User');
@@ -24,7 +25,7 @@ app.use(
     keys: [keys.cookieKey]
   })
 );
-
+app.use(flash());
 app.use(passport.initialize());
 app.use(passport.session());
 

@@ -26,6 +26,12 @@ passport.use(new googleStrategy(
     if (existingUser) {
       return done(null, existingUser);
     }
+
+    const listUsers = await User.find()
+    if(listUsers.length >= 9) {
+      return done(null, false)
+    }
+
     const user = await new User({ googleId: profile.id }).save()
     done(null, user)
   }
