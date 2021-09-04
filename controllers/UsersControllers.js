@@ -5,8 +5,6 @@ const Bet = mongoose.model('bets');
 
 const fetchCurrentUser = async (req, res) => {
 
-  let user = {}
-
   if(req.user) {
     const actualBet = await Bet.aggregate([
       {$lookup: {

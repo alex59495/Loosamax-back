@@ -1,7 +1,6 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const keys = require('./config/keys');
-const bodyParser = require('body-parser')
 const cookieSession = require('cookie-session');
 const passport = require('passport');
 const flash = require('connect-flash');
@@ -17,7 +16,7 @@ require('./services/passport');
 const app = express();
 
 // Middlewares
-app.use(bodyParser.json());
+app.use(express.json());
 app.use(
   cookieSession({
     // 30 days

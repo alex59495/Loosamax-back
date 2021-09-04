@@ -16,11 +16,13 @@ const WeeklyBets = ({bets, users, fetchWeekBets}) => {
   const [isLoading, setIsLoading] = useState(true)
 
   useEffect(() => {
+    let isMounted = true
     async function fetchAsync() {    
       await fetchWeekBets()
-      setIsLoading(false)
+      if (isMounted) setIsLoading(false);
     }
     fetchAsync()
+    return () => { isMounted = false };
   }, [])
 
   const renderUsers = users.map(user => {

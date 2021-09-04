@@ -9,13 +9,15 @@ const Stats = ({bets, fetchUserBets, user}) => {
   const [isLoading, setIsLoading] = useState(true)
 
   useEffect(() => {
+    let isMounted = true
     const fetchData = async () => {
       if (user._id) {
         await fetchUserBets(user._id)
-        setIsLoading(false)
+        if (isMounted) setIsLoading(false)
       }
     }
     fetchData();
+    return () => { isMounted = false };
   }, [user])
 
   const renderBets = (bets) => {
