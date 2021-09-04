@@ -76,6 +76,15 @@ const fetchUserBets = async (req, res) => {
   }
 }
 
+const fetchAllBets = async (req, res) => {
+  try {
+    const bets = await Bet.find({ result: { $ne: null }})
+    res.send(bets)
+  }catch(err){
+    res.status(422).send(err)
+  }
+}
+
 const fetchWeekBets = async(req, res) => {
   try {
     const weekBets = []
@@ -122,4 +131,4 @@ const deleteBet = async (req, res) => {
   }
 };
 
-module.exports = {createBets, fetchUserBets, deleteBet, fetchWeekBets}
+module.exports = {createBets, fetchUserBets, fetchAllBets, deleteBet, fetchWeekBets}

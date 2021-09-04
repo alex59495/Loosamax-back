@@ -7,8 +7,9 @@ import Profile from './Profile/Profile';
 import ListLeagues from './Games/ListLeagues';
 import ListGames from './Games/ListGames';
 import Home from './Home';
-import Stats from './Stats/Stats';
 import WeeklyBets from './Bets/WeeklyBets';
+import Stats from './Stats/Stats';
+import OldUserBets from './Bets/OldUserBets';
 
 // Redux functions
 import * as actions from '../actions/userActions';
@@ -16,11 +17,11 @@ import * as actions from '../actions/userActions';
 // utils
 import {LEAGUES} from '../constants/leagues';
 
-const App = (props) => {
+const App = ({fetchUser, fetchUsers}) => {
 
   useEffect(() => {
-    props.fetchUser()
-    props.fetchUsers()
+    fetchUser()
+    fetchUsers()
   }, [])
 
 
@@ -36,6 +37,7 @@ const App = (props) => {
           <div className="container">
             <Route exact path="/" component={Home} />
             <Route exact path="/weekbets" component={WeeklyBets} />
+            <Route exact path="/mesparis" component={OldUserBets} />
             <Route exact path="/stats" component={Stats} />
             <Route exact path="/profile/:id" component={Profile} />
             <Route exact path="/leagues" component={ListLeagues} />

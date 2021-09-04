@@ -9,5 +9,4 @@ export const FETCH_GAMES = 'FETCH_GAMES';
 // Bets
 export const CREATE_BET = 'CREATE_BET';
 export const DELETE_BET = 'DELETE_BET';
-export const FETCH_WEEK_BETS = 'FETCH_WEEK_BETS';
-export const GET_USER_BETS = 'GET_USER_BETS';
+export const GET_BETS = 'GET_BETS';

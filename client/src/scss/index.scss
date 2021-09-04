@@ -41,6 +41,22 @@ ul:not(.browser-default) {
   color: $orange;
 }
 
+.risky {
+  color: $risky;
+}
+
+.safe {
+  color: $safe;
+}
+
+.intermediate {
+  color: $intermediate;
+}
+
+.green-dark {
+  color: $green-dark;
+}
+
 .bold {
   font-weight: 700;
 }
