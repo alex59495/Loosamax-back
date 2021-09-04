@@ -36,6 +36,17 @@
   }
 }
 
+.btn-risky {
+  background-color: $risky;
+  border-radius: 4px;
+  cursor: pointer;
+  padding: 4px;
+  &:hover {
+    transition: 0.5s;
+    background-color: $intermediate
+  }
+}
+
 .btn-orange-large {
   font-size: 28px;
   background-color: $orange;

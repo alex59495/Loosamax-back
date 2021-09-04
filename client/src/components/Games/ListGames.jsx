@@ -4,7 +4,7 @@ import Loader from "react-loader-spinner";
 
 import * as actions from '../../actions/gamesActions';
 
-import GameOdd from './GameOdd';
+import BetPreview from '../Bets/BetPreview';
 import { snakeToCamel, capitalize } from '../../utils/textTransformation';
 
 const ListGames = ({league ,fetchGames, games}) => {
@@ -24,16 +24,7 @@ const ListGames = ({league ,fetchGames, games}) => {
 
     return games[league].map(game => {
       return (
-        <GameOdd
-          key={game._id}
-          _id={game._id}
-          home_team={game.home_team}
-          away_team={game.away_team}
-          commence_time={game.commence_time}
-          away_odd={game.away_odd}
-          home_odd={game.home_odd}
-          draw_odd={game.draw_odd}
-        />)
+        <BetPreview key={game._id} game={game} />)
     })
   }
 

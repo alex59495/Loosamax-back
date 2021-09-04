@@ -122,4 +122,13 @@ module.exports = (app) => {
       res.status(422).send(err)
     } 
   });
+
+    app.get('/api/bets', async (req, res) => {
+      try {
+        const bets = await Bet.find({ result: { $ne: null }})
+        res.send(bets)
+      }catch(err){
+        res.status(422).send(err)
+      }
+    })
 } 
