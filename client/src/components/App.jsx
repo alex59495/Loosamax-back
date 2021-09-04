@@ -9,6 +9,7 @@ import ListGames from './Games/ListGames';
 import Home from './Home';
 import WeeklyBets from './Bets/WeeklyBets';
 import Stats from './Stats/Stats';
+import OldUserBets from './Bets/OldUserBets';
 
 // Redux functions
 import * as actions from '../actions/userActions';
@@ -36,6 +37,7 @@ const App = (props) => {
           <div className="container">
             <Route exact path="/" component={Home} />
             <Route exact path="/weekbets" component={WeeklyBets} />
+            <Route exact path="/mesparis" component={OldUserBets} />
             <Route exact path="/stats" component={Stats} />
             <Route exact path="/profile/:id" component={Profile} />
             <Route exact path="/leagues" component={ListLeagues} />

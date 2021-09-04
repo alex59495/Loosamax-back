@@ -16,6 +16,7 @@ const Header = ({user}) => {
           <div className='d-flex'>
             <Link to={`/weekbets`}>Les paris de la semaine</Link>
             <Link to='/stats'>Stats</Link>
+            <Link to='/mesparis'>Mes Paris</Link>
             <Link to={`/profile/${user._id}`}>Mon profil</Link>
             <a href="/api/logout">Déconnexion</a>
           </div>

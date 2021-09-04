@@ -61,3 +61,21 @@ export const fetchWeekBets = () => async (dispatch) =>
   const res = await axios.get('/api/weekbets')
   dispatch({ type: GET_BETS, payload: res.data })
 };
+
+export const fetchUserBets = (userId) => async (dispatch) => 
+{
+  try {
+    const res = await axios.get(`/api/users/${userId}/bets`);
+
+    switch(res.status) {
+      case 200:
+        return dispatch({ type: GET_BETS, payload: res.data});
+      default:
+        alert('Oops, il y a eu une erreur.');
+    }
+
+  } catch(err) {
+    alert('Oops, il y a eu une erreur');
+  }
+}
+
