@@ -13,6 +13,14 @@ const gameSchema = new Schema({
   result: {
     type: Number,
     default: null
+  },
+  away_score: {
+    type: Number,
+    default: null
+  },
+  home_score: {
+    type: Number,
+    default: null
   }
 });
 

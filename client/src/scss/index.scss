@@ -70,3 +70,11 @@ ul:not(.browser-default) {
   border: 2px solid $green-dark;
   color: $green-dark;
 }
+
+.relative {
+  position: relative;
+}
+
+.absolute {
+  position: absolute;
+}

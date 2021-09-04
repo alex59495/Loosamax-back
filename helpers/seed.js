@@ -67,7 +67,9 @@ const dbSeed = async () => {
       away_odd: 2.2,
       home_odd: 1.5,
       draw_odd: 6,
-      result: 1
+      result: 1,
+      home_score: 2,
+      away_score: 1
     }))
   }
 
@@ -119,10 +121,8 @@ const dbSeed = async () => {
 
   // Data creation
   const datas = [...users, ...gamesNoResults, ...gamesResults, ...bets]
-  console.log(datas)
   datas.map(async (data, index) => {
     await data.save((err, result) => {
-      console.log(err)
       if (index === datas.length - 1) {
         console.log("Data created!");
         mongoose.disconnect();

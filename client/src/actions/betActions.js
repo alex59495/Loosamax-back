@@ -66,7 +66,6 @@ export const fetchUserBets = (userId) => async (dispatch) =>
 {
   try {
     const res = await axios.get(`/api/users/${userId}/bets`);
-
     switch(res.status) {
       case 200:
         return dispatch({ type: GET_BETS, payload: res.data});

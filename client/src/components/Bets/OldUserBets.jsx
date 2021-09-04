@@ -3,6 +3,7 @@ import {connect} from 'react-redux';
 import Loader from "react-loader-spinner";
 
 import BetPreview from './BetPreview';
+import GameResult from '../Games/GameResult';
 
 import {fetchUserBets} from '../../actions/betActions';
 
@@ -17,8 +18,9 @@ const OldUserBets = ({user, bets, fetchUserBets}) => {
         if(isMounted) setIsLoading(false)
       }
       fetchData();
+      return () => { isMounted = false };
     }
-  }, [])
+  }, [user])
 
   const renderBets = () => {
     if(isLoading) {

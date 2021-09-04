@@ -6,15 +6,15 @@
   border: 2px solid $salmon;
   width: 300px;
   .match {
-    display: flex;
-    justify-content: space-between;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
   }
   .date {
     text-align: center;
     margin-top: 4px;
   }
   .card-odd-detail {
-    width: 33%;
+    width: 100%;
     display: flex;
     text-align: center;
     flex-direction: column;
@@ -61,7 +61,6 @@
   background-color: $salmon;
   border-radius: 8px;
   border: $green-dark;
-  padding: 8px;
 }
 
 .card-stat {
@@ -92,4 +91,13 @@
   &.red {
     color: red;
   }
+}
+
+.card-result {
+  border-top: 3px solid $grey;
+  margin-top: 15px;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  z-index: 10;
+  font-size: 32px;
 }

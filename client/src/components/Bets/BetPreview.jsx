@@ -7,6 +7,7 @@ import {createBet} from '../../actions/betActions';
 import { formatDate } from '../../utils/textTransformation';
 
 import BandResult from './BandResult';
+import GameResult from '../Games/GameResult'
 
 const BetPreview = ({game, bet, createBet, user, history}) => {
 
@@ -28,9 +29,20 @@ const BetPreview = ({game, bet, createBet, user, history}) => {
     if (!bet) return null
     if (bet.game.result === null) return;
     if (bet.choice === bet.game.result) {
-      return <BandResult result="Winner"/>
+      return (
+        <>
+          <GameResult game={bet.game} />
+          <BandResult result="Winner"/>
+        </>
+      )
+
     } else {
-      return <BandResult result="Looser"/>
+      return (
+        <>
+          <GameResult game={bet.game} />
+          <BandResult result="Looser"/>
+        </>
+      )
     }
   }
 
