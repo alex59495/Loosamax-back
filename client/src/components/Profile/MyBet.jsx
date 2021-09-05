@@ -8,9 +8,14 @@ import * as actions from '../../actions/betActions';
 import BetPreview from '../Bets/BetPreview'
 
 const MyBet = ({user, deleteBet}) => {
+  const actualBet = (user) => {
+    if (Object.keys(user).length > 0) {
+      return user.bets.find((bet) => bet.game.result === null )
+    }
+  } 
 
   const renderMyBet = () => {
-    if(!user || !user.actualBet) {
+    if(!user) {
       return (
         <div className="container-center" style={{height: "100%", width: "100%"}}>
           <Loader
@@ -21,7 +26,7 @@ const MyBet = ({user, deleteBet}) => {
           />
         </div>
       )
-    } else if(user.actualBet && !user.actualBet.game)  {
+    } else if(!actualBet(user))  {
       return (
         <>
           <p>Pas de match pour le moment</p>
@@ -31,8 +36,8 @@ const MyBet = ({user, deleteBet}) => {
     } else {
       return (
         <div className="container-center">
-          <BetPreview bet={user.actualBet} game={user.actualBet.game}/>
-          <button className="btn-risky" onClick={() => deleteBet(user.actualBet._id)}>Supprimer</button>
+          <BetPreview bet={actualBet(user)} game={actualBet(user).game}/>
+          <button className="btn-risky" onClick={() => deleteBet(actualBet(user)._id)}>Supprimer</button>
         </div>
       )
     }

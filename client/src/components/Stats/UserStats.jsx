@@ -1,47 +1,9 @@
-import React, {useEffect, useState} from 'react'
+import React from 'react'
 import {connect} from 'react-redux';
-import axios from 'axios';
-
-import Loader from "react-loader-spinner";
 
 const UserStats = ({user}) => {
 
-  const [isLoading, setIsLoading] = useState(true)
-  const [bets, setBets] = useState([])
-
-
-  const fetchUserBets = async (userId) => 
-  {
-    try {
-      const res = await axios.get(`/api/users/${userId}/bets`);
-
-      switch(res.status) {
-        case 200:
-          return res.data
-        default:
-          alert('Oops, il y a eu une erreur.');
-      }
-
-    } catch(err) {
-      alert('Oops, il y a eu une erreur');
-    }
-  }
-
-  useEffect(() => {
-    const fetchData = async () => {
-      let isMounted = true
-      if (user._id) {
-        const betsFetched = await fetchUserBets(user._id)
-        if (isMounted) {
-          setBets(betsFetched)
-          setIsLoading(false)
-        }
-        return () => { isMounted = false };
-
-      }
-    }
-    fetchData();
-  }, [])
+  const bets = user.bets.filter(bet => bet.game.result)
 
   const colorResult = (result) => {
     if(result < 33) { return 'risky' }
@@ -50,18 +12,8 @@ const UserStats = ({user}) => {
   }
 
   const renderStats = (bets) => {
-    if (isLoading) {
-      return (
-        <div className="container-center" style={{height: "100%", width: "100%"}}>
-          <Loader
-          type="BallTriangle"
-          color="#00BFFF"
-          height={100}
-          width={100}
-        />
-        </div>
-      )
-    } else if (bets.length > 0) {
+
+    if (bets.length > 0) {
       return (
         <>
           <div className="d-flex justify-content-center">
@@ -88,6 +40,10 @@ const UserStats = ({user}) => {
             <div className="card-stat">
               <div className="title">Moyenne côte tentée</div>
               <div className="content">{averageOdd}</div>
+            </div>
+            <div className="card-stat">
+              <div className="title">Somme des gains</div>
+              <div className="content">{sumEarnings}</div>
             </div>
           </div>
         </>
@@ -120,6 +76,13 @@ const UserStats = ({user}) => {
   }, 0) / numberBets).toFixed(2)
 
   const winPourcentage = (numberWin / numberBets)*100
+
+  const sumEarnings = (bets.reduce((sum, bet) => {
+    if (bet.game.result === bet.choice) {
+      return sum + bet.odd * 2
+    }
+    return sum
+  }, 0)).toFixed(2)
 
   return (
     <div className="container-center">

@@ -23,21 +23,6 @@ const dbSeed = async () => {
   await Bet.deleteMany({})
   await Game.deleteMany({})
 
-  // Users creation
-
-  const max = new User ({
-    googleId: keys.googleIDMax,
-    pseudo: 'MaxSteel'
-  })
-
-  const alex = new User ({
-    googleId: keys.googleIDAlex,
-    pseudo: 'Alexis'
-  })
-
-
-  const users = [max, alex]
-
   // Games creation
 
   const gamesNoResults = []
@@ -77,51 +62,63 @@ const dbSeed = async () => {
   // Bets creation
 
   maxBet = new Bet ({
-    user: max._id,
     game: gamesNoResults[Math.floor(Math.random() * gamesNoResults.length)]._id,
     choice: 1,
     odd: 1.5
   })
 
   alexBet = new Bet ({
-    user: alex._id,
     game: gamesNoResults[Math.floor(Math.random() * gamesNoResults.length)]._id,
     choice: 1,
     odd: 1.5
   })
 
   maxBetLost = new Bet ({
-    user: max._id,
     game: gamesResults[Math.floor(Math.random() * gamesResults.length)]._id,
     choice: 2,
     odd: 2.2
   })
 
   alexBetLost = new Bet ({
-    user: alex._id,
     game: gamesResults[Math.floor(Math.random() * gamesResults.length)]._id,
     choice: 2,
     odd: 2.2
   })
 
   maxBetWin = new Bet ({
-    user: max._id,
     game: gamesResults[Math.floor(Math.random() * gamesResults.length)]._id,
     choice: 1,
     odd: 1.5
   })
 
   alexBetWin = new Bet ({
-    user: alex._id,
     game: gamesResults[Math.floor(Math.random() * gamesResults.length)]._id,
     choice: 1,
     odd: 1.5
   })
 
-  const bets = [maxBet, alexBet, maxBetLost, alexBetLost, maxBetWin, alexBetWin]
+  alexBets = [alexBet, alexBetLost, alexBetWin]
+  maxBets = [maxBet, maxBetLost, maxBetWin]
+
+  // Users creation
+
+  const max = new User ({
+    googleId: keys.googleIDMax,
+    pseudo: 'MaxSteel',
+    bets: [...maxBets]
+  })
+
+  const alex = new User ({
+    googleId: keys.googleIDAlex,
+    pseudo: 'Alexis',
+    bets: [...alexBets]
+  })
+
+
+  const users = [max, alex]
 
   // Data creation
-  const datas = [...users, ...gamesNoResults, ...gamesResults, ...bets]
+  const datas = [...users, ...gamesNoResults, ...gamesResults]
   datas.map(async (data, index) => {
     await data.save((err, result) => {
       if (index === datas.length - 1) {

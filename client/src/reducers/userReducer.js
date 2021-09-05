@@ -7,9 +7,14 @@ export default function userReducer(state = {}, action) {
     case UPDATE_PSEUDO:
       return {...state, pseudo: action.payload}
     case CREATE_BET:
-      return {...state, actualBet: action.payload}
+      const userAddBet = state
+      userAddBet.bets.push(action.payload)
+      return {...userAddBet}
     case DELETE_BET:
-      return {...state, actualBet: action.payload}
+      const userDeleteBets = state
+      const bets = state.bets.filter(bet => bet._id !== action.payload)
+      userDeleteBets.bets = bets
+      return {...userDeleteBets}
     default:
       return state;
   }
