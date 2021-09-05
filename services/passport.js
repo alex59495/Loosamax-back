@@ -10,7 +10,15 @@ passport.serializeUser((user, done) => {
 });
 
 passport.deserializeUser((id, done) => {
-  User.findById(id)
+  User.findById(id).populate(
+    {
+      path: 'bets',
+      populate: {
+        path: 'game',
+        model: 'games'
+      }
+    }
+  )
     .then((user) => done(null, user) )
 });
 

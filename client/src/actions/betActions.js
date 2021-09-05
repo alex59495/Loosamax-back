@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { CREATE_BET, DELETE_BET, GET_BETS} from './types';
+import { CREATE_BET, DELETE_BET } from './types';
 
 export const createBet = ({choice, team, user_id, game, odd}, history) => async (dispatch) => 
 {
@@ -20,7 +20,7 @@ export const createBet = ({choice, team, user_id, game, odd}, history) => async 
 
       switch(res.data.res) {
         case 'Fire redirect':
-          dispatch({ type: CREATE_BET, payload: {choice: choice, game: game, _id: res.data._id, result: null} });
+          dispatch({ type: CREATE_BET, payload: {choice: choice, game: game, _id: res.data._id} });
           history.push(`/profile/${user_id}`);
           break;
         case 'Existing game':
@@ -44,7 +44,7 @@ export const deleteBet = (id) => async (dispatch) =>
 
       switch(res.status) {
         case 200:
-          dispatch({ type: DELETE_BET, payload: {}});
+          dispatch({ type: DELETE_BET, payload: id});
           break;
         default:
           alert('Oops, il y a eu une erreur, réessaie de supprimer ton pari.');
@@ -53,29 +53,6 @@ export const deleteBet = (id) => async (dispatch) =>
     } catch(err) {
       alert('Oops, il y a eu une erreur, réessaie de supprimer ton pari.');
     }
-  }
-}
-
-export const fetchWeekBets = () => async (dispatch) => 
-{
-  const res = await axios.get('/api/weekbets')
-  dispatch({ type: GET_BETS, payload: res.data })
-};
-
-export const fetchUserBets = (userId) => async (dispatch) => 
-{
-  try {
-    const res = await axios.get(`/api/users/${userId}/bets`);
-
-    switch(res.status) {
-      case 200:
-        return dispatch({ type: GET_BETS, payload: res.data});
-      default:
-        alert('Oops, il y a eu une erreur.');
-    }
-
-  } catch(err) {
-    alert('Oops, il y a eu une erreur');
   }
 }
 

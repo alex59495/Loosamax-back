@@ -4,27 +4,31 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheck, faTimes } from '@fortawesome/free-solid-svg-icons';
 import Loader from "react-loader-spinner";
 
+import {fetchUsers} from '../../actions/userActions';
+
 
 import BetPreview from './BetPreview';
 
-import * as actions from '../../actions/betActions';
-
-const WeeklyBets = ({bets, users, fetchWeekBets}) => {
-
-  const usersBetDone = bets.map(bet => bet.user._id)
-
+const WeeklyBets = ({users, fetchUsers}) => {
   const [isLoading, setIsLoading] = useState(true)
 
   useEffect(() => {
-    async function fetchAsync() {    
-      await fetchWeekBets()
-      setIsLoading(false)
-    }
-    fetchAsync()
+    let isMounted = true
+      async function fetchData() {
+        await fetchUsers()
+        if(isMounted) setIsLoading(false)
+      }
+      fetchData();
+      return () => { isMounted = false };
   }, [])
 
+  const betsWeek = users.map(user => ({
+    bet: user.bets.find(bet => !bet.game.result),
+    user: user
+  }))
+
   const renderUsers = users.map(user => {
-    if(usersBetDone.includes(user._id)) {
+    if(user.bets.some(bet => !bet.game.result)) {
       return(
         <div key={user._id} className="card-bet green"><FontAwesomeIcon icon={faCheck} className='mr-1' />{user.pseudo}</div>
       )
@@ -35,26 +39,35 @@ const WeeklyBets = ({bets, users, fetchWeekBets}) => {
     }
   })
 
-  const renderBets = bets.map(bet => {
-    return (
-      <React.Fragment key={bet._id}>
-        <h3>{bet.user.pseudo}</h3>
-        <BetPreview bet={bet} game={bet.game}/>
-      </React.Fragment>
-    )
+  const renderBets = betsWeek.map(({bet, user}) => {
+    if(bet) {
+      return (
+        <React.Fragment key={bet._id}>
+          <h3>{user.pseudo}</h3>
+          <BetPreview bet={bet} game={bet.game}/>
+        </React.Fragment>
+      )
+    } else {
+      return(
+        <>
+          <h3>{user.pseudo}</h3>
+          <div>Il a pas encore fait son pari, ce feignant !</div>
+        </>
+      )
+    }
   })
 
   const renderWeekBets = () => {
     if(isLoading) {
       return (
-        <div className="container-center" style={{height: "100%", width: "100%"}}>
+        <div className="container-center" style={{height: "100vh", width: "100%"}}>
           <Loader
-          type="BallTriangle"
-          color="#00BFFF"
-          height={100}
-          width={100}
-        />
-      </div>
+            type="BallTriangle"
+            color="#00BFFF"
+            height={100}
+            width={100}
+          />
+        </div>
       )
     } else {
       return (
@@ -77,11 +90,10 @@ const WeeklyBets = ({bets, users, fetchWeekBets}) => {
   )
 }
 
-const mapStateToProps = ({bets, users}) => {
+const mapStateToProps = ({users}) => {
   return {
-    bets,
     users
   }
 }
 
-export default connect(mapStateToProps, actions)(WeeklyBets)
+export default connect(mapStateToProps, {fetchUsers})(WeeklyBets)

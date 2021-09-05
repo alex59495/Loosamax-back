@@ -2,10 +2,9 @@ const axios = require('axios')
 const keys = require('../config/keys')
 const leaguesIdentifiers = require('../helpers/leaguesIdentifiers')
 const teamNameStandard = require('../helpers/teamNameStandard')
+const {getNextMonday} = require('../helpers/useFullMethods')
 
 const mongoose = require('mongoose');
-const { keys } = require('../helpers/leaguesIdentifiers')
-
 const Game = mongoose.model('games');
 
 module.exports = class UpdateResultsService {
@@ -13,7 +12,8 @@ module.exports = class UpdateResultsService {
   constructor() {
     this.twoDaysAgo = new Date(new Date() - 1000 * 60 * 60 * 24 * 2).toISOString().slice(0, 10)
     this.today = new Date().toISOString().slice(0, 10)
-    this.leaguesAlias = leaguesIdentifiers.map(league => league.alias).join(',')
+    // On recupere les leagues alias pour le call API (Object entries + index 1 car la donnée est stocké sous forme d'object JS)
+    this.leaguesAlias = Object.entries(leaguesIdentifiers).map(league => league[1].alias).join(',')
   }
 
   setResult = (res) => {
@@ -34,14 +34,16 @@ module.exports = class UpdateResultsService {
       return {
         home_team: teamNameStandard[item.homeTeam.name],
         away_team: teamNameStandard[item.awayTeam.name],
-        result: this.setResult(item.score.winner)
+        result: this.setResult(item.score.winner),
+        home_score: item.score.fulltime.homeTeam,
+        away_score: item.score.fulltime.awayTeam,
       }
     })
 
     matchLastDaysFormatted.forEach(async (match) => {
       const gameUpdated = await Game.findOneAndUpdate(
         {home_team: match.home_team, away_team: match.away_team},
-        { $set: {result: match.result }},
+        { $set: {result: match.result, away_score: match.away_score, home_score: match.home_score, date_result: getNextMonday(new Date()) }},
         )
     })
   }

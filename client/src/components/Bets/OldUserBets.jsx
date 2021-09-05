@@ -1,33 +1,13 @@
-import {useEffect, useState} from 'react'
 import {connect} from 'react-redux';
-import Loader from "react-loader-spinner";
 
 import BetPreview from './BetPreview';
 
-import {fetchWeekBets} from '../../actions/betActions';
+const OldUserBets = ({user}) => {
 
-const OldUserBets = ({bets, fetchWeekBets}) => {
-  const [isLoading, setIsLoading] = useState(true)
-
-  useEffect(() => {
-    async function fetchData() {
-      await fetchWeekBets()
-      setIsLoading(false)
-    }
-    fetchData();
-  }, [])
+  const bets = user.bets ? user.bets.filter(bet => bet.game.result) : null
 
   const renderBets = () => {
-    if(isLoading) {
-      return(
-        <Loader
-          type="BallTriangle"
-          color="#00BFFF"
-          height={100}
-          width={100}
-        />
-      )
-    } else {
+    if (bets) {
       return bets.map(bet => {
         return (
           <div className="mt-1" key={bet._id} >
@@ -46,10 +26,10 @@ const OldUserBets = ({bets, fetchWeekBets}) => {
   )
 };
 
-const mapStateToProsp = ({bets}) => {
+const mapStateToProsp = ({user}) => {
   return {
-    bets
+    user
   }
 }
 
-export default connect(mapStateToProsp, {fetchWeekBets})(OldUserBets);
+export default connect(mapStateToProsp)(OldUserBets);
