@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom'
 import {connect} from 'react-redux';
 import Loader from "react-loader-spinner";
 
@@ -23,8 +24,8 @@ const Home = ({user}) => {
         )
       default:
         return (
-            <button className='btn-orange-large'>
-              <a href={`/profile/${user._id}`} data-test="button-profile">Mon profil</a>
+            <button className='btn-orange-large' data-test="button-profile">
+              <Link to={`/profile/${user._id}`}>Mon profil</Link>
             </button>
         )
     }

@@ -54,8 +54,7 @@ const dbSeed = async () => {
       draw_odd: 6,
       result: 1,
       home_score: 2,
-      away_score: 1,
-      date_result: new Date().toISOString().slice(0, 10)
+      away_score: 1
     }))
   }
 

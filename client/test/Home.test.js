@@ -1,8 +1,10 @@
 import React from 'react';
-import Enzyme, { shallow, mount } from 'enzyme';
+import Enzyme, { mount } from 'enzyme';
 import EnzymeAdapter from '@wojtekmaj/enzyme-adapter-react-17';
 import Home from '../src/components/Home';
 import { Provider } from 'react-redux';
+import { BrowserRouter } from 'react-router-dom';
+
 
 import { storeFactory } from './testUtils';
 
@@ -10,7 +12,12 @@ Enzyme.configure({ adapter: new EnzymeAdapter()});
 
 const setup = (initialState={}) => {
   const store = storeFactory(initialState)
-  return mount(<Provider store={store}><Home /></Provider>)
+  return mount(
+    <Provider store={store}>
+      <BrowserRouter>
+        <Home />
+      </BrowserRouter>
+    </Provider>)
 }
 
 describe('user logged', () => {

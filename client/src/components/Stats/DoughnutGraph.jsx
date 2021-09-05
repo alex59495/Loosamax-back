@@ -14,12 +14,14 @@ const DoughnutGraph = ({users}) => {
           return sum
         }, 0)).toFixed(2)}),
         backgroundColor: [
-          'rgba(153, 102, 255, 0.2)',
+          'rgba(0, 255, 0, 0.2)',
           'rgba(255, 159, 64, 0.2)',
+          'rgba(153, 102, 255, 0.2)',
         ],
         borderColor: [
-          'rgba(153, 102, 255, 1)',
+          'rgba(0, 255, 0, 1)',
           'rgba(255, 159, 64, 1)',
+          'rgba(153, 102, 255, 1)'
         ],
         borderWidth: 1,
       },
@@ -27,7 +29,10 @@ const DoughnutGraph = ({users}) => {
   };
 
   return (
-    <Doughnut data={data} />
+    <div style={{height: "300", width: "300"}}>
+      <h3 className='text-center'>Reparitition des gains</h3>
+      <Doughnut data={data} />
+    </div>
   )
 }
 

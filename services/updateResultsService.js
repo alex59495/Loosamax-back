@@ -35,14 +35,14 @@ module.exports = class UpdateResultsService {
         home_team: teamNameStandard[item.homeTeam.name],
         away_team: teamNameStandard[item.awayTeam.name],
         result: this.setResult(item.score.winner),
-        home_score: item.score.fulltime.homeTeam,
-        away_score: item.score.fulltime.awayTeam,
+        home_score: item.score.fullTime.homeTeam,
+        away_score: item.score.fullTime.awayTeam,
       }
     })
 
     matchLastDaysFormatted.forEach(async (match) => {
       const gameUpdated = await Game.findOneAndUpdate(
-        {home_team: match.home_team, away_team: match.away_team},
+        {home_team: match.home_team, away_team: match.away_team, result: null},
         { $set: {result: match.result, away_score: match.away_score, home_score: match.home_score, date_result: getNextMonday(new Date()) }},
         )
     })

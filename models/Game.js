@@ -21,11 +21,7 @@ const gameSchema = new Schema({
   home_score: {
     type: Number,
     default: null
-  },
-  date_result: {
-    type: Date,
-    default: null
   }
-});
+},{ timestamps: true });
 
 mongoose.model('games', gameSchema);
