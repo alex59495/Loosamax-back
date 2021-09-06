@@ -40,7 +40,6 @@ module.exports = class fetchOddService {
       })
 
       const existingGame = await Game.find({_id: id})
-      console.log('existingGame:', existingGame)
   
       if(existingGame.length > 0) { return null }
   

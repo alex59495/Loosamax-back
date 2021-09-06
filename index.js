@@ -41,7 +41,7 @@ require('./routes/userRoutes')(app);
 require('./routes/gamesRoutes')(app);
 require('./routes/betRoutes')(app);
 
-const myJobQueue = new Queue('myJob', 'redis://127.0.0.1:6379');
+const myJobQueue = new Queue('myJob', keys.redisUrl );
 
 if(process.env.NODE_ENV === 'production') {
   // Express will serve up production assets like main.css or main.js
