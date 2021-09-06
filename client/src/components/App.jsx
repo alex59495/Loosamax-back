@@ -1,30 +1,79 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { BrowserRouter, Route } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 import Header from './Header';
-import Profile from './Profile';
+import Profile from './Profile/Profile';
+import ListLeagues from './Games/ListLeagues';
+import ListGames from './Games/ListGames';
+import Home from './Home';
+import WeeklyBets from './Bets/WeeklyBets';
+import Stats from './Stats/Stats';
+import OldUserBets from './Bets/OldUserBets';
+
+import Loader from "react-loader-spinner";
 
 // Redux functions
-// import * as actions from '../actions'
-import * as actions from '../actions'
+import {fetchUser} from '../actions/userActions';
 
-const App = (props) => {
+// utils
+import {LEAGUES} from '../constants/leagues';
+
+const App = ({fetchUser}) => {
+
+  const [isLoading, setIsLoading] = useState(true)
 
   useEffect(() => {
-    props.fetchUser()
+    let isMounted = true
+      async function fetchData() {
+        await fetchUser()
+        if(isMounted) setIsLoading(false)
+      }
+      fetchData();
+      return () => { isMounted = false };
   }, [])
 
+  const renderLeagues = LEAGUES.map(({name}) => {
+    return <Route exact path={`/games/${name}`} key={name} render={(props) => <ListGames {...props} league={`${name}`} />} />
+  });
+
+  const renderApp = () => {
+    if (isLoading) {
+      return (
+        <div className="container-center" style={{height: "100vh", width: "100%"}}>
+          <Loader
+          type="BallTriangle"
+          color="#00BFFF"
+          height={100}
+          width={100}
+        />
+        </div>
+      )
+    } else {
+      return (
+        <BrowserRouter>
+          <>
+            <Header />
+            <div className="container">
+              <Route exact path="/" component={Home} />
+              <Route exact path="/weekbets" component={WeeklyBets} />
+              <Route exact path="/mesparis" component={OldUserBets} />
+              <Route exact path="/stats" component={Stats} />
+              <Route exact path="/profile/:id" component={Profile} />
+              <Route exact path="/leagues" component={ListLeagues} />
+              {renderLeagues}
+            </div>
+          </>
+        </BrowserRouter>
+      )
+    }
+  }
+
   return (
-    <div className='container'>
-      <BrowserRouter>
-        <>
-          <Header />
-          <Route exact path="/profile/:id" component={Profile} />
-        </>
-      </BrowserRouter>
+    <div className='background'>
+      {renderApp()}
     </div>
   )
 }
 
-export default connect(null, actions)(App)
+export default connect(null, {fetchUser})(App)

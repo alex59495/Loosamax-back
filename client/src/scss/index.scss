@@ -1,0 +1,80 @@
+// Import des configs
+@import "config/color";
+
+@import "navbar";
+@import "flexbox";
+@import "card";
+@import "grid";
+@import "container";
+@import "margin";
+@import "form";
+@import "button";
+@import "band";
+
+body {
+  margin: 0;
+}
+
+.right {
+  float: right !important;
+}
+
+a {
+  color: white;
+  text-decoration: none;
+  &:hover {
+    background-color: rgba(0,0,0,0.1);
+  }
+}
+
+ul:not(.browser-default) {
+  margin: 0;
+  padding-left: 0;
+  list-style-type: none;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.text-orange {
+  color: $orange;
+}
+
+.risky {
+  color: $risky;
+}
+
+.safe {
+  color: $safe;
+}
+
+.intermediate {
+  color: $intermediate;
+}
+
+.green-dark {
+  color: $green-dark;
+}
+
+.bold {
+  font-weight: 700;
+}
+
+.looser {
+  border: 2px solid $risky;
+  color: $risky;
+}
+
+.winner {
+  border: 2px solid $green-dark;
+  color: $green-dark;
+}
+
+.relative {
+  position: relative;
+}
+
+.absolute {
+  position: absolute;
+}

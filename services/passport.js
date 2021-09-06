@@ -10,7 +10,15 @@ passport.serializeUser((user, done) => {
 });
 
 passport.deserializeUser((id, done) => {
-  User.findById(id)
+  User.findById(id).populate(
+    {
+      path: 'bets',
+      populate: {
+        path: 'game',
+        model: 'games'
+      }
+    }
+  )
     .then((user) => done(null, user) )
 });
 
@@ -26,6 +34,12 @@ passport.use(new googleStrategy(
     if (existingUser) {
       return done(null, existingUser);
     }
+
+    const listUsers = await User.find()
+    if(listUsers.length >= 9) {
+      return done(null, false)
+    }
+
     const user = await new User({ googleId: profile.id }).save()
     done(null, user)
   }

@@ -1,24 +1,23 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const keys = require('./config/keys');
-const bodyParser = require('body-parser')
 const cookieSession = require('cookie-session');
 const passport = require('passport');
-const fetchResult = require('./jobs/fetchResults')
+const flash = require('connect-flash');
+const Queue = require('bull');
 
 // models
 require('./models/User');
+require('./models/Game');
+require('./models/Bet');
 
+// service
 require('./services/passport');
-require('./routes/authRoutes');
-
-const schedule = require('node-schedule');
-
-const job = schedule.scheduleJob('00 00 00 * * 0,1', fetchResult);
 
 const app = express();
 
-app.use(bodyParser.json());
+// Middlewares
+app.use(express.json());
 app.use(
   cookieSession({
     // 30 days
@@ -26,17 +25,23 @@ app.use(
     keys: [keys.cookieKey]
   })
 );
-
+app.use(flash());
 app.use(passport.initialize());
 app.use(passport.session());
 
+// Connect DB
 mongoose.connect(keys.mongoURI,  {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 });
 
+// Routes
 // Require export une fonction qu'on appelle directement avec l'argument app
-require('./routes/authRoutes')(app);
+require('./routes/userRoutes')(app);
+require('./routes/gamesRoutes')(app);
+require('./routes/betRoutes')(app);
+
+const myJobQueue = new Queue('myJob', 'redis://127.0.0.1:6379');
 
 if(process.env.NODE_ENV === 'production') {
   // Express will serve up production assets like main.css or main.js
