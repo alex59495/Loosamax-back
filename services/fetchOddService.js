@@ -6,12 +6,6 @@ const mongoose = require('mongoose');
 require('../models/Game');
 
 const Game = mongoose.model('games');
-
-// Connect DB
-mongoose.connect(keys.mongoURI,  {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-});
 module.exports = class fetchOddService {
 
   constructor(league) {
@@ -24,7 +18,7 @@ module.exports = class fetchOddService {
       url: `https://api.the-odds-api.com/v4/sports/${this.league}/odds/?apiKey=${keys.oddsApi}&regions=eu`
     });
     const games = fetchGames.data
-    games.forEach(async (game) => {
+    await Promise.all(games.map(async (game) => {
       const { id, home_team, away_team, commence_time, sport_key, bookmakers } = game
       const unibet = bookmakers.find(bookmaker => bookmaker.key == 'unibet');
   
@@ -46,8 +40,9 @@ module.exports = class fetchOddService {
               return draw_odd = price
           }
         })
-  
+        console.log('Ca va fetch')
         const existingGame = await Game.find({_id: id})
+        console.log('Ca a fetch')
     
         if(existingGame.length > 0) { return null }
     
@@ -64,6 +59,6 @@ module.exports = class fetchOddService {
     
         newGame.save()
       }
-    })
+    }))
   }
 }
