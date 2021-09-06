@@ -6,6 +6,12 @@ const mongoose = require('mongoose');
 require('../models/Game');
 
 const Game = mongoose.model('games');
+
+// Connect DB
+mongoose.connect(keys.mongoURI,  {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+});
 module.exports = class fetchOddService {
 
   constructor(league) {
