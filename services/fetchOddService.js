@@ -40,9 +40,7 @@ module.exports = class fetchOddService {
               return draw_odd = price
           }
         })
-        console.log('Ca va fetch')
         const existingGame = await Game.find({_id: id})
-        console.log('Ca a fetch')
     
         if(existingGame.length > 0) { return null }
     
@@ -57,7 +55,7 @@ module.exports = class fetchOddService {
           draw_odd: draw_odd,
         })
     
-        newGame.save()
+        await newGame.save()
       }
     }))
   }
