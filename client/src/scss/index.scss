@@ -27,6 +27,16 @@ a {
   }
 }
 
+
+.link {
+  background-color: gray;
+  font-weight: 700;
+  font-size: 18px;
+  width: fit-content;
+  padding: 2px 4px;
+  border-radius: 4px;
+}
+
 ul:not(.browser-default) {
   margin: 0;
   padding-left: 0;
