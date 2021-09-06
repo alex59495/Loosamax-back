@@ -4,6 +4,7 @@ const keys = require('./config/keys');
 const cookieSession = require('cookie-session');
 const passport = require('passport');
 const flash = require('connect-flash');
+const Queue = require('bull');
 
 // models
 require('./models/User');
@@ -39,6 +40,8 @@ mongoose.connect(keys.mongoURI,  {
 require('./routes/userRoutes')(app);
 require('./routes/gamesRoutes')(app);
 require('./routes/betRoutes')(app);
+
+const myJobQueue = new Queue('myJob', keys.redisUrl );
 
 if(process.env.NODE_ENV === 'production') {
   // Express will serve up production assets like main.css or main.js

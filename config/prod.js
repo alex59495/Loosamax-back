@@ -4,5 +4,6 @@ module.exports = {
   mongoURI: process.env.MONGO_URI,
   cookieKey: process.env.COOKIE_KEY,
   oddsApi: process.env.ODDS_API,
-  footballApiDataKey: process.env.FOOTBALL_API_KEY
+  footballApiDataKey: process.env.FOOTBALL_API_KEY,
+  redisUrl: process.env.REDIS_URL
 }

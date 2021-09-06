@@ -5,6 +5,9 @@ const teamNameStandard = require('../helpers/teamNameStandard')
 const {getNextMonday} = require('../helpers/useFullMethods')
 
 const mongoose = require('mongoose');
+
+require('../models/Game');
+
 const Game = mongoose.model('games');
 
 module.exports = class UpdateResultsService {

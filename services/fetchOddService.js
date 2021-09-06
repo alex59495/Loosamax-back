@@ -2,21 +2,23 @@ const axios = require('axios')
 const keys = require('../config/keys')
 
 const mongoose = require('mongoose');
-const Game = mongoose.model('games');
 
+require('../models/Game');
+
+const Game = mongoose.model('games');
 module.exports = class fetchOddService {
 
   constructor(league) {
     this.league = league
   }
 
-  call = async () => {  
+  call = async () => {
     const fetchGames = await axios({
       method: 'get',
       url: `https://api.the-odds-api.com/v4/sports/${this.league}/odds/?apiKey=${keys.oddsApi}&regions=eu`
     });
     const games = fetchGames.data
-    games.forEach(async game => {
+    games.forEach(async (game) => {
       const { id, home_team, away_team, commence_time, sport_key, bookmakers } = game
       const unibet = bookmakers.find(bookmaker => bookmaker.key == 'unibet');
   
@@ -36,7 +38,7 @@ module.exports = class fetchOddService {
             return draw_odd = price
         }
       })
-  
+
       const existingGame = await Game.find({_id: id})
   
       if(existingGame.length > 0) { return null }
