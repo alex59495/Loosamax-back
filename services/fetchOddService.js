@@ -32,35 +32,38 @@ module.exports = class fetchOddService {
       let away_odd = null
       let draw_odd = null
   
-      const market = unibet.markets[0]
-  
-      market.outcomes.forEach(({name, price}) => {
-        switch(name) {
-          case home_team:
-            return home_odd = price
-          case away_team:
-            return away_odd = price
-          default:
-            return draw_odd = price
-        }
-      })
+      if (unibet) {
 
-      const existingGame = await Game.find({_id: id})
+        const market = unibet.markets[0]
+    
+        market.outcomes.forEach(({name, price}) => {
+          switch(name) {
+            case home_team:
+              return home_odd = price
+            case away_team:
+              return away_odd = price
+            default:
+              return draw_odd = price
+          }
+        })
   
-      if(existingGame.length > 0) { return null }
-  
-      const newGame = new Game({
-        _id: id,
-        home_team: home_team,
-        away_team: away_team,
-        commence_time: commence_time,
-        sport_key: sport_key,
-        home_odd: home_odd,
-        away_odd: away_odd,
-        draw_odd: draw_odd,
-      })
-  
-      newGame.save()
+        const existingGame = await Game.find({_id: id})
+    
+        if(existingGame.length > 0) { return null }
+    
+        const newGame = new Game({
+          _id: id,
+          home_team: home_team,
+          away_team: away_team,
+          commence_time: commence_time,
+          sport_key: sport_key,
+          home_odd: home_odd,
+          away_odd: away_odd,
+          draw_odd: draw_odd,
+        })
+    
+        newGame.save()
+      }
     })
   }
 }
