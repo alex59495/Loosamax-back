@@ -55,7 +55,7 @@ const ListGames = ({league ,fetchGames, games}) => {
 
   return (
     <>
-      <h1 className="text-center text-orange">{capitalize(snakeToCamel(league))}</h1>
+      <h1 className="text-center">{capitalize(snakeToCamel(league))}</h1>
       {renderListGames()}
     </>
   )

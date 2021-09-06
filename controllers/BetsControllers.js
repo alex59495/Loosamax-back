@@ -9,9 +9,26 @@ const createBets = async (req, res) => {
   const { choice, game_id, odd } = req.body
 
   try {
-    const actualBet = req.user.bets.find(bet => bet.game.result === null)
+    const actualBet = req.user.bets.find(bet => bet.game.result === null);
+    const usersBets = await User.find().populate(
+      {
+        path: 'bets',
+        populate: {
+          path: 'game',
+          model: 'games'
+        }
+      }
+    )
 
-    if (!actualBet) {
+    const existingBet = usersBets.some(user => {
+      return user.bets.some(bet => bet.game.result === null && bet.game._id === game_id)
+    })
+
+    if (existingBet) {
+      res.status(200).send({res: 'Bet already taken'})
+    } else if(actualBet) {
+      res.status(200).send({res: 'You already have a bet'})
+    } else {
       const bet = await new Bet({
         choice,
         game: game_id,
@@ -22,8 +39,6 @@ const createBets = async (req, res) => {
 
       // Redirection
       res.status(200).send({res: 'Fire redirect', _id: bet._id})
-    } else {
-      res.status(200).send({res: 'Existing game'})
     }
 
   } catch(err) {
