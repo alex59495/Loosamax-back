@@ -7,11 +7,11 @@ const DoughnutGraph = ({users}) => {
   const statCalculatorUsers = new StatCalculatorUsers({users})
 
   const data = {
-    labels: statCalculatorUsers.usersPseudo(),
+    labels: statCalculatorUsers.usersPseudo,
     datasets: [
       {
         label: 'Reparitition des gains',
-        data: statCalculatorUsers.earningsReparition(),
+        data: statCalculatorUsers.earningsReparition,
         backgroundColor: [
           'rgba(0, 255, 0, 0.2)',
           'rgba(255, 159, 64, 0.2)',

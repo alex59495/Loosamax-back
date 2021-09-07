@@ -9,11 +9,11 @@ const RadarGraph = ({title, users, avgType}) => {
   const statCalculatorUsers = new StatCalculatorUsers({users})
 
   const data = {
-    labels: statCalculatorUsers.usersPseudo(),
+    labels: statCalculatorUsers.usersPseudo,
     datasets: [
       {
         label: title,
-        data: statCalculatorUsers[avgType](),
+        data: statCalculatorUsers[avgType],
         backgroundColor: 'rgba(255, 99, 132, 0.2)',
         borderColor: 'rgba(255, 99, 132, 1)',
         borderWidth: 1,

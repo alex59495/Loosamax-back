@@ -6,7 +6,7 @@ const LineChart = ({users}) => {
   const statCalculatorUsers = new StatCalculatorUsers({users})
   const data = {
     labels: Array.from({length: users[0].bets.length}, (_, i) => i + 1),
-    datasets: statCalculatorUsers.EarningsEvolutionByUsers(),
+    datasets: statCalculatorUsers.earningsEvolutionByUsers,
   };
 
   return (

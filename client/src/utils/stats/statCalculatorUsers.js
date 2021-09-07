@@ -8,30 +8,30 @@ export default class StatCalculatorUsers extends StatCalculator {
     this.users = users
   }
 
-  usersPseudo = () => this.users.map(user => user.pseudo)
+  get usersPseudo() { return this.users.map(user => user.pseudo) }
 
-  earningsReparition = () => (this.users.map((user) => {
+  get earningsReparition() { return (this.users.map((user) => {
     return (user.bets.reduce((sum, bet) => {
     if (bet.game.result === bet.choice) {
       return sum + this.betOdd(bet) * 2
     }
     return sum
-  }, 0)).toFixed(2)}))
+  }, 0)).toFixed(2)})) }
 
-  usersAvgOddLoose = () => ( this.users.map((user) => {
-    return new StatCalculatorUserBets({userBets: user.bets}).averageOddLoose()
-  }))
+  get usersAvgOddLoose() { return ( this.users.map((user) => {
+    return new StatCalculatorUserBets({userBets: user.bets}).averageOddLoose
+  })) }
 
-  usersAvgOddWin = () => ( this.users.map((user) => {
-    return new StatCalculatorUserBets({userBets: user.bets}).averageOddWin()
-  }))
+  get usersAvgOddWin() { return ( this.users.map((user) => {
+    return new StatCalculatorUserBets({userBets: user.bets}).averageOddWin
+  })) }
 
-  EarningsEvolutionByUsers = () => {
+  get earningsEvolutionByUsers() {
     return this.users.map((user) => {
       return {
         label: user.pseudo,
-        data: new StatCalculatorUserBets({userBets: user.bets}).tableEarnings().map((earning, index) => {
-          return earning + new StatCalculatorUserBets({userBets: user.bets}).tableEarnings().slice(0, index).reduce((sum, acc) => sum + acc, 0)
+        data: new StatCalculatorUserBets({userBets: user.bets}).tableEarnings.map((earning, index) => {
+          return earning + new StatCalculatorUserBets({userBets: user.bets}).tableEarnings.slice(0, index).reduce((sum, acc) => sum + acc, 0)
           }),
         fill: false,
         backgroundColor: user.color || 'rgb(255, 99, 132)',
