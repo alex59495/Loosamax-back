@@ -4,10 +4,13 @@ import Loader from "react-loader-spinner";
 
 import UserStats from './UserStats';
 import DoughnutGraph from './DoughnutGraph';
+import RadarGraph from './RadarGraph';
+import LineGraph from './LineGraph';
 
 import {fetchUsers} from '../../actions/userActions';
 
 const GlobalStats = ({users, fetchUsers}) => {
+  
   const [isLoading, setIsLoading] = useState(true)
 
   useEffect(() => {
@@ -21,31 +24,44 @@ const GlobalStats = ({users, fetchUsers}) => {
   }, [])
 
   const renderStatPerUser = () => {
-    if(isLoading) {
+    return users.map(user => {
+      return (
+        <UserStats key={user._id} user={user}/>
+      )
+    })
+  }
+
+  const renderStats = () => {
+    if(isLoading){
       return(
-        <div className="container-center" style={{height: "100vh", width: "100%"}}>
-          <Loader
-            type="BallTriangle"
-            color="#00BFFF"
-            height={100}
-            width={100}
-          />
-        </div>
+      <div className="container-center" style={{height: "100vh", width: "100%"}}>
+        <Loader
+          type="BallTriangle"
+          color="#00BFFF"
+          height={100}
+          width={100}
+        />
+      </div>
       )
     } else {
-      return users.map(user => {
-        return (
-          <UserStats key={user._id} user={user}/>
-        )
-      })
+      return (
+        <>
+          {renderStatPerUser()}
+          <div className="grid_wrap">
+            <DoughnutGraph users={users}/>
+            <RadarGraph title="Moyenne côtes réussies" users={users} avgType="usersAvgOddWin"/>
+            <RadarGraph title="Moyenne côtes ratées" users={users} avgType="usersAvgOddLoose"/>
+          </div>
+          <LineGraph users={users}/>
+        </>
+      )
     }
   }
 
   return (
     <div className="container-center">
       <h1>Les Stats des champions</h1>
-      {renderStatPerUser()}
-      <DoughnutGraph users={users}/>
+      {renderStats()}
     </div>
   )
 }

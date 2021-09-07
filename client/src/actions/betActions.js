@@ -2,7 +2,7 @@ import axios from 'axios';
 import Swal from 'sweetalert2';
 import { CREATE_BET, DELETE_BET } from './types';
 
-export const createBet = ({choice, team, user_id, game, odd}, history) => async (dispatch) => 
+export const createBet = ({choice, team, user_id, game}, history) => async (dispatch) => 
 {
   Swal.fire({
     title: `Enregistrer ce pari (${team}) ?`,
@@ -16,8 +16,7 @@ export const createBet = ({choice, team, user_id, game, odd}, history) => async 
       const data = {
         choice,
         user_id,
-        game_id: game._id,
-        odd
+        game_id: game._id
       }
   
       try {
