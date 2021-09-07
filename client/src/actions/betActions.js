@@ -23,8 +23,11 @@ export const createBet = ({choice, team, user_id, game, odd}, history) => async 
           dispatch({ type: CREATE_BET, payload: {choice: choice, game: game, _id: res.data._id} });
           history.push(`/profile/${user_id}`);
           break;
-        case 'Existing game':
-          alert('Tu as déjà un pari en cours, tu ne peux pas en créer un nouveau pour le moment. Pour supprimer ton pari actuel rends toi dans ton Profil');
+        case 'You already have a bet':
+          alert('Tu as déjà un pari en cours vil chenapan, tu ne peux pas en créer un nouveau pour le moment. Pour supprimer ton pari actuel rends toi dans ton Profil');
+          break;
+        case 'Bet already taken':
+          alert('Ce pari a déjà été sélectionné par un autre joueur qui a eu le nez fin (#Valé #Loic ?), pas le choix il va falloir en prendre un autre.');
           break;
         default:
           alert('Oops, il y a eu une erreur, essaie de ré-engistrer ton pari.');

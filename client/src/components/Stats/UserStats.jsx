@@ -49,7 +49,7 @@ const UserStats = ({user}) => {
         </>
       )
     } else {
-      return <h1 className="container-center">Pas de paris</h1>
+      return <h4 className="container-center">Pas de paris</h4>
     }
   }
 
