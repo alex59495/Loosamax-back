@@ -6,6 +6,7 @@ const BetSchema = require('./Bet');
 
 const userSchema = new Schema({
   googleId: String,
+  emails: Array,
   pseudo: {
     type: String,
     default: "LooserMax"

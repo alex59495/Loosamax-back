@@ -31,6 +31,7 @@ passport.use(new googleStrategy(
   }, 
   async (accessToken, refreshToken, profile, done) => {
     const existingUser = await User.findOne({ googleId: profile.id })
+    
     if (existingUser) {
       return done(null, existingUser);
     }
@@ -42,7 +43,8 @@ passport.use(new googleStrategy(
 
     const user = await new User({ 
       googleId: profile.id,
-      color: "#bc4b51"
+      color: "#bc4b51",
+      emails: profile.emails
     }).save()
     done(null, user)
   }
