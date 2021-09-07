@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import {connect} from 'react-redux';
 import Loader from "react-loader-spinner";
+import { Link } from 'react-router-dom';
 
 import * as actions from '../../actions/gamesActions';
 
@@ -55,7 +56,10 @@ const ListGames = ({league ,fetchGames, games}) => {
 
   return (
     <>
-      <h1 className="text-center text-orange">{capitalize(snakeToCamel(league))}</h1>
+      <div className="link">
+        <Link to="/leagues">Revenir aux ligues</Link>
+      </div>
+      <h1 className="text-center">{capitalize(snakeToCamel(league))}</h1>
       {renderListGames()}
     </>
   )
