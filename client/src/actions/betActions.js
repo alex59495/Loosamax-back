@@ -32,14 +32,24 @@ export const createBet = ({choice, team, user_id, game, odd}, history) => async 
             dispatch({ type: CREATE_BET, payload: {choice: choice, game: game, _id: res.data._id} });
             history.push(`/profile/${user_id}`);
             break;
-          case 'Existing game':
+          case 'You already have a bet':
             Swal.fire({
               icon: 'error',
               iconColor: '#bc4b51',
               title: 'Oops...',
               confirmButtonColor: '#4c956c',
               confirmButtonText: "J'ai compris",
-              html: 'Tu as déjà un pari en cours, tu ne peux pas en créer un nouveau pour le moment.<br> Pour supprimer ton pari actuel rends toi dans ton Profil.',
+              html: 'Tu as déjà un pari en cours vil chenapan, tu ne peux pas en créer un nouveau pour le moment.<br> Pour supprimer ton pari actuel rends toi dans ton Profil.',
+            })
+            break;
+          case 'Bet already taken':
+            Swal.fire({
+              icon: 'warning',
+              iconColor: '#bc4b51',
+              title: 'Oops...',
+              confirmButtonColor: '#4c956c',
+              confirmButtonText: "J'ai compris",
+              html: 'Ce pari a déjà été sélectionné par un autre joueur qui a eu le nez fin (#Valé #Loic ?).<br> Pas le choix il va falloir en prendre un autre.',
             })
             break;
           default:
