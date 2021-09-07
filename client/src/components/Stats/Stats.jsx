@@ -4,10 +4,12 @@ import Loader from "react-loader-spinner";
 
 import UserStats from './UserStats';
 import DoughnutGraph from './DoughnutGraph';
+import RadarGraph from './RadarGraph';
 
 import {fetchUsers} from '../../actions/userActions';
 
 const GlobalStats = ({users, fetchUsers}) => {
+  
   const [isLoading, setIsLoading] = useState(true)
 
   useEffect(() => {
@@ -45,7 +47,11 @@ const GlobalStats = ({users, fetchUsers}) => {
     <div className="container-center">
       <h1>Les Stats des champions</h1>
       {renderStatPerUser()}
-      <DoughnutGraph users={users}/>
+      <div className="grid_wrap">
+        <DoughnutGraph users={users}/>
+        <RadarGraph title="Moyenne côtes réussies" users={users} avgType="usersAvgOddWin"/>
+        <RadarGraph title="Moyenne côtes ratées" users={users} avgType="usersAvgOddLoose"/>
+      </div>
     </div>
   )
 }

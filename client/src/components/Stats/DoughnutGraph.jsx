@@ -1,18 +1,17 @@
 import { Doughnut } from 'react-chartjs-2';
 
+import StatCalculation from '../../utils/statCalculation';
+
 const DoughnutGraph = ({users}) => {
+
+  const statCalculation = new StatCalculation({users})
+
   const data = {
-    labels: users.map(user => user.pseudo),
+    labels: statCalculation.usersPseudo(),
     datasets: [
       {
         label: 'Reparitition des gains',
-        data: users.map((user) => {
-          return (user.bets.reduce((sum, bet) => {
-          if (bet.game.result === bet.choice) {
-            return sum + bet.odd * 2
-          }
-          return sum
-        }, 0)).toFixed(2)}),
+        data: statCalculation.earningsReparition(),
         backgroundColor: [
           'rgba(0, 255, 0, 0.2)',
           'rgba(255, 159, 64, 0.2)',
