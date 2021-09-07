@@ -10,7 +10,7 @@ const LineChart = ({users}) => {
   };
 
   return (
-    <div style={{width: "100%"}}>
+    <div className='card-graph w-100'>
       <h3 className='text-center'>Evolution des bénéfices</h3>
       <Line data={data} />
     </div>
