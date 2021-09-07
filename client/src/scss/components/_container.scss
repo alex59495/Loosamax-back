@@ -1,3 +1,7 @@
+body {
+  margin: 0;
+}
+
 .container {
   display: flex;
   flex-direction: column;
@@ -14,7 +18,7 @@
 
 .background {
   min-height: 100vh;
-  background-image: linear-gradient(rgba(255,255,255,0.5), rgba(255,255,255,0.5)), url('../img/background.svg');
+  background-image: linear-gradient(rgba(255,255,255,0.5), rgba(255,255,255,0.5)), url('../../img/background.svg');
   background-position: center;
   background-size: cover;
 }
