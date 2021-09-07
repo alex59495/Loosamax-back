@@ -1,6 +1,6 @@
 // User
 export const FETCH_USER = 'FETCH_USER';
-export const UPDATE_PSEUDO = 'UPDATE_PSEUDO';
+export const UPDATE_USER = 'UPDATE_USER';
 export const FETCH_USERS = 'FETCH_USERS';
 
 // Games

@@ -29,8 +29,8 @@ const MyBet = ({user, deleteBet}) => {
     } else if(!actualBet(user))  {
       return (
         <>
-          <p>Pas de match pour le moment</p>
-          <Link className='btn-orange' to='/leagues'>Voir les paris disponibles</Link>
+          <p>Pas de match pour le moment, gros feignant !</p>
+          <Link className='btn-risky' to='/leagues'>Voir les paris disponibles</Link>
         </>
       )
     } else {
@@ -45,7 +45,7 @@ const MyBet = ({user, deleteBet}) => {
 
   return (
     <div className="container-center mb-1">
-      <h1>Ton Pari de cette semaine</h1>
+      <h1 className="text-center">Ton Pari de cette semaine</h1>
       {renderMyBet()}
     </div>
   )

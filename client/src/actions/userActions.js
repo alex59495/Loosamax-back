@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { FETCH_USER, UPDATE_PSEUDO, FETCH_USERS} from './types'; 
+import { FETCH_USER, UPDATE_USER, FETCH_USERS} from './types'; 
 
 export const fetchUser = () => async (dispatch) => 
 {
@@ -13,14 +13,14 @@ export const fetchUsers = () => async (dispatch) =>
   dispatch({ type: FETCH_USERS, payload: res.data })
 };
 
-export const changePseudo = (user, values) => {
+export const updateUser = (user, values) => {
   axios({
     method: 'patch',
     url: `/api/current_user/${user._id}`,
     data: values
   })
   return {
-    type: UPDATE_PSEUDO,
-    payload: values.pseudo
+    type: UPDATE_USER,
+    payload: values
   }
 }
