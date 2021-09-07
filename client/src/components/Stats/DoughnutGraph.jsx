@@ -1,17 +1,17 @@
 import { Doughnut } from 'react-chartjs-2';
 
-import StatCalculation from '../../utils/statCalculation';
+import StatCalculatorUsers from '../../utils/stats/statCalculatorUsers';
 
 const DoughnutGraph = ({users}) => {
 
-  const statCalculation = new StatCalculation({users})
+  const statCalculatorUsers = new StatCalculatorUsers({users})
 
   const data = {
-    labels: statCalculation.usersPseudo(),
+    labels: statCalculatorUsers.usersPseudo(),
     datasets: [
       {
         label: 'Reparitition des gains',
-        data: statCalculation.earningsReparition(),
+        data: statCalculatorUsers.earningsReparition(),
         backgroundColor: [
           'rgba(0, 255, 0, 0.2)',
           'rgba(255, 159, 64, 0.2)',

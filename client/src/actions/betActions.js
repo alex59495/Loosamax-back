@@ -1,14 +1,13 @@
 import axios from 'axios';
 import { CREATE_BET, DELETE_BET } from './types';
 
-export const createBet = ({choice, team, user_id, game, odd}, history) => async (dispatch) => 
+export const createBet = ({choice, team, user_id, game}, history) => async (dispatch) => 
 {
   if(window.confirm(`Enregistrer ce pari (${team}) ?`)) {
     const data = {
       choice,
       user_id,
-      game_id: game._id,
-      odd
+      game_id: game._id
     }
 
     try {

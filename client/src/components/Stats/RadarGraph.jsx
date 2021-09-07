@@ -1,18 +1,19 @@
 import React from 'react';
 import { Radar } from 'react-chartjs-2';
 
-import StatCalculation from '../../utils/statCalculation';
+import StatCalculatorUsers from '../../utils/stats/statCalculatorUsers';
+
 
 const RadarGraph = ({title, users, avgType}) => {
 
-  const statCalculation = new StatCalculation({users})
+  const statCalculatorUsers = new StatCalculatorUsers({users})
 
   const data = {
-    labels: statCalculation.usersPseudo(),
+    labels: statCalculatorUsers.usersPseudo(),
     datasets: [
       {
         label: title,
-        data: statCalculation[avgType](),
+        data: statCalculatorUsers[avgType](),
         backgroundColor: 'rgba(255, 99, 132, 0.2)',
         borderColor: 'rgba(255, 99, 132, 1)',
         borderWidth: 1,

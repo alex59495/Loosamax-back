@@ -17,10 +17,9 @@ const BetPreview = ({game, bet, createBet, user, history}) => {
     } else {
       return createBet({
         choice: x, 
-        team: choiceData(x).team, 
+        team: choiceData(x), 
         game: {...game}, 
         user_id: user._id,
-        odd: choiceData(x).odd
       }, history)
     }
   }
@@ -28,11 +27,11 @@ const BetPreview = ({game, bet, createBet, user, history}) => {
   const choiceData = (x) => {
     switch(x) {
       case 1:
-        return { team: game.home_team, odd: game.home_odd }
+        return game.home_team
       case 0:
-        return { team: 'Match nul', odd: game.draw_odd }
+        return 'Match nul'
       case 2:
-        return { team: game.away_team, odd: game.away_team }
+        return game.away_team
       default:
         return;
     }

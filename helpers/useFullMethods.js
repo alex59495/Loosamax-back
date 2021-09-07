@@ -3,7 +3,3 @@ const getNextMonday = (date) => {
 }
 
 module.exports = {getNextMonday}
-
-// arr.map((it, index) => {
-//   return it + arr.slice(0, index).reduce((sum, acc) => sum + acc, 0)
-// })
