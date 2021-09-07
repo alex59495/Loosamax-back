@@ -6,7 +6,7 @@ const User = mongoose.model('users');
 
 const createBets = async (req, res) => {
 
-  const { choice, game_id, odd } = req.body
+  const { choice, game_id } = req.body
 
   try {
     const actualBet = req.user.bets.find(bet => bet.game.result === null);
@@ -31,8 +31,7 @@ const createBets = async (req, res) => {
     } else {
       const bet = await new Bet({
         choice,
-        game: game_id,
-        odd: odd
+        game: game_id
       })
   
       await User.updateOne({_id: req.user._id}, {$push: {"bets": bet}})

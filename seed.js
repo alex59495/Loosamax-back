@@ -62,38 +62,32 @@ const dbSeed = async () => {
 
   maxBet = new Bet ({
     game: gamesNoResults[Math.floor(Math.random() * gamesNoResults.length)]._id,
-    choice: 1,
-    odd: 1.5
+    choice: 1
   })
 
   alexBet = new Bet ({
     game: gamesNoResults[Math.floor(Math.random() * gamesNoResults.length)]._id,
-    choice: 1,
-    odd: 1.5
+    choice: 1
   })
 
   maxBetLost = new Bet ({
     game: gamesResults[Math.floor(Math.random() * gamesResults.length)]._id,
-    choice: 2,
-    odd: 2.2
+    choice: 2
   })
 
   alexBetLost = new Bet ({
     game: gamesResults[Math.floor(Math.random() * gamesResults.length)]._id,
-    choice: 2,
-    odd: 2.2
+    choice: 2
   })
 
   maxBetWin = new Bet ({
     game: gamesResults[Math.floor(Math.random() * gamesResults.length)]._id,
-    choice: 1,
-    odd: 1.5
+    choice: 1
   })
 
   alexBetWin = new Bet ({
     game: gamesResults[Math.floor(Math.random() * gamesResults.length)]._id,
-    choice: 1,
-    odd: 1.5
+    choice: 1
   })
 
   alexBets = [alexBet, alexBetLost, alexBetWin]
