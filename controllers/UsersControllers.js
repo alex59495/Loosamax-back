@@ -3,19 +3,7 @@ const mongoose = require('mongoose');
 const User = mongoose.model('users');
 
 const fetchCurrentUser = async (req, res) => {
-
-  if(req.user) {
-
-    user = {
-      _id: req.user._id, 
-      googleId: req.user.googleId,
-      pseudo: req.user.pseudo,
-      bets: req.user.bets
-    }
-
-    res.send({...user});
-  }
-  res.send(false);
+  res.send(req.user)
 }
 
 const patchCurrentUser = async (req, res) => {
