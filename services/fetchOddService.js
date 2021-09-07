@@ -40,22 +40,27 @@ module.exports = class fetchOddService {
               return draw_odd = price
           }
         })
-        const existingGame = await Game.find({_id: id})
-    
-        if(existingGame.length > 0) { return null }
-    
-        const newGame = new Game({
-          _id: id,
-          home_team: home_team,
-          away_team: away_team,
-          commence_time: commence_time,
-          sport_key: sport_key,
+
+        const existingGame = await Game.findByIdAndUpdate(id, {$set: {
           home_odd: home_odd,
           away_odd: away_odd,
-          draw_odd: draw_odd,
-        })
-    
-        await newGame.save()
+          draw_odd: draw_odd
+        }}).exec();
+            
+        if(!existingGame) {
+          const newGame = new Game({
+            _id: id,
+            home_team: home_team,
+            away_team: away_team,
+            commence_time: commence_time,
+            sport_key: sport_key,
+            home_odd: home_odd,
+            away_odd: away_odd,
+            draw_odd: draw_odd
+          })
+      
+          await newGame.save()
+        }
       }
     }))
   }
