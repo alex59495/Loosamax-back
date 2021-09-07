@@ -12,23 +12,15 @@ const DoughnutGraph = ({users}) => {
       {
         label: 'Reparitition des gains',
         data: statCalculatorUsers.earningsReparition,
-        backgroundColor: [
-          'rgba(0, 255, 0, 0.2)',
-          'rgba(255, 159, 64, 0.2)',
-          'rgba(153, 102, 255, 0.2)',
-        ],
-        borderColor: [
-          'rgba(0, 255, 0, 1)',
-          'rgba(255, 159, 64, 1)',
-          'rgba(153, 102, 255, 1)'
-        ],
+        backgroundColor: statCalculatorUsers.usersColor,
+        borderColor: statCalculatorUsers.usersBorderColor,
         borderWidth: 1,
       },
     ],
   };
 
   return (
-    <div style={{height: "300", width: "300"}}>
+    <div className='card-graph w-300-px'>
       <h3 className='text-center'>Reparitition des gains</h3>
       <Doughnut data={data} />
     </div>

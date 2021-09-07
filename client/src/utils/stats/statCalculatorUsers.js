@@ -1,5 +1,7 @@
 import StatCalculator from './statCalculator'
-import StatCalculatorUserBets from './statCalculatorUserBets'
+import StatCalculatorUserBets from './statCalculatorUserBets';
+
+import {hexToRgb} from '../../utils/textTransformation';
 
 export default class StatCalculatorUsers extends StatCalculator {
 
@@ -9,6 +11,8 @@ export default class StatCalculatorUsers extends StatCalculator {
   }
 
   get usersPseudo() { return this.users.map(user => user.pseudo) }
+  get usersColor() { return this.users.map(user => hexToRgb(user.color)) }
+  get usersBorderColor() { return this.users.map(user => user.color) }
 
   get earningsReparition() { return (this.users.map((user) => {
     return (user.bets.reduce((sum, bet) => {

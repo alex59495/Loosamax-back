@@ -11,6 +11,7 @@ const userSchema = new Schema({
     type: String,
     default: "LooserMax"
   },
+  color: String,
   bets: [BetSchema]
 },{ timestamps: true });
 

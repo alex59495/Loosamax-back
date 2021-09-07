@@ -43,6 +43,7 @@ passport.use(new googleStrategy(
 
     const user = await new User({ 
       googleId: profile.id,
+      color: "#bc4b51",
       emails: profile.emails
     }).save()
     done(null, user)

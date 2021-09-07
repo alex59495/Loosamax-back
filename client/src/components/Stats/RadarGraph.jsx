@@ -29,7 +29,7 @@ const RadarGraph = ({title, users, avgType}) => {
   
 
   return (
-    <div style={{height: "300", width: "300"}}>
+    <div className='card-graph w-300-px'>
       <h3 className='text-center'>{title}</h3>
       <Radar data={data} options={options} />
     </div>

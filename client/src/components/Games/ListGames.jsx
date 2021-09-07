@@ -21,7 +21,13 @@ const ListGames = ({league ,fetchGames, games}) => {
   }, [])
 
   const renderGames = () => {
-    if(!games.hasOwnProperty(league)) {return null}
+    if(!games.hasOwnProperty(league)) {
+      return null
+    }
+
+    if(games[league].length === 0) {
+      return <p>Pas encore de paris disponibles pour cette ligue jeune impétueux. Il va falloir patienter</p>
+    }
 
     return games[league].map(game => {
       return (

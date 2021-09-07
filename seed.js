@@ -98,13 +98,15 @@ const dbSeed = async () => {
   const max = new User ({
     googleId: keys.googleIDMax,
     pseudo: 'MaxSteel',
-    bets: [...maxBets]
+    bets: [...maxBets],
+    color: "#bc4b51"
   })
 
   const alex = new User ({
     googleId: keys.googleIDAlex,
     pseudo: 'Alexis',
-    bets: [...alexBets]
+    bets: [...alexBets],
+    color: "#bc4b51"
   })
 
 

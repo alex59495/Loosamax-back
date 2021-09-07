@@ -2,17 +2,6 @@
   cursor: pointer;
 }
 
-.btn-salmon {
-  background-color: $salmon;
-  border-radius: 4px;
-  cursor: pointer;
-  padding: 4px;
-  &:hover {
-    transition: 0.5s;
-    background-color: $orange;
-  }
-}
-
 .btn-risky {
   background-color: $risky;
   color: white;
@@ -30,17 +19,7 @@
   border-radius: 4px;
   cursor: pointer;
   padding: 4px;
-  &:hover {
-    transition: 0.5s;
-    background-color: $intermediate
-  }
-}
-
-.btn-risky {
-  background-color: $risky;
-  border-radius: 4px;
-  cursor: pointer;
-  padding: 4px;
+  color: white;
   &:hover {
     transition: 0.5s;
     background-color: $intermediate

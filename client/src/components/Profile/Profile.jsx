@@ -1,75 +1,48 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import { connect } from 'react-redux';
-import { Formik } from 'formik';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPencilAlt } from '@fortawesome/free-solid-svg-icons';
 
 // Components
 import MyBet from './MyBet';
+import ColorEditor from './ColorEditor';
+import FormPseudo from './FormPseudo';
 
-// Redux actions
-import * as actions from '../../actions/userActions';
-
-const Profile = ({user, changePseudo}) => {
+const Profile = ({user}) => {
   const [openEdit, setOpenEdit] = useState(false)
+  const [show, setShow] = useState(false)
+
+  useEffect(() => {
+    setShow(false)
+  }, [user.color])
 
   const renderForm = () => {
     if(openEdit) {
       return (
-        <Formik
-          initialValues={{ pseudo: '' }}
-          validate={values => {
-            const errors = {};
-            if (!values.pseudo) {
-              errors.pseudo = 'Tu dois avoir un joli petit nom.';
-            }
-            return errors;
-          }}
-          onSubmit={(values, { setSubmitting }) => {
-            changePseudo(user, values);
-            setOpenEdit(false);
-            setSubmitting(false);
-          }}
-        >
-          {({
-            values,
-            errors,
-            touched,
-            handleChange,
-            handleBlur,
-            handleSubmit,
-            isSubmitting,
-            /* and other goodies */
-          }) => (
-            <form onSubmit={handleSubmit} className='container-center mb-1'>
-              <input
-                type="pseudo"
-                name="pseudo"
-                onChange={handleChange}
-                onBlur={handleBlur}
-                value={values.pseudo}
-              />
-              <div className="form-error">
-                {errors.pseudo && touched.pseudo && errors.pseudo}
-              </div>
-              <button type="submit" disabled={isSubmitting} className='btn-salmon'>
-                Changer
-              </button>
-            </form>
-          )}
-        </Formik>
+        <FormPseudo user={user} setOpenEdit={setOpenEdit}/>
+      )
+    }
+  }
+
+  const renderColorEditor = () => {
+    if(show) {
+      return (
+        <ColorEditor user={user}/>
       )
     }
   }
 
   return (
     <div className='d-flex container-center'>
-      <h1>Ton pseudo</h1>
+      <h1>Ton profil</h1>
       <div className="d-flex justify-content-center align-items-center">
         <h2>{user.pseudo}</h2>
-        <div className="ml-1 action" onClick={() => setOpenEdit(!openEdit)}>{openEdit ? "Fermer" : <FontAwesomeIcon icon={faPencilAlt} />}</div>
+        <div className="card-color" style={{backgroundColor: `${user.color}`, marginLeft: `4px`}} onClick={() => setShow(!show)}></div>
+        <div className="action" style={{marginLeft: `4px`}}  onClick={() => setOpenEdit(!openEdit)}>{openEdit ? "Fermer" : <FontAwesomeIcon icon={faPencilAlt} />}</div>
       </div>
       {renderForm()}
+      <i className='text-center' style={{margin: '4px', fontSize: '12px'}}>La couleur est utilisée dans la page des stats pour afficher les graphiques. Tu peux la modifier en cliquant dessus.</i>
+      {renderColorEditor()}
       <MyBet />
     </div>
   )
@@ -81,4 +54,4 @@ const mapStateToProps = ({user}) => {
   }
 }
 
-export default connect(mapStateToProps, actions)(Profile)
+export default connect(mapStateToProps, null)(Profile)

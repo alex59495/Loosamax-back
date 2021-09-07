@@ -18,7 +18,7 @@ const OldUserBets = ({user}) => {
     } else {
       return (
         <>
-          <h3>Pas encore de paris (et donc pas encore de défaites)</h3>
+          <h3 className="text-center">Pas encore de paris (et donc pas encore de défaites)</h3>
           <iframe title="gif-think" src="https://giphy.com/embed/d3mlE7uhX8KFgEmY" width="480" height="264" frameBorder="0" className="giphy-embed" allowFullScreen></iframe><p><a href="https://giphy.com/gifs/culture--think-hmm-d3mlE7uhX8KFgEmY">via GIPHY</a></p>
         </>
       )
