@@ -18,23 +18,23 @@ const Home = ({user}) => {
     switch(user) {
       case false:
         return (
-          <button className='btn-orange-large'>
-            <a href="/auth/google" data-test="button-login">Se connecter avec Google</a>
-          </button>
+          <>
+            <a href="/auth/google" className='btn-orange font-size-large' data-test="button-login">Se connecter avec Google</a>
+          </>
         )
       default:
         return (
-            <button className='btn-orange-large' data-test="button-profile">
-              <Link to={`/profile/${user._id}`}>Mon profil</Link>
-            </button>
+            <>
+              <Link className='btn-orange font-size-large' to={`/profile/${user._id}`}>Mon profil</Link>
+            </>
         )
     }
   }
 
   return (
     <div className='text-center'>
-      <h1>LOOSAMAX</h1>
-      <h3>Viens perdre des sous entre amis</h3>
+      <div className="text-font-logo">LOOSAMAX</div>
+      <h3 className="text-comment">Viens perdre des sous entre amis</h3>
       {renderContent()}
     </div>
   )

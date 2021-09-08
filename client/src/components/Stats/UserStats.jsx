@@ -15,7 +15,7 @@ const UserStats = ({user}) => {
 
   const renderStats = (bets) => {
 
-    if (bets.length > 0) {
+    if (statCalculatorUserBets.bets.length > 0) {
       return (
         <>
           <div className="d-flex justify-content-center">
@@ -51,7 +51,7 @@ const UserStats = ({user}) => {
         </>
       )
     } else {
-      return <p className="container-center">Pas encore de paris...</p>
+      return <p className="text-comment">Pas encore de paris...</p>
     }
   }
 

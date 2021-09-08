@@ -8,6 +8,7 @@ import RadarGraph from './RadarGraph';
 import LineGraph from './LineGraph';
 
 import {fetchUsers} from '../../actions/userActions';
+import StatCalculatorUsers from '../../utils/stats/statCalculatorUsers';
 
 const GlobalStats = ({users, fetchUsers}) => {
   
@@ -31,10 +32,33 @@ const GlobalStats = ({users, fetchUsers}) => {
     })
   }
 
+  const renderStatsGraph = () => {
+    const statCalculatorUsers = new StatCalculatorUsers({users})
+
+    if (statCalculatorUsers.usersMadeBets) {
+      return (
+        <p class="text-comment">
+          Il n'y a même pas encore de paris, t'as cru qu'on allait bosser et faire des jolis graphs ?
+        </p>
+      )
+    } else {
+      return (
+        <>
+          <div className="grid_wrap">
+            <DoughnutGraph users={users}/>
+            <RadarGraph title="Moyenne côtes réussies" users={users} avgType="usersAvgOddWin"/>
+            <RadarGraph title="Moyenne côtes ratées" users={users} avgType="usersAvgOddLoose"/>
+          </div>
+          <LineGraph users={users}/>  
+        </>
+      )
+    }
+  }
+
   const renderStats = () => {
     if(isLoading){
       return(
-      <div className="container-center" style={{height: "100vh", width: "100%"}}>
+      <div className="container-center margin-auto">
         <Loader
           type="BallTriangle"
           color="#00BFFF"
@@ -47,19 +71,15 @@ const GlobalStats = ({users, fetchUsers}) => {
       return (
         <>
           {renderStatPerUser()}
-          <div className="grid_wrap">
-            <DoughnutGraph users={users}/>
-            <RadarGraph title="Moyenne côtes réussies" users={users} avgType="usersAvgOddWin"/>
-            <RadarGraph title="Moyenne côtes ratées" users={users} avgType="usersAvgOddLoose"/>
-          </div>
-          <LineGraph users={users}/>
+          <h3>Graphs</h3>
+          {renderStatsGraph()}
         </>
       )
     }
   }
 
   return (
-    <div className="container-center">
+    <div className="container-center inherit-min-height">
       <h1>Les Stats des champions</h1>
       {renderStats()}
     </div>

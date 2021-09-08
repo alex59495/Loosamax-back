@@ -14,6 +14,9 @@ export default class StatCalculatorUsers extends StatCalculator {
   get usersColor() { return this.users.map(user => hexToRgb(user.color)) }
   get usersBorderColor() { return this.users.map(user => user.color) }
 
+  // True if at least one bet valid
+  get usersMadeBets() { return this.users.some(user => new StatCalculatorUserBets({userBets: user.bets}).bets) }
+
   get earningsReparition() { return (this.users.map((user) => {
     return (user.bets.reduce((sum, bet) => {
     if (bet.game.result === bet.choice) {
@@ -39,7 +42,7 @@ export default class StatCalculatorUsers extends StatCalculator {
           }),
         fill: false,
         backgroundColor: user.color || 'rgb(255, 99, 132)',
-        borderColor: user.color || 'rgba(255, 99, 132, 0.2)',
+        borderColor: hexToRgb(user.color) || 'rgba(255, 99, 132, 0.2)',
       }
     })
   }

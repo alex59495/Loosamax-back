@@ -1,9 +1,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Allerta+Stencil&display=swap');
-@import url('https://fonts.googleapis.com/css?family=Abril+Fatface|Lato');
+@import url('https://fonts.googleapis.com/css?family=Abril+Fatface|Lato|Nanum+Pen+Script');
 
 $font-logo: "Allerta Stencil";
 $ghost-text-title: "Abril Fatface";
 $ghost-text: "Lato";
+$comment-text: "Nanum Pen Script";
 
 .text-center {
   text-align: center;
@@ -34,4 +35,19 @@ $ghost-text: "Lato";
   text-align: center;
   margin-top: -20px;
   font-weight: 900;
+}
+
+.text-comment {
+  font-family: $comment-text;
+  color: $black;
+  font-size: 24px;
+}
+
+.text-font-logo {
+  font-family: $font-logo;
+  font-size: 62px;
+}
+
+.font-size-large {
+  font-size: 28px;
 }
