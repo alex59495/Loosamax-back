@@ -41,7 +41,7 @@ const App = ({fetchUser}) => {
   const renderApp = () => {
     if (isLoading) {
       return (
-        <div className="container-center" style={{height: "100vh", width: "100%"}}>
+        <div className="container-center inherit-min-height justify-content-center">
           <Loader
           type="BallTriangle"
           color="#00BFFF"

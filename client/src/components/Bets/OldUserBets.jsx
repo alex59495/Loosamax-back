@@ -2,13 +2,15 @@ import {connect} from 'react-redux';
 
 import BetPreview from './BetPreview';
 
-const OldUserBets = ({user}) => {
+import StatCalculatorUserBets from '../../utils/stats/statCalculatorUserBets';
 
-  const bets = user.bets ? user.bets.filter(bet => bet.game.result) : null
+const OldUserBets = ({user}) => {
+  
+  const statCalculatorUserBets = new StatCalculatorUserBets({userBets: user.bets})
 
   const renderBets = () => {
-    if (bets.length > 0) {
-      return bets.map(bet => {
+    if (statCalculatorUserBets.bets.length > 0) {
+      return statCalculatorUserBets.bets.map(bet => {
         return (
           <div className="mt-1" key={bet._id} >
             <BetPreview bet={bet} game={bet.game}/>
@@ -18,7 +20,7 @@ const OldUserBets = ({user}) => {
     } else {
       return (
         <>
-          <h3 className="text-center">Pas encore de paris (et donc pas encore de défaites)</h3>
+          <p className="text-comment">Pas encore de paris (et donc pas encore de défaites)</p>
           <iframe title="gif-think" src="https://giphy.com/embed/d3mlE7uhX8KFgEmY" width="480" height="264" frameBorder="0" className="giphy-embed" allowFullScreen></iframe><p><a href="https://giphy.com/gifs/culture--think-hmm-d3mlE7uhX8KFgEmY">via GIPHY</a></p>
         </>
       )
