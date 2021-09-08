@@ -4,6 +4,7 @@ export default class StatCalculatorUserBets extends StatCalculator {
   constructor({ userBets }) {
     super()
     this.bets = userBets.filter(bet => bet.game.result)
+    this.currentBet = userBets.find(bet => !bet.game.result)
   }
 
   get numberBets() { return this.bets.length }

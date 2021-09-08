@@ -3,7 +3,6 @@ import { Radar } from 'react-chartjs-2';
 
 import StatCalculatorUsers from '../../utils/stats/statCalculatorUsers';
 
-
 const RadarGraph = ({title, users, avgType}) => {
 
   const statCalculatorUsers = new StatCalculatorUsers({users})

@@ -21,19 +21,19 @@ module.exports = class fetchOddService {
   dataForWeek = (data) => {
     switch (new Date().getDay()) {
       case 1:
-        return data.filter((match) => new Date(match.commence_time) <= this.addDays(new Date(), 7)) 
+        return data.filter((match) => new Date(match.commence_time) <= this.addDays(new Date(), 8)) 
       case 2:
-        return data.filter((match) => new Date(match.commence_time) <= this.addDays(new Date(), 6)) 
+        return data.filter((match) => new Date(match.commence_time) <= this.addDays(new Date(), 7)) 
       case 3:
-        return data.filter((match) => new Date(match.commence_time) <= this.addDays(new Date(), 5))
+        return data.filter((match) => new Date(match.commence_time) <= this.addDays(new Date(), 6))
       case 4:
-        return data.filter((match) => new Date(match.commence_time) <= this.addDays(new Date(), 4))
+        return data.filter((match) => new Date(match.commence_time) <= this.addDays(new Date(), 5))
       case 5:
-        return data.filter((match) => new Date(match.commence_time) <= this.addDays(new Date(), 3))
+        return data.filter((match) => new Date(match.commence_time) <= this.addDays(new Date(), 4))
       case 6:
-        return data.filter((match) => new Date(match.commence_time) <= this.addDays(new Date(), 2))
+        return data.filter((match) => new Date(match.commence_time) <= this.addDays(new Date(), 3))
       case 7:
-        return data.filter((match) => new Date(match.commence_time) <= this.addDays(new Date(), 1))
+        return data.filter((match) => new Date(match.commence_time) <= this.addDays(new Date(), 2))
     }
   }
 

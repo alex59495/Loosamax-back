@@ -27,7 +27,7 @@ const Profile = ({user}) => {
   const renderColorEditor = () => {
     if(show) {
       return (
-        <ColorEditor user={user}/>
+        <ColorEditor user={user} setShow={setShow}/>
       )
     }
   }
@@ -38,7 +38,7 @@ const Profile = ({user}) => {
       <div className="d-flex justify-content-center align-items-center">
         <h2>{user.pseudo}</h2>
         <div className="card-color" style={{backgroundColor: `${user.color}`, marginLeft: `4px`}} onClick={() => setShow(!show)}></div>
-        <div className="action" style={{marginLeft: `4px`}}  onClick={() => setOpenEdit(!openEdit)}>{openEdit ? "Fermer" : <FontAwesomeIcon icon={faPencilAlt} />}</div>
+        <div className="clickable" style={{marginLeft: `4px`}}  onClick={() => setOpenEdit(!openEdit)}>{openEdit ? "Fermer" : <FontAwesomeIcon icon={faPencilAlt} />}</div>
       </div>
       {renderForm()}
       <i className='text-center' style={{margin: '4px', fontSize: '12px'}}>La couleur est utilisée dans la page des stats pour afficher les graphiques. Tu peux la modifier en cliquant dessus.</i>

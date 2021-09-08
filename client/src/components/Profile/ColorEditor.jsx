@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 
 import { updateUser } from '../../actions/userActions';
 
-const ColorEditor = ({user, updateUser}) => {
+const ColorEditor = ({user, updateUser, setShow}) => {
   const [background, setBackground] = useState(user.color)
 
   const handleChangeComplete = (color) => {
@@ -13,6 +13,7 @@ const ColorEditor = ({user, updateUser}) => {
 
   const handleSubmitColor = () => {
     updateUser(user, {color: background});
+    setShow(false)
   }
 
   const showColorPicker = () => {
@@ -22,7 +23,9 @@ const ColorEditor = ({user, updateUser}) => {
           color={ background }
           onChangeComplete={handleChangeComplete}
         />
-        <div onClick={handleSubmitColor} className="btn-orange mt-1">Je change ma couleur</div>
+        <div className="d-flex">
+          <div onClick={handleSubmitColor} className="btn-orange mt-1">Je change ma couleur</div>
+        </div>
       </>
     )
   }
