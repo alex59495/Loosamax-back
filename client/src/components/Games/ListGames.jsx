@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 import Loader from "react-loader-spinner";
 import { Link } from 'react-router-dom';
 
-import * as actions from '../../actions/gamesActions';
+import { fetchGames } from '../../actions/gamesActions';
 
 import BetPreview from '../Bets/BetPreview';
 import { snakeToCamel, capitalize } from '../../utils/textTransformation';
@@ -79,4 +79,4 @@ const mapStateToProps = ({games}) => {
   }
 }
 
-export default connect(mapStateToProps, actions)(ListGames);
+export default connect(mapStateToProps, { fetchGames })(ListGames);
