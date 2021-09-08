@@ -12,12 +12,18 @@
 
 .btn-orange {
   background-color: $orange;
+  cursor: pointer;
   border-radius: 4px;
-  padding: 10px;
+  padding: 4px;
   box-shadow: 10px 15px 15px rgba(0, 0, 0, 0.1);
   &:hover {
     transition: 0.5s;
     background-color: $intermediate
   }
+}
+
+.btn-large {
+  font-size: 28px;
+  padding: 10px;
 }
 

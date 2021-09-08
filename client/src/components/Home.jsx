@@ -19,13 +19,13 @@ const Home = ({user}) => {
       case false:
         return (
           <>
-            <a href="/auth/google" className='btn-orange font-size-large' data-test="button-login">Se connecter avec Google</a>
+            <a href="/auth/google" className='btn-orange btn-large' data-test="button-login">Se connecter avec Google</a>
           </>
         )
       default:
         return (
             <>
-              <Link className='btn-orange font-size-large' to={`/profile/${user._id}`}>Mon profil</Link>
+              <Link className='btn-orange btn-large' to={`/profile/${user._id}`}>Mon profil</Link>
             </>
         )
     }
