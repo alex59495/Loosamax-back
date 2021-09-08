@@ -2,7 +2,6 @@ const axios = require('axios')
 const keys = require('../config/keys')
 const leaguesIdentifiers = require('../helpers/leaguesIdentifiers')
 const teamNameStandard = require('../helpers/teamNameStandard')
-const {getNextMonday} = require('../helpers/useFullMethods')
 
 const mongoose = require('mongoose');
 
@@ -43,11 +42,11 @@ module.exports = class UpdateResultsService {
       }
     })
 
-    matchLastDaysFormatted.forEach(async (match) => {
-      const gameUpdated = await Game.findOneAndUpdate(
+    await Promise.all(matchLastDaysFormatted.map(async (match) => {
+      return await Game.findOneAndUpdate(
         {home_team: match.home_team, away_team: match.away_team, result: null},
-        { $set: {result: match.result, away_score: match.away_score, home_score: match.home_score, date_result: getNextMonday(new Date()) }},
-        )
-    })
+        { $set: {result: match.result, away_score: match.away_score, home_score: match.home_score }},
+      )
+    }))
   }
 }

@@ -12,12 +12,37 @@ module.exports = class fetchOddService {
     this.league = league
   }
 
+  addDays(date, days) {
+    const result = new Date(date);
+    result.setDate(result.getDate() + days);
+    return result;
+  }
+
+  dataForWeek = (data) => {
+    switch (new Date().getDay()) {
+      case 1:
+        return data.filter((match) => new Date(match.commence_time) <= this.addDays(new Date(), 7)) 
+      case 2:
+        return data.filter((match) => new Date(match.commence_time) <= this.addDays(new Date(), 6)) 
+      case 3:
+        return data.filter((match) => new Date(match.commence_time) <= this.addDays(new Date(), 5))
+      case 4:
+        return data.filter((match) => new Date(match.commence_time) <= this.addDays(new Date(), 4))
+      case 5:
+        return data.filter((match) => new Date(match.commence_time) <= this.addDays(new Date(), 3))
+      case 6:
+        return data.filter((match) => new Date(match.commence_time) <= this.addDays(new Date(), 2))
+      case 7:
+        return data.filter((match) => new Date(match.commence_time) <= this.addDays(new Date(), 1))
+    }
+  }
+
   call = async () => {
     const fetchGames = await axios({
       method: 'get',
-      url: `https://api.the-odds-api.com/v4/sports/${this.league}/odds/?apiKey=${keys.oddsApi}&regions=eu`
+      url: `https://api.the-odds-api.com/v4/sports/${this.league}/odds/?apiKey=${keys.oddsApi}&regions=eu&markets=h2h`
     });
-    const games = fetchGames.data
+    const games = this.dataForWeek(fetchGames.data)
     await Promise.all(games.map(async (game) => {
       const { id, home_team, away_team, commence_time, sport_key, bookmakers } = game
       const unibet = bookmakers.find(bookmaker => bookmaker.key == 'unibet');

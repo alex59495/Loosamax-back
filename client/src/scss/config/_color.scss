@@ -9,3 +9,33 @@ $safe: #5b8e7d;
 $intermediate: #f4a259;
 $black: #132a13;
 $grey: #e5e5e5;
+
+// Ghost page 404
+$white-ghost: #EDEDED;
+$gray-ghost: #BFC0C0;
+$dark-ghost: #585959;
+$light-ghost: #D3DEEA;
+
+.risky {
+  color: $risky;
+}
+
+.safe {
+  color: $safe;
+}
+
+.intermediate {
+  color: $intermediate;
+}
+
+.green-dark {
+  color: $green-dark;
+}
+
+.text-dark-ghost {
+  color: $dark-ghost
+}
+
+.text-gray-ghost {
+  color: $gray-ghost
+}

@@ -1,0 +1,37 @@
+@import url('https://fonts.googleapis.com/css2?family=Allerta+Stencil&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Abril+Fatface|Lato');
+
+$font-logo: "Allerta Stencil";
+$ghost-text-title: "Abril Fatface";
+$ghost-text: "Lato";
+
+.text-center {
+  text-align: center;
+}
+
+.text-orange {
+  color: $orange;
+}
+
+.bold {
+  font-weight: 700;
+}
+
+.text-ghost-title {
+  font-family: $ghost-text-title;
+  font-size: 52px;
+  color: $white-ghost;
+  text-align: center;
+  font-size: 9em;
+  margin: 0;
+  text-shadow: -1px 0 $gray-ghost, 0 1px $gray-ghost, 1px 0 $gray-ghost, 0 -1px $gray-ghost;
+}
+
+.text-ghost {
+  font-family: $ghost-text;
+  font-size: 1.5em;
+  text-transform: uppercase;
+  text-align: center;
+  margin-top: -20px;
+  font-weight: 900;
+}

@@ -3,13 +3,12 @@ import {connect} from 'react-redux';
 import Loader from "react-loader-spinner";
 import { Link } from 'react-router-dom';
 
-import * as actions from '../../actions/gamesActions';
+import { fetchGames } from '../../actions/gamesActions';
 
 import BetPreview from '../Bets/BetPreview';
 import { snakeToCamel, capitalize } from '../../utils/textTransformation';
 
 const ListGames = ({league ,fetchGames, games}) => {
-
   const [isLoading, setIsLoading] = useState(true)
 
   useEffect(() => {
@@ -26,6 +25,9 @@ const ListGames = ({league ,fetchGames, games}) => {
     }
 
     if(games[league].length === 0) {
+      if ([6,7,1].includes(new Date().getDay())) {
+        return <p>Alors comme ça on veut parier les week-end ? On aime pas les faillots ici, va falloir attendre.</p>
+      }
       return <p>Pas encore de paris disponibles pour cette ligue jeune impétueux. Il va falloir patienter</p>
     }
 
@@ -77,4 +79,4 @@ const mapStateToProps = ({games}) => {
   }
 }
 
-export default connect(mapStateToProps, actions)(ListGames);
+export default connect(mapStateToProps, { fetchGames })(ListGames);
