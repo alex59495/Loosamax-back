@@ -24,7 +24,7 @@ module.exports = class UpdateResultsService {
     return 0
   }
 
-  call = async (resolve, reject) => {
+  call = async () => {
 
     const matchLastDays = await axios({
         method: 'get',
