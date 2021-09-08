@@ -15,7 +15,7 @@ export default class StatCalculatorUsers extends StatCalculator {
   get usersBorderColor() { return this.users.map(user => user.color) }
 
   // True if at least one bet valid
-  get usersMadeBets() { return this.users.some(user => new StatCalculatorUserBets({userBets: user.bets}).bets) }
+  get usersMadeBets() { return this.users.some(user => new StatCalculatorUserBets({userBets: user.bets}).bets).length > 0 }
 
   get earningsReparition() { return (this.users.map((user) => {
     return (user.bets.reduce((sum, bet) => {
