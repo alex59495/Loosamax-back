@@ -37,7 +37,7 @@ const GlobalStats = ({users, fetchUsers}) => {
 
     if (statCalculatorUsers.usersMadeBets) {
       return (
-        <p class="text-comment">
+        <p className="text-comment">
           Il n'y a même pas encore de paris, t'as cru qu'on allait bosser et faire des jolis graphs ?
         </p>
       )

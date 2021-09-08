@@ -7,12 +7,11 @@ import {Link} from 'react-router-dom';
 import * as actions from '../../actions/betActions';
 import BetPreview from '../Bets/BetPreview'
 
+import StatCalculatorUserBets from '../../utils/stats/statCalculatorUserBets';
+
 const MyBet = ({user, deleteBet}) => {
-  const actualBet = (user) => {
-    if (Object.keys(user).length > 0) {
-      return user.bets.find((bet) => bet.game.result === null )
-    }
-  } 
+
+  const statCalculatorUserBets = new StatCalculatorUserBets({userBets: user.bets})
 
   const renderMyBet = () => {
     if(!user) {
@@ -26,7 +25,7 @@ const MyBet = ({user, deleteBet}) => {
           />
         </div>
       )
-    } else if(!actualBet(user))  {
+    } else if(!statCalculatorUserBets.currentBet)  {
       return (
         <>
           <div className="text-comment">Pas de match pour le moment, gros feignant !</div>
@@ -36,8 +35,8 @@ const MyBet = ({user, deleteBet}) => {
     } else {
       return (
         <div className="container-center">
-          <BetPreview bet={actualBet(user)} game={actualBet(user).game}/>
-          <button className="btn-risky" onClick={() => deleteBet(actualBet(user)._id)}>Supprimer</button>
+          <BetPreview bet={statCalculatorUserBets.currentBet} game={statCalculatorUserBets.currentBet.game}/>
+          <button className="btn-risky" onClick={() => deleteBet(statCalculatorUserBets.currentBet._id)}>Supprimer</button>
         </div>
       )
     }
