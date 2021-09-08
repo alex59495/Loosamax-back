@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { BrowserRouter, Route } from 'react-router-dom';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 import Header from './Header';
@@ -10,6 +10,7 @@ import Home from './Home';
 import WeeklyBets from './Bets/WeeklyBets';
 import Stats from './Stats/Stats';
 import OldUserBets from './Bets/OldUserBets';
+import NoMatch from './NoMatch';
 
 import Loader from "react-loader-spinner";
 
@@ -55,13 +56,16 @@ const App = ({fetchUser}) => {
           <>
             <Header />
             <div className="container">
-              <Route exact path="/" component={Home} />
-              <Route exact path="/weekbets" component={WeeklyBets} />
-              <Route exact path="/mesparis" component={OldUserBets} />
-              <Route exact path="/stats" component={Stats} />
-              <Route exact path="/profile/:id" component={Profile} />
-              <Route exact path="/leagues" component={ListLeagues} />
-              {renderLeagues}
+              <Switch>
+                <Route exact path="/" component={Home} />
+                <Route exact path="/weekbets" component={WeeklyBets} />
+                <Route exact path="/mesparis" component={OldUserBets} />
+                <Route exact path="/stats" component={Stats} />
+                <Route exact path="/profile/:id" component={Profile} />
+                <Route exact path="/leagues" component={ListLeagues} />
+                {renderLeagues}
+                <Route component={NoMatch} status={404}/>
+              </Switch>
             </div>
           </>
         </BrowserRouter>
