@@ -24,9 +24,9 @@ const Home = ({user}) => {
         )
       default:
         return (
-            <>
+            <div data-test="button-profile">
               <Link className='btn-orange btn-large' to={`/profile/${user._id}`}>Mon profil</Link>
-            </>
+            </div>
         )
     }
   }
