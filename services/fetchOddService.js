@@ -40,7 +40,7 @@ module.exports = class fetchOddService {
   call = async () => {
     const fetchGames = await axios({
       method: 'get',
-      url: `https://api.the-odds-api.com/v4/sports/${this.league}/odds/?apiKey=${keys.oddsApi}&regions=eu`
+      url: `https://api.the-odds-api.com/v4/sports/${this.league}/odds/?apiKey=${keys.oddsApi}&regions=eu&markets=h2h`
     });
     const games = this.dataForWeek(fetchGames.data)
     await Promise.all(games.map(async (game) => {
