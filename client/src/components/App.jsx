@@ -74,9 +74,9 @@ const App = ({fetchUser}) => {
   }
 
   return (
-    <div className='background'>
+    <>
       {renderApp()}
-    </div>
+    </>
   )
 }
 
