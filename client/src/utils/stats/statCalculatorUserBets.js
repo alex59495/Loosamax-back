@@ -33,14 +33,14 @@ export default class StatCalculatorUserBets extends StatCalculator {
   
   get sumEarnings() { return (this.bets.reduce((sum, bet) => {
     if (bet.game.result === bet.choice) {
-      return sum + this.betOdd(bet) * 2
+      return sum + (this.betOdd(bet) * 2 - 2)
     }
     return sum - 2
   }, 0)).toFixed(2) }
 
   get tableEarnings() { return (this.bets.map((bet) => {
     if (bet.game.result === bet.choice) {
-      return this.betOdd(bet) * 2
+      return this.betOdd(bet) * 2 - 2
     }
     return - 2
   }, 0)) }

@@ -11,7 +11,7 @@ import {fetchUsers} from '../../actions/userActions';
 import StatCalculatorUsers from '../../utils/stats/statCalculatorUsers';
 
 const GlobalStats = ({users, fetchUsers}) => {
-  
+
   const [isLoading, setIsLoading] = useState(true)
 
   useEffect(() => {
