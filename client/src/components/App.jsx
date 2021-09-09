@@ -20,18 +20,18 @@ import {fetchUser} from '../actions/userActions';
 // utils
 import {LEAGUES} from '../constants/leagues';
 
-const App = ({fetchUser}) => {
+const App = ({fetchUser, user}) => {
 
   const [isLoading, setIsLoading] = useState(true)
 
   useEffect(() => {
     let isMounted = true
-      async function fetchData() {
-        await fetchUser()
-        if(isMounted) setIsLoading(false)
-      }
-      fetchData();
-      return () => { isMounted = false };
+    async function fetchData() {
+      await fetchUser()
+      if(isMounted) setIsLoading(false)
+    }
+    fetchData();
+    return () => { isMounted = false };
   }, [])
 
   const renderLeagues = LEAGUES.map(({name}) => {
@@ -50,34 +50,50 @@ const App = ({fetchUser}) => {
         />
         </div>
       )
+    } else if (user === {} || !user) {
+      return (
+        <BrowserRouter>
+          <Header />
+          <div className="container">
+            <Switch>
+              <Route exact path="/" component={Home} />
+              <Route component={NoMatch} status={404}/>
+            </Switch>
+          </div>
+        </BrowserRouter>
+      )
     } else {
       return (
         <BrowserRouter>
-          <>
-            <Header />
-            <div className="container">
-              <Switch>
-                <Route exact path="/" component={Home} />
-                <Route exact path="/weekbets" component={WeeklyBets} />
-                <Route exact path="/mesparis" component={OldUserBets} />
-                <Route exact path="/stats" component={Stats} />
-                <Route exact path="/profile/:id" component={Profile} />
-                <Route exact path="/leagues" component={ListLeagues} />
-                {renderLeagues}
-                <Route component={NoMatch} status={404}/>
-              </Switch>
-            </div>
-          </>
+          <Header />
+          <div className="container">
+            <Switch>
+              <Route exact path="/" component={Home} />
+              <Route exact path="/weekbets" component={WeeklyBets} />
+              <Route exact path="/mesparis" component={OldUserBets} />
+              <Route exact path="/stats" component={Stats} />
+              <Route exact path="/profile/:id" component={Profile} />
+              <Route exact path="/leagues" component={ListLeagues} />
+              {renderLeagues}
+              <Route component={NoMatch} status={404}/>
+            </Switch>
+          </div>
         </BrowserRouter>
       )
     }
   }
 
   return (
-    <div className='background'>
+    <>
       {renderApp()}
-    </div>
+    </>
   )
 }
 
-export default connect(null, {fetchUser})(App)
+const mapStateToPros = ({user}) => {
+  return {
+    user
+  }
+}
+
+export default connect(mapStateToPros, {fetchUser})(App)
