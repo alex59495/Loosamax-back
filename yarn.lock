@@ -714,7 +714,7 @@ express-partials@0.3.0:
   resolved "https://registry.yarnpkg.com/express-partials/-/express-partials-0.3.0.tgz#88b9c40164afd9a55278629b2948e6ace7bff45f"
   integrity sha1-iLnEAWSv2aVSeGKbKUjmrOe/9F8=
 
-express@^4.17.1:
+express@^4.16.2, express@^4.17.1:
   version "4.17.1"
   resolved "https://registry.yarnpkg.com/express/-/express-4.17.1.tgz#4491fc38605cf51f8629d39c2b5d026f98a4c134"
   integrity sha512-mHJ9O79RqluphRrcw2X/GTh3k9tVv8YcoyY4Kkh4WDMUYKRZUq0h1o0w2rrrxBqM7VoeUVqgb27xlEMXTnYt4g==
@@ -2008,6 +2008,13 @@ spdx-license-ids@^3.0.0:
   version "3.0.10"
   resolved "https://registry.yarnpkg.com/spdx-license-ids/-/spdx-license-ids-3.0.10.tgz#0d9becccde7003d6c658d487dd48a32f0bf3014b"
   integrity sha512-oie3/+gKf7QtpitB0LYLETe+k8SifzsX4KixvpOsbI6S0kRiRQ5MKOio8eMSAKQ17N06+wdEOXRiId+zOxo0hA==
+
+ssl-express-www@^3.0.8:
+  version "3.0.8"
+  resolved "https://registry.yarnpkg.com/ssl-express-www/-/ssl-express-www-3.0.8.tgz#a530f117ac05ccab1184255756922c80ba2fcdab"
+  integrity sha512-BoPgj9UFZVXiY/FySVRJnGaYE09XWpXJDGsIc1mXCvt2Fn7deyC6T4oHV8SoI5zhAnj2u5OZwXfZOfOTcOuajw==
+  dependencies:
+    express "^4.16.2"
 
 standard-as-callback@^2.1.0:
   version "2.1.0"

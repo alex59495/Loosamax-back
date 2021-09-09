@@ -1,7 +1,6 @@
 const CACHE_NAME = 'sw-cache-example';
 const toCache = [
-  '/',
-  '/index.html'
+  '/index.html',
 ];
 
 self.addEventListener('install', function(event) {
@@ -15,15 +14,19 @@ self.addEventListener('install', function(event) {
 })
 
 self.addEventListener('fetch', function(event) {
-  event.respondWith(
-    fetch(event.request)
-      .catch(() => {
-        return caches.open(CACHE_NAME)
-          .then((cache) => {
-            return cache.match(event.request)
-          })
-      })
-  )
+  console.log(navigator)
+  if (!navigator.onLine) {
+    event.respondWith(
+      fetch(event.request)
+        .catch(() => {
+          return caches.open(CACHE_NAME)
+            .then((cache) => {
+              console.log(cache)
+              return cache.match(event.request)
+            })
+        })
+    )
+  }
 })
 
 self.addEventListener('activate', function(event) {
@@ -49,8 +52,7 @@ self.addEventListener("push", (e) => {
       {
           body: data.text,
           icon: "./images/logo192.png", 
-          badge: "./images/logo192.png",
-          vibrate: [500,110,500,110,450,110,200,110,170,40,450,110,200,110,170,40,500]
+          badge: "./images/logo192.png"
       }
     )
   )
