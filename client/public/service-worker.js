@@ -14,8 +14,6 @@ self.addEventListener('install', function(event) {
   )
 })
 
-
-
 self.addEventListener('fetch', function(event) {
   event.respondWith(
     fetch(event.request)
@@ -27,8 +25,6 @@ self.addEventListener('fetch', function(event) {
       })
   )
 })
-
-
 
 self.addEventListener('activate', function(event) {
   event.waitUntil(
@@ -44,3 +40,29 @@ self.addEventListener('activate', function(event) {
       .then(() => self.clients.claim())
   )
 })
+
+self.addEventListener("push", e => {
+  const data = e.data.json();
+  self.registration.showNotification(
+      data.title, // title of the notification
+      {
+          body: "Heyy !! On est vendredi mon petit loup ! Il serait peut être temps de faire son pari.", //the body of the push notification
+          image: "./images/logo192.png",
+          icon: "./images/logo192.png" // icon 
+      }
+  );
+});
+
+self.addEventListener('notificationclick', event => {
+  if (event.action === 'close') {
+    event.notification.close();
+  } else {
+    event.waitUntil(self.clients.matchAll().then(clients => {
+      if (clients.length){ // check if at least one tab is already open
+        clients[0].focus();
+      } else {
+        self.clients.openWindow('/');
+      }
+    }));
+  }
+});
