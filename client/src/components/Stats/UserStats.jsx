@@ -23,7 +23,6 @@ const UserStats = ({user}) => {
 
   const globalEarning = statCalculatorUserBets.globalEarning
 
-
   const renderStats = (bets) => {
 
     if (statCalculatorUserBets.bets.length > 0) {
