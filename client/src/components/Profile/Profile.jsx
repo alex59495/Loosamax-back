@@ -1,23 +1,26 @@
 import React, {useState, useEffect} from 'react';
 import { connect } from 'react-redux';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPencilAlt } from '@fortawesome/free-solid-svg-icons';
+import { faPencilAlt, faCheck, faTimes } from '@fortawesome/free-solid-svg-icons';
 
 // Components
 import MyBet from './MyBet';
 import ColorEditor from './ColorEditor';
 import FormPseudo from './FormPseudo';
 
+import { askForSubscription } from '../../subscriptionHandler'
 import { useParams } from 'react-router-dom'
 
 const Profile = ({user}) => {
   const [openEdit, setOpenEdit] = useState(false)
   const [show, setShow] = useState(false)
+	const [subscription] = useState(Notification.permission)
 
   let { id } = useParams();
 
   useEffect(() => {
     setShow(false)
+    askForSubscription(user)
   }, [user.color])
 
   const renderForm = () => {
@@ -32,6 +35,18 @@ const Profile = ({user}) => {
     if(show) {
       return (
         <ColorEditor user={user} setShow={setShow}/>
+      )
+    }
+  }
+
+  const renderNotification = () => {
+    if(subscription === "granted") {
+      return (
+        <FontAwesomeIcon icon={faCheck} className="green-dark" />
+      )
+    } else {
+      return (
+        <FontAwesomeIcon icon={faTimes} className="risky"/>
       )
     }
   }
@@ -56,6 +71,8 @@ const Profile = ({user}) => {
           {renderForm()}
           <i className='text-center' style={{margin: '4px', fontSize: '12px'}}>La couleur est utilisée dans la page des stats pour afficher les graphiques. Tu peux la modifier en cliquant dessus.</i>
           {renderColorEditor()}
+          <div className="mt-1">Notification : {renderNotification()}</div>
+          <i className='text-center font-size-12px' style={{margin: '4px'}}>Les notifications ne peuvent être activées / désactivées que par l'utilisateur via le browser</i>
           <MyBet />
         </>
       )

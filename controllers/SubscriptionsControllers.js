@@ -8,12 +8,14 @@ webpush.setVapidDetails("mailto:example@yourdomain.org", keys.publicVapid, keys.
 
 function handlePushNotificationSubscription(req, res) {
   const subscriptionRequest = req.body;
-  console.log(subscriptionRequest)
-  subscription = Subscription.findOneOrCreate({
-    user: req.user.id
+
+  subscription = Subscription.updateOneOrCreate({
+    user: req.user.id,
+    device: req.device.type
   }, {
     user: req.user.id,
-    detail: subscriptionRequest
+    detail: subscriptionRequest,
+    device: req.device.type
   })
   
   res.status(201).json({ id: subscription });
@@ -23,19 +25,23 @@ async function sendPushNotification(req, res) {
   const subscriptionId = ObjectId(req.params.id);
   const pushSubscription = await Subscription.find({_id: subscriptionId});
   console.log(pushSubscription)
-  webpush
-    .sendNotification(
-      pushSubscription[0].detail,
-      JSON.stringify({
-        title: "Alerte Procrastination",
-        text: "HEY! Take a look at this brand new t-shirt!",
-      })
-    )
-    .catch(err => {
-      console.log(err);
-    });
-
-  res.status(202).json({});
+  try {
+    webpush
+      .sendNotification(
+        pushSubscription[0].detail,
+        JSON.stringify({
+          title: "Alerte Procrastination",
+          text: "VENDREDI ! VENDREDI !",
+        })
+      )
+      .catch(err => {
+        console.log(err);
+      });
+  
+    res.status(202).json({});
+  } catch(err) {
+    res.status(500).send(err)
+  }
 }
 
 module.exports = { handlePushNotificationSubscription, sendPushNotification };

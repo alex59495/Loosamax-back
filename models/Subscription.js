@@ -3,15 +3,15 @@ const { Schema } = mongoose;
 
 const subscription = new Schema({
   user: { type: Schema.Types.ObjectId, ref: 'user', required: true },
-  active: Boolean,
-  detail: Object
-});
+  detail: Object,
+  device: String,
+}, { timestamps: true });
 
-subscription.statics.findOneOrCreate = function findOneOrCreate(condition, doc) {
+subscription.statics.updateOneOrCreate = function updateOneOrCreate(condition, doc) {
   const self = this;
   const newDocument = doc;
   return new Promise((resolve, reject) => {
-    return self.findOne(condition)
+    return self.findOneAndUpdate(condition, doc)
       .then((result) => {
         if (result) {
           return resolve(result);
