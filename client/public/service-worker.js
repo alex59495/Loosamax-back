@@ -41,10 +41,10 @@ self.addEventListener('activate', function(event) {
   )
 })
 
-self.addEventListener("push", async (e) => {
+self.addEventListener("push", (e) => {
   const data = e.data.json();
   e.waitUntil(
-    await self.registration.showNotification(
+    self.registration.showNotification(
       data.title, // title of the notification
       {
           body: data.text,
