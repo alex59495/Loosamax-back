@@ -14,14 +14,12 @@ self.addEventListener('install', function(event) {
 })
 
 self.addEventListener('fetch', function(event) {
-  console.log(navigator)
   if (!navigator.onLine) {
     event.respondWith(
       fetch(event.request)
         .catch(() => {
           return caches.open(CACHE_NAME)
             .then((cache) => {
-              console.log(cache)
               return cache.match(event.request)
             })
         })

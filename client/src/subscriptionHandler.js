@@ -1,11 +1,11 @@
 import getDeviceType from './utils/getDevise'
-// import Swal from 'sweetalert2';
+import Swal from 'sweetalert2';
 const publicVapidKey = 'BJc1xneLB_KUaF3xNek8v37xk1Fp7n7cbZWh5QOwrR-D1luIQ9UmXbYIyJ60HINpqgdVg8E1EfZZyk8ZXqKi8Lw'; 
 
 function urlBase64ToUint8Array(base64String) {
   const padding = "=".repeat((4 - base64String.length % 4) % 4);
   const base64 = (base64String + padding)
-    .replace(/\-/g, "+")
+    .replace(/-/g, "+")
     .replace(/_/g, "/");
 
   const rawData = window.atob(base64);
@@ -58,12 +58,12 @@ const askForSubscription = (user) => {
           console.log('Nouvelle souscription')
         }
       } else {
-          // Swal.fire({
-          //   title: 'Pleeeeeaaaassseee',
-          //   confirmButtonColor: '#4c956c',
-          //   confirmButtonText: "Ok, je vais le faire !",
-          //   html: "Allez, active les notifs !<br> Valé te remerciera, tu verras !<br> Et en plus, on promet de pas trop t'emmerder.",
-          // })
+          Swal.fire({
+            title: 'Pleeeeeaaaassseee',
+            confirmButtonColor: '#4c956c',
+            confirmButtonText: "Ok, je vais le faire !",
+            html: "Allez, active les notifs !<br> Valé te remerciera, tu verras !<br> Et en plus, on promet de pas trop t'emmerder.",
+          })
       }
     })
   }
