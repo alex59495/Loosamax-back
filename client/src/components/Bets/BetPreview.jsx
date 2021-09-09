@@ -26,11 +26,11 @@ const BetPreview = ({game, bet, createBet, user, history}) => {
 
   const choiceData = (x) => {
     switch(x) {
-      case 1:
+      case "1":
         return game.home_team
-      case 0:
+      case "N":
         return 'Match nul'
-      case 2:
+      case "2":
         return game.away_team
       default:
         return;
@@ -68,24 +68,24 @@ const BetPreview = ({game, bet, createBet, user, history}) => {
     <div className="card-odd">
       <div className="match">
         <div 
-            className={`card-odd-detail ${bet && bet.choice === 1 ? 'active-odd' : null} ${!bet ? 'clickable' : null}`}
-            onClick={() => clickable(1)}
+            className={`card-odd-detail ${bet && bet.choice === "1" ? 'active-odd' : null} ${!bet ? 'clickable' : null}`}
+            onClick={() => clickable("1")}
             style={bet ? null : {cursor: 'pointer'}}
           >
             <span className="team">{game.home_team}</span>
             <span className={oddRisk(game.home_odd)}>{game.home_odd}</span>
           </div>
           <div 
-            className={`card-odd-detail ${bet && bet.choice === 0 ? 'active-odd' : null} ${!bet ? 'clickable' : null}`}
-            onClick={() => clickable(0)}
+            className={`card-odd-detail ${bet && bet.choice === "N" ? 'active-odd' : null} ${!bet ? 'clickable' : null}`}
+            onClick={() => clickable("N")}
             style={bet ? null : {cursor: 'pointer'}}
           >
             <span>Nul</span>
             <span className={oddRisk(game.draw_odd)}>{game.draw_odd}</span>
           </div>
           <div 
-            className={`card-odd-detail ${bet && bet.choice === 2 ? 'active-odd' : null} ${!bet ? 'clickable' : null}`}
-            onClick={() => clickable(2)}
+            className={`card-odd-detail ${bet && bet.choice === "2" ? 'active-odd' : null} ${!bet ? 'clickable' : null}`}
+            onClick={() => clickable("2")}
             style={bet ? null : {cursor: 'pointer'}}
           >
             <span className="team">{game.away_team}</span>

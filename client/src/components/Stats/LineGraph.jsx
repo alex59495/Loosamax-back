@@ -9,10 +9,22 @@ const LineChart = ({users}) => {
     datasets: statCalculatorUsers.earningsEvolutionByUsers,
   };
 
+  const options = {
+    scales: {
+      yAxis: {
+          ticks: {
+            callback: function(value) {
+              return value + '€'
+            }
+          }
+      }
+  }
+  }
+
   return (
     <div className='card-graph w-100'>
       <h3 className='text-center'>Evolution des bénéfices</h3>
-      <Line data={data} />
+      <Line data={data} options={options}/>
     </div>
   )
 }
