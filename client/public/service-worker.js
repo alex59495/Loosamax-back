@@ -41,16 +41,18 @@ self.addEventListener('activate', function(event) {
   )
 })
 
-self.addEventListener("push", e => {
+self.addEventListener("push", async (e) => {
   const data = e.data.json();
-  self.registration.showNotification(
+  e.waitUntil(
+    await self.registration.showNotification(
       data.title, // title of the notification
       {
-          body: "Heyy !! On est vendredi mon petit loup ! Il serait peut être temps de faire son pari.", //the body of the push notification
+          body: data.text,
           image: "./images/logo192.png",
           icon: "./images/logo192.png" // icon 
       }
-  );
+    )
+  )
 });
 
 self.addEventListener('notificationclick', event => {
