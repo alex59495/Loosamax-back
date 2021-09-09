@@ -26,7 +26,6 @@ const App = ({fetchUser, user}) => {
 
   useEffect(() => {
     let isMounted = true
-    console.log(user)
     async function fetchData() {
       await fetchUser()
       if(isMounted) setIsLoading(false)
