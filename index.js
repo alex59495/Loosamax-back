@@ -6,10 +6,15 @@ const passport = require('passport');
 const flash = require('connect-flash');
 const Queue = require('bull');
 
+const webpush = require('web-push');
+
+webpush.setVapidDetails('mailto:maxence.lenoir1206@gmail.com', keys.publicVapid, keys.privateVapid);
+
 // models
 require('./models/User');
 require('./models/Game');
 require('./models/Bet');
+require('./models/Subscription');
 
 // service
 require('./services/passport');
@@ -40,6 +45,7 @@ mongoose.connect(keys.mongoURI,  {
 require('./routes/userRoutes')(app);
 require('./routes/gamesRoutes')(app);
 require('./routes/betRoutes')(app);
+require('./routes/subscribeRoutes')(app);
 
 const myJobQueue = new Queue('myJob', keys.redisUrl );
 
