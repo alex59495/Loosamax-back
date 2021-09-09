@@ -1,5 +1,5 @@
 import getDeviceType from './utils/getDevise'
-import Swal from 'sweetalert2';
+// import Swal from 'sweetalert2';
 const publicVapidKey = 'BJc1xneLB_KUaF3xNek8v37xk1Fp7n7cbZWh5QOwrR-D1luIQ9UmXbYIyJ60HINpqgdVg8E1EfZZyk8ZXqKi8Lw'; 
 
 function urlBase64ToUint8Array(base64String) {
