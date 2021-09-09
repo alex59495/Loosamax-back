@@ -5,5 +5,7 @@ module.exports = {
   cookieKey: process.env.COOKIE_KEY,
   oddsApi: process.env.ODDS_API,
   footballApiDataKey: process.env.FOOTBALL_API_KEY,
-  redisUrl: process.env.REDIS_URL
+  redisUrl: process.env.REDIS_URL,
+  publicVapid: process.env.PUBLIC_VAPID,
+  privateVapid: process.env.PRIVATE_VAPID,
 }
