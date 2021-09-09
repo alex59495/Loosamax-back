@@ -1,4 +1,4 @@
-const app = require('./app')
+const app = require('./app');
 
 if(process.env.NODE_ENV === 'production') {
   // Express will serve up production assets like main.css or main.js
