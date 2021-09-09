@@ -1,6 +1,7 @@
 const passport = require('passport');
 
 const UsersControllers = require('../controllers/UsersControllers.js')
+const userSubscription = require('../middlewares/userSubscriptions')
 
 module.exports = (app) => {
 
@@ -23,7 +24,7 @@ module.exports = (app) => {
     res.redirect('/')
   })
 
-  app.get('/api/current_user', UsersControllers.fetchCurrentUser);
+  app.get('/api/current_user', userSubscription, UsersControllers.fetchCurrentUser);
 
   app.patch('/api/current_user/:id', UsersControllers.patchCurrentUser);
 

@@ -21,8 +21,14 @@ const RadarGraph = ({title, users, avgType}) => {
   }
 
   const options = {
-    scale: {
-      ticks: { beginAtZero: true },
+    scales: {
+      r: {
+        angleLines: {
+            display: false
+        },
+        suggestedMin: 0,
+        suggestedMax: 2.2
+      }
     },
   };
   

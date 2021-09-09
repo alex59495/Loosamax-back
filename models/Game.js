@@ -11,7 +11,7 @@ const gameSchema = new Schema({
   home_odd: Number,
   draw_odd: Number,
   result: {
-    type: Number,
+    type: String,
     default: null
   },
   away_score: {

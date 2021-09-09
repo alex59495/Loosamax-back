@@ -19,9 +19,9 @@ module.exports = class UpdateResultsService {
   }
 
   setResult = (res) => {
-    if (res === "AWAY_TEAM") return 2;
-    if (res === "HOME_TEAM") return 1;
-    return 0
+    if (res === "AWAY_TEAM") return "2";
+    if (res === "HOME_TEAM") return "1";
+    return "N"
   }
 
   call = async () => {

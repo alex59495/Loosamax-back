@@ -69,29 +69,38 @@ export const createBet = ({choice, team, user_id, game}, history) => async (disp
 
 export const deleteBet = (id) => async (dispatch) => 
 {
-  if(window.confirm('Tu veux supprimer ton pari ?')) {
-    try {
-      const res = await axios.delete(`/api/bets/${id}`);
+  Swal.fire({
+    title: `Tu veux supprimer ce pari ?`,
+    showCancelButton: true,
+    confirmButtonColor: '#4c956c',
+    cancelButtonColor: '#bc4b51',
+    confirmButtonText: 'Affirmatif !',
+    cancelButtonText: 'Bah non ..'
+  }).then(async (result) => {
+    if (result.isConfirmed) {
+      try {
+        const res = await axios.delete(`/api/bets/${id}`);
 
-      switch(res.status) {
-        case 200:
-          dispatch({ type: DELETE_BET, payload: id});
-          break;
-        default:
-          Swal.fire({
-            icon: 'error',
-            title: 'Oops... Il y a eu une erreur',
-            html: 'Essaie encore.',
-          })
+        switch(res.status) {
+          case 200:
+            dispatch({ type: DELETE_BET, payload: id});
+            break;
+          default:
+            Swal.fire({
+              icon: 'error',
+              title: 'Oops... Il y a eu une erreur',
+              html: 'Essaie encore.',
+            })
+        }
+
+      } catch(err) {
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops... Il y a eu une erreur',
+          html: 'Essaie encore.',
+        })
       }
-
-    } catch(err) {
-      Swal.fire({
-        icon: 'error',
-        title: 'Oops... Il y a eu une erreur',
-        html: 'Essaie encore.',
-      })
     }
-  }
+  })
 }
 
