@@ -1,8 +1,7 @@
 const mongoose = require('mongoose');
 const { Schema } = mongoose;
 
-const BetSchema = require('./Bet');
-
+const betSchema = require('./Bet');
 
 const userSchema = new Schema({
   googleId: String,
@@ -12,7 +11,7 @@ const userSchema = new Schema({
     default: "LooserMax"
   },
   color: String,
-  bets: [BetSchema]
+  bets: [betSchema]
 },{ timestamps: true });
 
-mongoose.model('users', userSchema);
+module.exports = mongoose.model('users', userSchema);

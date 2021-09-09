@@ -24,4 +24,4 @@ const gameSchema = new Schema({
   }
 },{ timestamps: true });
 
-mongoose.model('games', gameSchema);
+module.exports = mongoose.model('games', gameSchema);

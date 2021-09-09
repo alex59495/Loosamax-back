@@ -1,8 +1,8 @@
 const mongoose = require('mongoose');
 const ObjectId = mongoose.Types.ObjectId;
 
-const Bet = mongoose.model('bets');
-const User = mongoose.model('users');
+const Bet = require('../models/Bet');
+const User = require('../models/User');
 
 const createBets = async (req, res) => {
 
