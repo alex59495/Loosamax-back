@@ -32,7 +32,6 @@ async function createNotificationSubscription() {
 }
 
 async function postSubscription(subscription) {
-  console.log(subscription)
   await fetch("/api/subscription", {
     method: "POST",
     body: JSON.stringify(subscription),
@@ -42,11 +41,11 @@ async function postSubscription(subscription) {
 });
 }
 
-const askForSubscription = (user) => {
+const askForSubscription = async (user) => {
   if('serviceWorker' in navigator){
     navigator.serviceWorker.register('/service-worker.js');
-    askUserPermission().then(async (res) => {
-      if (res === "granted") {
+    // askUserPermission().then(async (res) => {
+      // if (res === "granted") {
         const subscription = await createNotificationSubscription()
         // On check si le user a déjà une souscription qui correspond à ce qu'il demande actuellement (sub details + device)
         const userAlreadySubscribe = user.subscriptions.filter(sub => sub.detail.endpoint === subscription.endpoint && sub.device === getDeviceType()).length > 0
@@ -58,15 +57,15 @@ const askForSubscription = (user) => {
           postSubscription(subscription)
           console.log('Nouvelle souscription')
         }
-      } else {
-          Swal.fire({
-            title: 'Pleeeeeaaaassseee',
-            confirmButtonColor: '#4c956c',
-            confirmButtonText: "Ok, je vais le faire !",
-            html: "Allez, active les notifs !<br> Valé te remerciera, tu verras !<br> Et en plus, on promet de pas trop t'emmerder.",
-          })
-      }
-    })
+      // } else {
+      //     Swal.fire({
+      //       title: 'Pleeeeeaaaassseee',
+      //       confirmButtonColor: '#4c956c',
+      //       confirmButtonText: "Ok, je vais le faire !",
+      //       html: "Allez, active les notifs !<br> Valé te remerciera, tu verras !<br> Et en plus, on promet de pas trop t'emmerder.",
+      //     })
+      // }
+    // })
   }
 }
 

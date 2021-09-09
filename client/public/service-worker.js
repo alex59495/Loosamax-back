@@ -48,8 +48,9 @@ self.addEventListener("push", (e) => {
       data.title, // title of the notification
       {
           body: data.text,
-          image: "./images/logo192.png",
-          icon: "./images/logo192.png" // icon 
+          icon: "./images/logo192.png", 
+          badge: "./images/logo192.png",
+          vibrate: [500,110,500,110,450,110,200,110,170,40,450,110,200,110,170,40,500]
       }
     )
   )
