@@ -5,7 +5,7 @@ const publicVapidKey = 'BJc1xneLB_KUaF3xNek8v37xk1Fp7n7cbZWh5QOwrR-D1luIQ9UmXbYI
 function urlBase64ToUint8Array(base64String) {
   const padding = "=".repeat((4 - base64String.length % 4) % 4);
   const base64 = (base64String + padding)
-    .replace(/\-/g, "+")
+    .replace(/-/g, "+")
     .replace(/_/g, "/");
 
   const rawData = window.atob(base64);
@@ -32,7 +32,6 @@ async function createNotificationSubscription() {
 }
 
 async function postSubscription(subscription) {
-  console.log(subscription)
   await fetch("/api/subscription", {
     method: "POST",
     body: JSON.stringify(subscription),

@@ -23,12 +23,12 @@ function handlePushNotificationSubscription(req, res) {
 
 async function sendPushNotification(req, res) {
   const subscriptionId = ObjectId(req.params.id);
-  const pushSubscription = await Subscription.find({_id: subscriptionId});
+  const pushSubscription = await Subscription.findById(subscriptionId);
   console.log(pushSubscription)
   try {
     webpush
       .sendNotification(
-        pushSubscription[0].detail,
+        pushSubscription.detail,
         JSON.stringify({
           title: "Alerte Procrastination",
           text: "VENDREDI ! VENDREDI !",
@@ -38,7 +38,7 @@ async function sendPushNotification(req, res) {
         console.log(err);
       });
   
-    res.status(202).json({});
+    res.status(202).json({id: req.params.id});
   } catch(err) {
     res.status(500).send(err)
   }

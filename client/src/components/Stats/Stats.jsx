@@ -9,6 +9,7 @@ import LineGraph from './LineGraph';
 
 import {fetchUsers} from '../../actions/userActions';
 import StatCalculatorUsers from '../../utils/stats/statCalculatorUsers';
+import StatCalculatorUserBets from '../../utils/stats/statCalculatorUserBets';
 
 const GlobalStats = ({users, fetchUsers}) => {
 
@@ -25,7 +26,11 @@ const GlobalStats = ({users, fetchUsers}) => {
   }, [])
 
   const renderStatPerUser = () => {
-    return users.map(user => {
+    const usersSorted = users.sort((userA, userB) => {
+      return new StatCalculatorUserBets({userBets: userB.bets}).globalEarning - new StatCalculatorUserBets({userBets: userA.bets}).globalEarning 
+    }) 
+
+    return usersSorted.map(user => {
       return (
         <UserStats key={user._id} user={user}/>
       )

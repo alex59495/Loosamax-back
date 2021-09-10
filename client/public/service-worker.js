@@ -1,7 +1,6 @@
 const CACHE_NAME = 'sw-cache-example';
 const toCache = [
-  '/',
-  '/index.html'
+  '/index.html',
 ];
 
 self.addEventListener('install', function(event) {
@@ -15,15 +14,17 @@ self.addEventListener('install', function(event) {
 })
 
 self.addEventListener('fetch', function(event) {
-  event.respondWith(
-    fetch(event.request)
-      .catch(() => {
-        return caches.open(CACHE_NAME)
-          .then((cache) => {
-            return cache.match(event.request)
-          })
-      })
-  )
+  if (!navigator.onLine) {
+    event.respondWith(
+      fetch(event.request)
+        .catch(() => {
+          return caches.open(CACHE_NAME)
+            .then((cache) => {
+              return cache.match(event.request)
+            })
+        })
+    )
+  }
 })
 
 self.addEventListener('activate', function(event) {
@@ -41,15 +42,15 @@ self.addEventListener('activate', function(event) {
   )
 })
 
-self.addEventListener("push", async (e) => {
+self.addEventListener("push", (e) => {
   const data = e.data.json();
   e.waitUntil(
-    await self.registration.showNotification(
+    self.registration.showNotification(
       data.title, // title of the notification
       {
           body: data.text,
-          image: "./images/logo192.png",
-          icon: "./images/logo192.png" // icon 
+          icon: "./images/logo192.png", 
+          badge: "./images/logo192.png"
       }
     )
   )

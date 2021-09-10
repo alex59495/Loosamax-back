@@ -1889,7 +1889,7 @@ express-partials@0.3.0:
   resolved "https://registry.yarnpkg.com/express-partials/-/express-partials-0.3.0.tgz#88b9c40164afd9a55278629b2948e6ace7bff45f"
   integrity sha1-iLnEAWSv2aVSeGKbKUjmrOe/9F8=
 
-express@^4.17.1:
+express@^4.16.2, express@^4.17.1:
   version "4.17.1"
   resolved "https://registry.yarnpkg.com/express/-/express-4.17.1.tgz#4491fc38605cf51f8629d39c2b5d026f98a4c134"
   integrity sha512-mHJ9O79RqluphRrcw2X/GTh3k9tVv8YcoyY4Kkh4WDMUYKRZUq0h1o0w2rrrxBqM7VoeUVqgb27xlEMXTnYt4g==
@@ -4778,6 +4778,13 @@ sprintf-js@~1.0.2:
   version "1.0.3"
   resolved "https://registry.yarnpkg.com/sprintf-js/-/sprintf-js-1.0.3.tgz#04e6926f662895354f3dd015203633b857297e2c"
   integrity sha1-BOaSb2YolTVPPdAVIDYzuFcpfiw=
+
+ssl-express-www@^3.0.8:
+  version "3.0.8"
+  resolved "https://registry.yarnpkg.com/ssl-express-www/-/ssl-express-www-3.0.8.tgz#a530f117ac05ccab1184255756922c80ba2fcdab"
+  integrity sha512-BoPgj9UFZVXiY/FySVRJnGaYE09XWpXJDGsIc1mXCvt2Fn7deyC6T4oHV8SoI5zhAnj2u5OZwXfZOfOTcOuajw==
+  dependencies:
+    express "^4.16.2"
 
 stack-utils@^2.0.2:
   version "2.0.3"

@@ -1,4 +1,5 @@
 const express = require('express');
+const secure = require('ssl-express-www');
 const mongoose = require('mongoose');
 const keys = require('./config/keys');
 const cookieSession = require('cookie-session');
@@ -30,6 +31,7 @@ app.use(
     keys: [keys.cookieKey]
   })
 );
+app.use(secure);
 app.use(flash());
 app.use(passport.initialize());
 app.use(passport.session());
