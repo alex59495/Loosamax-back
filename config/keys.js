@@ -1,5 +1,8 @@
-if (process.env.NODE_ENV === 'production') {
-  module.exports = require('./prod');
-} else {
-  module.exports = require('./dev');
+switch(process.env.NODE_ENV) {
+  case 'production':
+  // Use the same denomination in Github secret as we do in Heroku Var
+  case 'test':
+    module.exports = require('./prod');
+  default:
+    module.exports = require('./dev');
 }
