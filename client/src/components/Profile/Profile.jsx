@@ -72,7 +72,7 @@ const Profile = ({user}) => {
           <i className='text-center' style={{margin: '4px', fontSize: '12px'}}>La couleur est utilisée dans la page des stats pour afficher les graphiques. Tu peux la modifier en cliquant dessus.</i>
           {renderColorEditor()}
           <div className="mt-1">Notification : {renderNotification()}</div>
-          <i className='text-center font-size-12px' style={{margin: '4px'}}>Les notifications ne peuvent être activées / désactivées que par l'utilisateur via le browser</i>
+          <i className='text-center font-size-12px' style={{margin: '4px'}}>Les notifications ne peuvent être activées / désactivées que par toi via le navigateur</i>
           <MyBet />
         </>
       )
