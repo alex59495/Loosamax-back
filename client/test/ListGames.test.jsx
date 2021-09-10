@@ -8,6 +8,7 @@ import { BrowserRouter } from 'react-router-dom';
 import {games} from './data/games';
 import {fetchGames as mockFetchGames } from '../src/actions/gamesActions';
 import { storeFactory, findByTestAttr } from './testUtils';
+
 // activate global mock to make sure actions dont make network call
 jest.mock('../src/actions/gamesActions');
 

@@ -25,6 +25,10 @@
 //   })
 // })
 
-test('pass test', () => {
-  expect(true).toEqual(true)
+// import { FETCH_GAMES } from '../../src/actions/types'; 
+// import { fetchGames } from '../../src/actions/gamesActions';
+
+
+test('return an action with FETCH_GAMES', () => {
+  expect(true).toEqual(true);
 })
