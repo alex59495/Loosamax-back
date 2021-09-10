@@ -10,6 +10,13 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+    - name: Setup secrets
+      env:
+        COOKIE_KEY: ${{ secrets.COOKIE_KEY }}
+        GOOGLE_CLIENT_ID: ${{ secrets.GOOGLE_CLIENT_ID }}
+        GOOGLE_CLIENT_SECRET: ${{ secrets.GOOGLE_CLIENT_SECRET }}
+        PRIVATE_VAPID: ${{ secrets.PRIVATE_VAPID }}
+        PUBLIC_VAPID: ${{ secrets.PUBLIC_VAPID }}
     - uses: actions/checkout@v2
     - name: Use Node.js
       uses: actions/setup-node@v2
