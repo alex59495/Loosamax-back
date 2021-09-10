@@ -11,7 +11,7 @@
     "inst-all": "yarn install && yarn --cwd client install",
     "client-build": "yarn --cwd client build",
     "heroku-postbuild": "YARN_PRODUCTION=false yarn inst-all && yarn client-build",
-    "test": "yarn jest && yarn --cwd client jest"
+    "test": "yarn jest --detectOpenHandles && yarn --cwd client jest"
   },
   "license": "MIT",
   "dependencies": {
