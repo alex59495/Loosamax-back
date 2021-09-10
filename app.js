@@ -1,10 +1,4 @@
 const express = require('express');
-const keys = require('./config/keys')
-// const Queue = require('bull');
-
-const webpush = require('web-push');
-
-webpush.setVapidDetails('mailto:maxence.lenoir1206@gmail.com', keys.publicVapid, keys.privateVapid);
 
 // models
 require('./models/User');

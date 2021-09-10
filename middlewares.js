@@ -3,10 +3,14 @@ const passport = require('passport');
 const flash = require('connect-flash');
 const express = require('express');
 const device = require('express-device');
+// const Queue = require('bull');
 
 const keys = require('./config/keys');
 
 module.exports = (app) => {
+  const webpush = require('web-push');
+
+  webpush.setVapidDetails('mailto:maxence.lenoir1206@gmail.com', keys.publicVapid, keys.privateVapid);
 
   app.set('view engine', 'ejs');
   app.set('view options', { layout: false });
