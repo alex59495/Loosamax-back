@@ -5,12 +5,12 @@ const leaguesIdentifiers = require('../helpers/leaguesIdentifiers')
 const noGamesInWeekEnd = async (leagueName) => {
   // On ne retourne pas de games si on est Samedi / Dimanche ou Lundi
   switch (new Date().getDay()) {
-    case 6:
-    case 7:
+    // case 6:
+    // case 7:
     case 1:
       return []
     default:
-      return await Game.find({sport_key: leagueName})
+      return await Game.find({sport_key: leagueName, result: null})
   }
 }
 
