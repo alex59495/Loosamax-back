@@ -31,14 +31,16 @@ const WeeklyBets = ({users, fetchUsers}) => {
   })
 
   const renderUsers = users.map(user => {
-    if(user.bets.some(bet => !bet.game.result) && !isWeekend) {
-      return(
-        <div key={user._id} className="card-bet green"><FontAwesomeIcon icon={faCheck} className='mr-1' />{user.pseudo}</div>
-      )
-    } else {
-      return(
-        <div key={user._id} className="card-bet red" ><FontAwesomeIcon icon={faTimes} className='mr-1'/>{user.pseudo}</div>
-      )
+    if(!isWeekend) {
+      if(user.bets.some(bet => !bet.game.result)) {
+        return(
+          <div key={user._id} className="card-bet green"><FontAwesomeIcon icon={faCheck} className='mr-1' />{user.pseudo}</div>
+        )
+      } else {
+        return(
+          <div key={user._id} className="card-bet red" ><FontAwesomeIcon icon={faTimes} className='mr-1'/>{user.pseudo}</div>
+        )
+      }
     }
   })
 
