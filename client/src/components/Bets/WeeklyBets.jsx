@@ -22,10 +22,13 @@ const WeeklyBets = ({users, fetchUsers}) => {
       return () => { isMounted = false };
   }, [])
 
-  const betsWeek = users.map(user => ({
-    bet: user.bets.find(bet => !bet.game.result),
-    user: user
-  }))
+
+  const betsWeek = users.map(user => {
+    return {
+      bet: [0,1,6].includes(new Date().getDay()) ? user.bets[user.bets.length - 1] : user.bets.find(bet => !bet.game.result),
+      user: user
+    }
+  })
 
   const renderUsers = users.map(user => {
     if(user.bets.some(bet => !bet.game.result)) {
