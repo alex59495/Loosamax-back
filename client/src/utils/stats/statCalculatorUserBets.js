@@ -1,10 +1,12 @@
-import StatCalculator from "./statCalculator"
+import StatCalculator from "./statCalculator";
+
+import { isWeekend } from "../isWeekend";
 
 export default class StatCalculatorUserBets extends StatCalculator {
   constructor({ userBets }) {
     super()
     this.bets = userBets.filter(bet => bet.game.result)
-    this.currentBet = [0,1,6].includes(new Date().getDay()) ? userBets[userBets.length - 1] : userBets.find(bet => !bet.game.result)
+    this.currentBet = isWeekend ? userBets[userBets.length - 1] : userBets.find(bet => !bet.game.result)
   }
 
   get numberBets() { return this.bets.length }

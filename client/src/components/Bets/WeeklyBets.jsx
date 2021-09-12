@@ -5,7 +5,7 @@ import { faCheck, faTimes } from '@fortawesome/free-solid-svg-icons';
 import Loader from "react-loader-spinner";
 
 import {fetchUsers} from '../../actions/userActions';
-
+import {isWeekend} from '../../utils/isWeekend';
 
 import BetPreview from './BetPreview';
 
@@ -25,13 +25,13 @@ const WeeklyBets = ({users, fetchUsers}) => {
 
   const betsWeek = users.map(user => {
     return {
-      bet: [0,1,6].includes(new Date().getDay()) ? user.bets[user.bets.length - 1] : user.bets.find(bet => !bet.game.result),
+      bet: isWeekend ? user.bets[user.bets.length - 1] : user.bets.find(bet => !bet.game.result),
       user: user
     }
   })
 
   const renderUsers = users.map(user => {
-    if(user.bets.some(bet => !bet.game.result)) {
+    if(user.bets.some(bet => !bet.game.result) && !isWeekend) {
       return(
         <div key={user._id} className="card-bet green"><FontAwesomeIcon icon={faCheck} className='mr-1' />{user.pseudo}</div>
       )
