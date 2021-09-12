@@ -51,7 +51,7 @@ const WeeklyBets = ({users, fetchUsers}) => {
       return(
         <React.Fragment key={user._id}>
           <h3>{user.pseudo}</h3>
-          <div>Il n'a pas encore fait son pari, ce feignant !</div>
+          <div className="text-comment">Il n'a pas encore fait son pari, ce feignant !</div>
         </React.Fragment>
       )
     }
@@ -60,7 +60,7 @@ const WeeklyBets = ({users, fetchUsers}) => {
   const renderWeekBets = () => {
     if(isLoading) {
       return (
-        <div className="container-center" style={{height: "100vh", width: "100%"}}>
+        <div className="container-center margin-auto">
           <Loader
             type="BallTriangle"
             color="#00BFFF"
@@ -83,7 +83,7 @@ const WeeklyBets = ({users, fetchUsers}) => {
 
 
   return (
-    <div className="container-center">
+    <div className="container-center inherit-min-height">
       <h1>Les paris de la semaine</h1>
       {renderWeekBets()}
     </div>

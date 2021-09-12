@@ -1,15 +1,22 @@
 const express = require('express');
+const secure = require('ssl-express-www');
 const mongoose = require('mongoose');
 const keys = require('./config/keys');
 const cookieSession = require('cookie-session');
 const passport = require('passport');
+const device = require('express-device');
 const flash = require('connect-flash');
 const Queue = require('bull');
+
+const webpush = require('web-push');
+
+webpush.setVapidDetails('mailto:maxence.lenoir1206@gmail.com', keys.publicVapid, keys.privateVapid);
 
 // models
 require('./models/User');
 require('./models/Game');
 require('./models/Bet');
+require('./models/Subscription');
 
 // service
 require('./services/passport');
@@ -25,9 +32,16 @@ app.use(
     keys: [keys.cookieKey]
   })
 );
+app.use(secure);
 app.use(flash());
 app.use(passport.initialize());
 app.use(passport.session());
+ 
+app.set('view engine', 'ejs');
+app.set('view options', { layout: false });
+app.set('views', __dirname + '/views');
+ 
+app.use(device.capture());
 
 // Connect DB
 mongoose.connect(keys.mongoURI,  {
@@ -40,6 +54,7 @@ mongoose.connect(keys.mongoURI,  {
 require('./routes/userRoutes')(app);
 require('./routes/gamesRoutes')(app);
 require('./routes/betRoutes')(app);
+require('./routes/subscribeRoutes')(app);
 
 const myJobQueue = new Queue('myJob', keys.redisUrl );
 

@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const { Schema } = mongoose;
 
 const BetSchema = require('./Bet');
-
+const SubscriptionSchema = require('./Subscription');
 
 const userSchema = new Schema({
   googleId: String,
@@ -12,7 +12,8 @@ const userSchema = new Schema({
     default: "LooserMax"
   },
   color: String,
-  bets: [BetSchema]
+  bets: [BetSchema],
+  subscriptions: [SubscriptionSchema],
 },{ timestamps: true });
 
 mongoose.model('users', userSchema);

@@ -1,7 +1,3 @@
-.action {
-  cursor: pointer;
-}
-
 .btn-risky {
   background-color: $risky;
   color: white;
@@ -16,25 +12,18 @@
 
 .btn-orange {
   background-color: $orange;
-  border-radius: 4px;
   cursor: pointer;
+  border-radius: 4px;
   padding: 4px;
-  color: white;
+  box-shadow: 10px 15px 15px rgba(0, 0, 0, 0.1);
   &:hover {
     transition: 0.5s;
     background-color: $intermediate
   }
 }
 
-.btn-orange-large {
-  font-size: 28px;
-  background-color: $orange;
-  border-radius: 4px;
-  cursor: pointer;
-  padding: 4px;
-  &:hover {
-    transition: 0.5s;
-    background-color: $intermediate
-  }
+.btn-large {
+  font-size: 22px;
+  padding: 10px;
 }
 

@@ -7,15 +7,25 @@ const UserStats = ({user}) => {
 
   const statCalculatorUserBets = new StatCalculatorUserBets({userBets: user.bets})
 
-  const colorResult = (result) => {
+  const colorResultPourcentage = (result) => {
     if(result < 33) { return 'risky' }
     if(result < 66) { return 'intermediate' }
     return 'safe'
   }
 
+  const colorResultEarning = (result) => {
+    if(result < 0 ) { return 'risky' }
+    if(result > 0) { return 'safe' }
+    return 'intermediate'
+  }
+
+  const winPoucentage = statCalculatorUserBets.winPourcentage
+
+  const globalEarning = statCalculatorUserBets.globalEarning
+
   const renderStats = (bets) => {
 
-    if (bets.length > 0) {
+    if (statCalculatorUserBets.bets.length > 0) {
       return (
         <>
           <div className="d-flex justify-content-center">
@@ -29,7 +39,7 @@ const UserStats = ({user}) => {
             </div>
             <div className="card-stat">
               <div className="title">Pourcentage Gagné</div>
-              <div className={`content ${colorResult(statCalculatorUserBets.winPourcentage)}`}>{statCalculatorUserBets.winPourcentage}%</div>
+              <div className={`content ${colorResultPourcentage(winPoucentage)}`}>{winPoucentage}%</div>
             </div>
             <div className="card-stat">
               <div className="title">Moyenne côte réussie</div>
@@ -44,14 +54,15 @@ const UserStats = ({user}) => {
               <div className="content">{statCalculatorUserBets.averageOdd}</div>
             </div>
             <div className="card-stat">
-              <div className="title">Somme des gains</div>
-              <div className="content">{statCalculatorUserBets.sumEarnings}</div>
+              <div className="title">Gain global</div>
+              <div className={`content ${colorResultEarning(globalEarning)}`}>{globalEarning}€</div>
             </div>
+
           </div>
         </>
       )
     } else {
-      return <p className="container-center">Pas encore de paris...</p>
+      return <p className="text-comment">Pas encore de paris...</p>
     }
   }
 
