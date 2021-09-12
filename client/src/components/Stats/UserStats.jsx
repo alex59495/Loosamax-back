@@ -20,12 +20,12 @@ const UserStats = ({user}) => {
         <>
           <div className="d-flex justify-content-center">
             <div className="card-stat">
-              <div className="title">Perdu</div>
-              <div className="content">{statCalculatorUserBets.numberLoose}</div>
-            </div>
-            <div className="card-stat">
               <div className="title">Gagné</div>
               <div className="content">{statCalculatorUserBets.numberWin}</div>
+            </div>
+            <div className="card-stat">
+              <div className="title">Perdu</div>
+              <div className="content">{statCalculatorUserBets.numberLoose}</div>
             </div>
             <div className="card-stat">
               <div className="title">Pourcentage Gagné</div>

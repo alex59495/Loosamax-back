@@ -9,6 +9,9 @@ import BetPreview from '../Bets/BetPreview'
 
 const MyBet = ({user, deleteBet}) => {
   const actualBet = (user) => {
+    if([0,1,6].includes(new Date().getDay())) {
+      return user.bets[-1]
+    }
     if (Object.keys(user).length > 0) {
       return user.bets.find((bet) => bet.game.result === null )
     }

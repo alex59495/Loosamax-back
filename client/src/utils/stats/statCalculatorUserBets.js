@@ -28,7 +28,7 @@ export default class StatCalculatorUserBets extends StatCalculator {
     return sum + this.betOdd(bet)
   }, 0) / this.numberBets).toFixed(2) }
   
-  get winPourcentage() { return (this.numberWin / this.numberBets)*100 }
+  get winPourcentage() { return Math.round((this.numberWin / this.numberBets)*100) }
   
   get sumEarnings() { return (this.bets.reduce((sum, bet) => {
     if (bet.game.result === bet.choice) {
