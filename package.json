@@ -11,7 +11,8 @@
     "inst-all": "yarn install && yarn --cwd client install",
     "client-build": "yarn --cwd client build",
     "heroku-postbuild": "YARN_PRODUCTION=false yarn inst-all && yarn client-build",
-    "test": "yarn --cwd client jest"
+    "test": "yarn --cwd client jest",
+    "console": "node --experimental-repl-await ./console.js"
   },
   "license": "MIT",
   "dependencies": {

@@ -6,7 +6,7 @@ const mongoose = require('mongoose');
 require('../models/Game');
 
 const Game = mongoose.model('games');
-module.exports = class fetchOddService {
+module.exports = class FetchOddService {
 
   constructor(league) {
     this.league = league
