@@ -7,6 +7,7 @@ import { fetchGames } from '../../actions/gamesActions';
 
 import BetPreview from '../Bets/BetPreview';
 import { snakeToCamel, capitalize } from '../../utils/textTransformation';
+import { isWeekend } from '../../utils/isWeekend';
 
 const ListGames = ({league ,fetchGames, games}) => {
   const [isLoading, setIsLoading] = useState(true)
@@ -25,8 +26,8 @@ const ListGames = ({league ,fetchGames, games}) => {
     }
 
     if(games[league].length === 0) {
-      if ([6,7,1].includes(new Date().getDay())) {
-        return <p className="text-comment">Alors comme ça on veut parier les week-end ? On aime pas les faillots ici, va falloir attendre.</p>
+      if (isWeekend()) {
+        return <p className="text-comment">Alors comme ça on veut parier les week-end (oui, Lundi c'est we aussi !) ? On aime pas les faillots ici, va falloir attendre.</p>
       }
       return <p className="text-comment">Pas encore de paris disponibles pour cette ligue jeune impétueux. Il va falloir patienter</p>
     }

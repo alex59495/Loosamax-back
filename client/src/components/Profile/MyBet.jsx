@@ -5,7 +5,8 @@ import {Link} from 'react-router-dom';
 
 // redux actions
 import * as actions from '../../actions/betActions';
-import BetPreview from '../Bets/BetPreview'
+import BetPreview from '../Bets/BetPreview';
+import { isWeekend } from '../../utils/isWeekend';
 
 import StatCalculatorUserBets from '../../utils/stats/statCalculatorUserBets';
 
@@ -36,7 +37,7 @@ const MyBet = ({user, deleteBet}) => {
       return (
         <div className="container-center">
           <BetPreview bet={statCalculatorUserBets.currentBet} game={statCalculatorUserBets.currentBet.game}/>
-          <button className="btn-risky" onClick={() => deleteBet(statCalculatorUserBets.currentBet._id)}>Supprimer</button>
+          {!isWeekend() ? <button className="btn-risky" onClick={() => deleteBet(statCalculatorUserBets.currentBet._id)}>Supprimer</button> : null}
         </div>
       )
     }
