@@ -9,7 +9,7 @@ const noGamesInWeekEnd = async (leagueName) => {
     case 1:
       return []
     default:
-      return await Game.find({sport_key: leagueName})
+      return await Game.find({sport_key: leagueName, result: null})
   }
 }
 
