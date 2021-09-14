@@ -9,6 +9,8 @@ import {isWeekend} from '../../utils/isWeekend';
 
 import BetPreview from './BetPreview';
 
+import StatCalculatorUserBets from '../../utils/stats/statCalculatorUserBets';
+
 const WeeklyBets = ({users, fetchUsers}) => {
   const [isLoading, setIsLoading] = useState(true)
 
@@ -24,14 +26,15 @@ const WeeklyBets = ({users, fetchUsers}) => {
 
 
   const betsWeek = users.map(user => {
+    const statCalculatorUserBets = new StatCalculatorUserBets({userBets: user.bets})
     return {
-      bet: isWeekend ? user.bets[user.bets.length - 1] : user.bets.find(bet => !bet.game.result),
+      bet: statCalculatorUserBets.currentBet,
       user: user
     }
   })
 
   const renderUsers = users.map(user => {
-    if(!isWeekend) {
+    if(!isWeekend()) {
       if(user.bets.some(bet => !bet.game.result)) {
         return(
           <div key={user._id} className="card-bet green"><FontAwesomeIcon icon={faCheck} className='mr-1' />{user.pseudo}</div>

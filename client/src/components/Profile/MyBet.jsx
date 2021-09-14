@@ -37,7 +37,7 @@ const MyBet = ({user, deleteBet}) => {
       return (
         <div className="container-center">
           <BetPreview bet={statCalculatorUserBets.currentBet} game={statCalculatorUserBets.currentBet.game}/>
-          {!isWeekend ? <button className="btn-risky" onClick={() => deleteBet(statCalculatorUserBets.currentBet._id)}>Supprimer</button> : null}
+          {!isWeekend() ? <button className="btn-risky" onClick={() => deleteBet(statCalculatorUserBets.currentBet._id)}>Supprimer</button> : null}
         </div>
       )
     }

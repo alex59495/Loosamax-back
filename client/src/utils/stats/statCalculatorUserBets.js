@@ -6,7 +6,15 @@ export default class StatCalculatorUserBets extends StatCalculator {
   constructor({ userBets }) {
     super()
     this.bets = userBets.filter(bet => bet.game.result)
-    this.currentBet = isWeekend ? userBets[userBets.length - 1] : userBets.find(bet => !bet.game.result)
+    let bet
+    if(isWeekend()) {
+      bet = userBets[userBets.length - 1]
+    } else if(userBets.some(bet => !bet.game.result)) {
+      bet = userBets.find(bet => !bet.game.result)
+    } else {
+      bet = null
+    }
+    this.currentBet = bet
   }
 
   get numberBets() { return this.bets.length }
