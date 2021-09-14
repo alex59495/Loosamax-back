@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const ObjectId = mongoose.Types.ObjectId;
 
-const Bet = require('../models/Bet');
+const {betModel} = require('../models/Bet');
 const User = require('../models/User');
 
 const createBets = async (req, res) => {
@@ -29,7 +29,8 @@ const createBets = async (req, res) => {
     } else if(actualBet) {
       res.status(200).send({res: 'You already have a bet'})
     } else {
-      const bet = await new Bet({
+
+      const bet = await new betModel({
         choice,
         game: game_id
       })

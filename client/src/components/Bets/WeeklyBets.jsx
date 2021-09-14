@@ -59,7 +59,7 @@ const WeeklyBets = ({users, fetchUsers}) => {
       return(
         <React.Fragment key={user._id}>
           <h3>{user.pseudo}</h3>
-          <div className="text-comment">Il n'a pas encore fait son pari, ce feignant !</div>
+          <div className="text-comment text-center">Il n'a pas encore fait son pari, ce feignant !</div>
         </React.Fragment>
       )
     }

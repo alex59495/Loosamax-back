@@ -6,4 +6,7 @@ const betSchema = new Schema({
   choice: {type: String, required: true},
 });
 
-mongoose.model('bets', betSchema);
+module.exports = {
+  betSchema,
+  betModel: mongoose.model('bets', betSchema)
+}

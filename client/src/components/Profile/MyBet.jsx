@@ -29,7 +29,7 @@ const MyBet = ({user, deleteBet}) => {
     } else if(!statCalculatorUserBets.currentBet)  {
       return (
         <>
-          <div className="text-comment">Pas de match pour le moment, gros feignant !</div>
+          <div className="text-comment text-center">Pas de match pour le moment, gros feignant !</div>
           <Link className='btn-risky mt-1' to='/leagues'>Voir les paris disponibles</Link>
         </>
       )
