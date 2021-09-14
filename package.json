@@ -3,18 +3,19 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js",
-    "server": "nodemon --delay 1500ms index.js",
+    "start": "node server.js",
+    "server": "nodemon --delay 1500ms server.js",
     "client": "yarn --cwd client start",
     "dev": "concurrently \"yarn run server\" \"yarn run client\" ",
     "client-install": "yarn --cwd client install",
     "inst-all": "yarn install && yarn --cwd client install",
     "client-build": "yarn --cwd client build",
     "heroku-postbuild": "YARN_PRODUCTION=false yarn inst-all && yarn client-build",
-    "test": "yarn --cwd client jest"
+    "test": "yarn jest --detectOpenHandles && yarn --cwd client jest"
   },
   "license": "MIT",
   "dependencies": {
+    "@tsed/testing-mongoose": "^6.67.0",
     "axios": "^0.21.2",
     "body-parser": "^1.19.0",
     "bull": "^3.29.1",
@@ -22,6 +23,8 @@
     "connect-flash": "^0.1.1",
     "cookie-session": "^1.4.0",
     "express": "^4.17.1",
+    "jest": "26.6.0",
+    "mongodb-memory-server": "^7.4.0",
     "express-device": "^0.4.2",
     "mongoose": "^6.0.2",
     "nodemon": "^2.0.12",
@@ -29,7 +32,21 @@
     "passport-google-oauth20": "^2.0.0",
     "react-redux": "^7.2.4",
     "redux": "^4.1.1",
+    "supertest": "^6.1.6",
     "ssl-express-www": "^3.0.8",
     "web-push": "^3.4.5"
+  },
+  "jest": {
+    "testEnvironment": "node",
+    "coveragePathIgnorePatterns": [
+      "/node_modules/"
+    ],
+    "modulePathIgnorePatterns": [
+      "client"
+    ],
+    "preset": "@shelf/jest-mongodb"
+  },
+  "devDependencies": {
+    "@shelf/jest-mongodb": "^2.0.3"
   }
 }

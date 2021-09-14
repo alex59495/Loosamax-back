@@ -9,7 +9,7 @@ import BetPreview from '../Bets/BetPreview';
 import { snakeToCamel, capitalize } from '../../utils/textTransformation';
 import { isWeekend } from '../../utils/isWeekend';
 
-const ListGames = ({league ,fetchGames, games}) => {
+const ListGames = ({league , fetchGames, games}) => {
   const [isLoading, setIsLoading] = useState(true)
 
   useEffect(() => {
@@ -34,7 +34,8 @@ const ListGames = ({league ,fetchGames, games}) => {
 
     return games[league].map(game => {
       return (
-        <BetPreview key={game._id} game={game} />)
+          <BetPreview key={game._id} game={game} />
+      )
     })
   }
 
@@ -64,13 +65,13 @@ const ListGames = ({league ,fetchGames, games}) => {
   
 
   return (
-    <>
+    <div data-test="list-games">
       <div className="link">
         <Link to="/leagues">Revenir aux ligues</Link>
       </div>
       <h1 className="text-center">{capitalize(snakeToCamel(league))}</h1>
       {renderListGames()}
-    </>
+    </div>
   )
 }
 

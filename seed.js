@@ -3,6 +3,7 @@ require('./models/User');
 require('./models/Game');
 require('./models/Bet');
 const mongoose = require("mongoose");
+const Subscribe = mongoose.model('subscribes');
 const User = mongoose.model('users');
 const Game = mongoose.model('games');
 const Bet = mongoose.model('bets');
@@ -19,6 +20,7 @@ const dbSeed = async () => {
 
   // Delete existing data
 
+  await Subscribe.deleteMany({})
   await User.deleteMany({})
   await Bet.deleteMany({})
   await Game.deleteMany({})
@@ -57,7 +59,7 @@ const dbSeed = async () => {
     draw_odd: 2.12,
     away_odd: 1.84,
     result: "N",
-    home_score: 2,
+    home_score: 1,
     away_score: 1
   })
 

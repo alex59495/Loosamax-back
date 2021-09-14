@@ -4,7 +4,6 @@ const mongoose = require('mongoose');
 const keys = require('./config/keys');
 const cookieSession = require('cookie-session');
 const passport = require('passport');
-const device = require('express-device');
 const flash = require('connect-flash');
 const Queue = require('bull');
 
@@ -36,12 +35,6 @@ app.use(secure);
 app.use(flash());
 app.use(passport.initialize());
 app.use(passport.session());
- 
-app.set('view engine', 'ejs');
-app.set('view options', { layout: false });
-app.set('views', __dirname + '/views');
- 
-app.use(device.capture());
 
 // Connect DB
 mongoose.connect(keys.mongoURI,  {

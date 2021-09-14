@@ -16,4 +16,4 @@ const userSchema = new Schema({
   subscriptions: [SubscriptionSchema],
 },{ timestamps: true });
 
-mongoose.model('users', userSchema);
+module.exports = mongoose.model('users', userSchema);

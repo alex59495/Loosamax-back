@@ -1,5 +1,4 @@
-const mongoose = require('mongoose');
-const Game = mongoose.model('games');
+const Game = require('../models/Game');
 const leaguesIdentifiers = require('../helpers/leaguesIdentifiers')
 
 const noGamesInWeekEnd = async (leagueName) => {
