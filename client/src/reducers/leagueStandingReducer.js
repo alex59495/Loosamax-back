@@ -1,11 +1,12 @@
-import { FETCH_STANDING, CLEAN_STANDING } from '../actions/types';
+import { FETCH_STANDING } from '../actions/types';
 
-export default function leagueStandingReducer(state = [], action) {
+export default function leagueStandingReducer(state = {}, action) {
   switch(action.type) {
     case FETCH_STANDING:
-      return [...action.payload]
-    case CLEAN_STANDING:
-        return []
+      return {
+        ...state,
+        ...action.payload
+      }
     default:
       return state;
   }

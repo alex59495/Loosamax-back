@@ -12,50 +12,33 @@ export default class StatCalculatorUsers extends StatCalculator {
 
   getUserLastResult() { 
     return this.users.map(user => {
-      const gameWithResults = user.bets.filter(bet => bet.game.result)
-      const lastBet = gameWithResults[gameWithResults.length - 1]
-      
-      let oddWin
-      let oddLoose
-      if(lastBet && lastBet.choice === lastBet.game.result) {
-        switch(lastBet.choice) {
-          case "1":
-            oddWin = lastBet.game.home_odd;
-            break;
-          case "2":
-            oddWin = lastBet.game.away_odd;
-            break;
-          default:
-            oddWin = lastBet.game.draw_odd;
-        }
-      } else if(lastBet && lastBet.choice !== lastBet.game.result) {
-        switch(lastBet.choice) {
-          case "1":
-            oddLoose = lastBet.game.home_odd;
-            break;
-          case "2":
-            oddLoose = lastBet.game.away_odd;
-            break;
-          default:
-            oddLoose = lastBet.game.draw_odd;
-        }
-      }
+      const stats = new StatCalculatorUserBets({userBets: user.bets})
       return {
         pseudo: user.pseudo,
-        oddWin,
-        oddLoose,
+        oddWin: stats.lastBetWinOdd,
+        oddLoose: stats.lastBetLooseOdd,
       }
     })
   }
 
   get bestUserLastWeek() {
-    const lastResults = this.getUserLastResult();
-    return(lastResults.sort((a, b) => b.oddWin - a.oddWin)[0])
+    const userLastResults = this.getUserLastResult();
+    const user = userLastResults.sort((a, b) => b.oddWin - a.oddWin)[0]
+    return user ? user : null
   }
 
+  // Perd avec la plus faible cote
   get worstUserLastWeek() {
-    const lastResults = this.getUserLastResult();
-    return(lastResults.sort((a, b) => b.oddLoose - a.oddLoose)[0])
+    const userLastResults = this.getUserLastResult();
+    const user = userLastResults.filter(user => user.oddLoose).sort((a, b) => a.oddLoose - b.oddLoose)[0]
+    return user ? user : null
+  }
+
+// Perd avec la plus haute cote cote
+  get worstUserHigestBetLastWeek() {
+    const userLastResults = this.getUserLastResult();
+    const user = userLastResults.sort((a, b) => b.oddLoose - a.oddLoose)[0]
+    return user ? user : null
   }
 
   get usersPseudo() { return this.users.map(user => user.pseudo) }

@@ -4,7 +4,7 @@ import Loader from "react-loader-spinner";
 import { Link } from 'react-router-dom';
 
 import { fetchGames } from '../../actions/gamesActions';
-import { fetchStanding, cleanStanding } from '../../actions/leagueStandingAction';
+import { fetchStanding } from '../../actions/leagueStandingAction';
 
 import BetPreview from '../Bets/BetPreview';
 import LeagueStandings from '../Standings/LeagueStandings';
@@ -13,19 +13,18 @@ import { snakeToCamel, capitalize } from '../../utils/textTransformation';
 import { isWeekend } from '../../utils/isWeekend';
 import leaguesIdentifiers from 'helpers/leaguesIdentifiers';
 
-const ListGames = ({league, leagueStanding, fetchGames, fetchStanding, cleanStanding, games}) => {
+const ListGames = ({league, leagueStanding, fetchGames, fetchStanding, games}) => {
   const [isLoading, setIsLoading] = useState(true)
+
+  const leagueAlias = leaguesIdentifiers[league].alias
 
   useEffect(() => {
     async function fetchAsync() {    
       await fetchGames(league)
-      await fetchStanding(leaguesIdentifiers[league].alias)
+      await fetchStanding(leagueAlias)
       setIsLoading(false)
     }
     fetchAsync()
-    return () => {
-      cleanStanding()
-    }
   }, [])
 
   const renderGames = () => {
@@ -78,18 +77,17 @@ const ListGames = ({league, leagueStanding, fetchGames, fetchStanding, cleanStan
         <Link to="/leagues">Revenir aux ligues</Link>
       </div>
       <h1 className="text-center">{capitalize(snakeToCamel(league))}</h1>
-      <LeagueStandings leagueStanding={leagueStanding} />
       {renderListGames()}
+      <LeagueStandings leagueStanding={leagueStanding[leagueAlias]} />
     </div>
   )
 }
 
-const mapStateToProps = ({games, leagueStanding, cleanStanding}) => {
+const mapStateToProps = ({games, leagueStanding}) => {
   return {
     games,
     leagueStanding,
-    cleanStanding
   }
 }
 
-export default connect(mapStateToProps, { fetchGames, fetchStanding, cleanStanding })(ListGames);
+export default connect(mapStateToProps, { fetchGames, fetchStanding })(ListGames);

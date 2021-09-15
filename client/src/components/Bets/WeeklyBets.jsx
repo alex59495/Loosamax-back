@@ -37,9 +37,18 @@ const WeeklyBets = ({users, fetchUsers}) => {
   const renderWorstUser = () => {
     const worstUser = new StatCalculatorUsers({users: users}).worstUserLastWeek
     if(worstUser) {
-      return <><b>{worstUser.pseudo}</b>, sérieusement, rater une côte à <b>{worstUser.oddWin}</b> ? En vrai c'était pas si simple, bien joué l'artiste.</>
+      return <><b>{worstUser.pseudo}</b>, sérieusement, rater une côte à <b>{worstUser.oddLoose}</b> ? En vrai c'était pas si simple, bien joué l'artiste.</>
     } else {
-      return <>Pas de looser par ici, ça fait péter la banque</> 
+      return <>Pas de looser par ici, ça fait péter la banque !</> 
+    }
+  }
+
+  const renderWorstUserHigestBetLastWeek = () => {
+    const worstUserHigestBetLastWeek = new StatCalculatorUsers({users: users}).worstUserHigestBetLastWeek
+    if(worstUserHigestBetLastWeek) {
+      return <>Bah bravo, <b>{worstUserHigestBetLastWeek.pseudo}</b> on fait perdre les copains avec une côte trop ambitieuse à <b>{worstUserHigestBetLastWeek.oddLoose}</b>. Ca sent la banqueroute !</>
+    } else {
+      return <>Pas de looser par ici, ça fait péter la banque !</> 
     }
   }
 
@@ -47,13 +56,17 @@ const WeeklyBets = ({users, fetchUsers}) => {
 
     return (
       <>
-        <div className="text-center card-bet">
+        <div className="text-center card-resume-stats">
           <p className="mb-1"><b>🏆 Le champion de la semaine dernière</b></p>
           {renderBestUser()}
         </div>
-        <div className="text-center card-bet">
+        <div className="text-center card-resume-stats">
           <p className="mb-1"><b>⛔ Le zéro de la semaine de la semaine dernière</b></p>
           {renderWorstUser()}
+        </div>
+        <div className="text-center card-resume-stats">
+          <p className="mb-1"><b>💸 Le flambeur (raté) de la semaine dernière</b></p>
+          {renderWorstUserHigestBetLastWeek()}
         </div>
       </>
     )

@@ -1,25 +1,29 @@
 import React from 'react';
 
 const LeagueStanding = ({leagueStanding}) => {
-  const renderLeagueStanding = leagueStanding.map(data => {
-    return(
-      <tr key={data.position}>
-        <td className='text-center'>{data.position}.</td>
-        <td>{data.team.name}</td>
-        <td className='text-center'>{data.playedGames}</td>
-        <td className='text-center'>{data.won}</td>
-        <td className='text-center'>{data.draw}</td>
-        <td className='text-center'>{data.lost}</td>
-        <td className='text-center'>{data.points}</td>
-        <td className='text-center'>{data.goalsFor}</td>
-        <td className='text-center'>{data.goalsAgainst}</td>
-        <td className='text-center'>{data.goalDifference}</td>
-      </tr>
-    )
-  })
+  const renderLeagueStanding = () => {
+    if(leagueStanding) {
+      return leagueStanding.map(data => {
+        return(
+          <tr key={data.position}>
+            <td className='text-center'>{data.position}.</td>
+            <td>{data.team.name}</td>
+            <td className='text-center'>{data.playedGames}</td>
+            <td className='text-center'>{data.won}</td>
+            <td className='text-center'>{data.draw}</td>
+            <td className='text-center'>{data.lost}</td>
+            <td className='text-center'>{data.points}</td>
+            <td className='text-center'>{data.goalsFor}</td>
+            <td className='text-center'>{data.goalsAgainst}</td>
+            <td className='text-center'>{data.goalDifference}</td>
+          </tr>
+        )
+      })
+    }
+  }
 
   const renderElement = () => {
-    if(leagueStanding.length > 0) {
+    if(leagueStanding && leagueStanding.length > 0) {
       const lastTeam = leagueStanding[leagueStanding.length - 1].team.name
 
       return(
@@ -41,7 +45,7 @@ const LeagueStanding = ({leagueStanding}) => {
             </tr>
           </thead>
           <tbody>
-            {renderLeagueStanding}
+            {renderLeagueStanding()}
           </tbody>
         </table>
       </div>
