@@ -4,7 +4,7 @@ import Loader from "react-loader-spinner";
 import { Link } from 'react-router-dom';
 
 import { fetchGames } from '../../actions/gamesActions';
-import { fetchStanding } from '../../actions/leagueStandingAction';
+import { fetchStanding } from '../../actions/leaguesStandingsActions';
 
 import BetPreview from '../Bets/BetPreview';
 import LeagueStandings from '../Standings/LeagueStandings';
@@ -13,7 +13,7 @@ import { snakeToCamel, capitalize } from '../../utils/textTransformation';
 import { isWeekend } from '../../utils/isWeekend';
 import leaguesIdentifiers from 'helpers/leaguesIdentifiers';
 
-const ListGames = ({league, leagueStanding, fetchGames, fetchStanding, games}) => {
+const ListGames = ({league, leaguesStandings, fetchGames, fetchStanding, games}) => {
   const [isLoading, setIsLoading] = useState(true)
 
   const leagueAlias = leaguesIdentifiers[league].alias
@@ -78,15 +78,15 @@ const ListGames = ({league, leagueStanding, fetchGames, fetchStanding, games}) =
       </div>
       <h1 className="text-center">{capitalize(snakeToCamel(league))}</h1>
       {renderListGames()}
-      <LeagueStandings leagueStanding={leagueStanding[leagueAlias]} />
+      <LeagueStandings leagueStanding={leaguesStandings[leagueAlias]} />
     </div>
   )
 }
 
-const mapStateToProps = ({games, leagueStanding}) => {
+const mapStateToProps = ({games, leaguesStandings}) => {
   return {
     games,
-    leagueStanding,
+    leaguesStandings,
   }
 }
 
