@@ -2,8 +2,9 @@
 require('./models/User');
 require('./models/Game');
 require('./models/Bet');
+require('./models/Subscription');
 const mongoose = require("mongoose");
-const Subscribe = mongoose.model('subscribes');
+const Subscribe = mongoose.model('subscriptions');
 const User = mongoose.model('users');
 const Game = mongoose.model('games');
 const Bet = mongoose.model('bets');
