@@ -25,11 +25,22 @@ const GlobalStats = ({users, fetchUsers}) => {
       return () => { isMounted = false };
   }, [])
 
-  const renderStatPerUser = () => {
-    const usersSorted = users.sort((userA, userB) => {
-      return new StatCalculatorUserBets({userBets: userB.bets}).globalEarning - new StatCalculatorUserBets({userBets: userA.bets}).globalEarning 
-    }) 
+  const usersSorted = users.sort((userA, userB) => {
+    return new StatCalculatorUserBets({userBets: userB.bets}).globalEarning - new StatCalculatorUserBets({userBets: userA.bets}).globalEarning 
+  })
 
+  const renderRanking = () => {
+    return usersSorted.map((user, index) => {
+      return (
+        <tr key={user._id}>
+          <td>{index + 1}.</td>
+          <td>{user.pseudo}</td>
+        </tr>
+      )
+    })
+  }
+
+  const renderStatPerUser = () => {
     return usersSorted.map(user => {
       return (
         <UserStats key={user._id} user={user}/>
@@ -86,6 +97,17 @@ const GlobalStats = ({users, fetchUsers}) => {
   return (
     <div className="container-center inherit-min-height">
       <h1>Les Stats des champions</h1>
+      <table>
+        <thead>
+            <tr>
+                <th colSpan="2">Le classement</th>
+            </tr>
+        </thead>
+        <tbody>
+          {renderRanking()}
+        </tbody>
+      </table>
+      <h2>Les stats en détails</h2>
       {renderStats()}
     </div>
   )

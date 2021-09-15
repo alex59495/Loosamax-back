@@ -9,6 +9,7 @@ import {isWeekend} from '../../utils/isWeekend';
 
 import BetPreview from './BetPreview';
 
+import StatCalculatorUsers from '../../utils/stats/statCalculatorUsers';
 import StatCalculatorUserBets from '../../utils/stats/statCalculatorUserBets';
 
 const WeeklyBets = ({users, fetchUsers}) => {
@@ -24,7 +25,39 @@ const WeeklyBets = ({users, fetchUsers}) => {
       return () => { isMounted = false };
   }, [])
 
+  const renderBestUser = () => {
+    const bestUser = new StatCalculatorUsers({users: users}).bestUserLastWeek
+    if(bestUser) {
+      return <>Bravo <b>{bestUser.pseudo}</b> avec sa côte à <b>{bestUser.oddWin}</b> qui passe. #GrosseCote #GrosGain #GrosRespect comme on dit</>
+    } else {
+      return <>Franchement les gars ? Pas un seul capable de passer un paris ? Et ben cette app porte bien son nom !</> 
+    }
+  }
 
+  const renderWorstUser = () => {
+    const worstUser = new StatCalculatorUsers({users: users}).worstUserLastWeek
+    if(worstUser) {
+      return <><b>{worstUser.pseudo}</b>, sérieusement, rater une côte à <b>{worstUser.oddWin}</b> ? En vrai c'était pas si simple, bien joué l'artiste.</>
+    } else {
+      return <>Pas de looser par ici, ça fait péter la banque</> 
+    }
+  }
+
+  const statsLastWeek = () => {
+
+    return (
+      <>
+        <div className="text-center card-bet">
+          <p className="mb-1"><b>🏆 Le champion de la semaine dernière</b></p>
+          {renderBestUser()}
+        </div>
+        <div className="text-center card-bet">
+          <p className="mb-1"><b>⛔ Le zéro de la semaine de la semaine dernière</b></p>
+          {renderWorstUser()}
+        </div>
+      </>
+    )
+  }
   const betsWeek = users.map(user => {
     const statCalculatorUserBets = new StatCalculatorUserBets({userBets: user.bets})
     return {
@@ -80,6 +113,7 @@ const WeeklyBets = ({users, fetchUsers}) => {
     } else {
       return (
         <>
+          {!isWeekend() ? statsLastWeek() : null}
           <div className="d-flex">
             {renderUsers}
           </div>
