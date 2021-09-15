@@ -4,20 +4,28 @@ import Loader from "react-loader-spinner";
 import { Link } from 'react-router-dom';
 
 import { fetchGames } from '../../actions/gamesActions';
+import { fetchStanding, cleanStanding } from '../../actions/leagueStandingAction';
 
 import BetPreview from '../Bets/BetPreview';
+import LeagueStandings from '../Standings/LeagueStandings';
+
 import { snakeToCamel, capitalize } from '../../utils/textTransformation';
 import { isWeekend } from '../../utils/isWeekend';
+import leaguesIdentifiers from 'helpers/leaguesIdentifiers';
 
-const ListGames = ({league , fetchGames, games}) => {
+const ListGames = ({league, leagueStanding, fetchGames, fetchStanding, cleanStanding, games}) => {
   const [isLoading, setIsLoading] = useState(true)
 
   useEffect(() => {
     async function fetchAsync() {    
       await fetchGames(league)
+      await fetchStanding(leaguesIdentifiers[league].alias)
       setIsLoading(false)
     }
     fetchAsync()
+    return () => {
+      cleanStanding()
+    }
   }, [])
 
   const renderGames = () => {
@@ -70,15 +78,18 @@ const ListGames = ({league , fetchGames, games}) => {
         <Link to="/leagues">Revenir aux ligues</Link>
       </div>
       <h1 className="text-center">{capitalize(snakeToCamel(league))}</h1>
+      <LeagueStandings leagueStanding={leagueStanding} />
       {renderListGames()}
     </div>
   )
 }
 
-const mapStateToProps = ({games}) => {
+const mapStateToProps = ({games, leagueStanding, cleanStanding}) => {
   return {
-    games
+    games,
+    leagueStanding,
+    cleanStanding
   }
 }
 
-export default connect(mapStateToProps, { fetchGames })(ListGames);
+export default connect(mapStateToProps, { fetchGames, fetchStanding, cleanStanding })(ListGames);
