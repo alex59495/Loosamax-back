@@ -16,4 +16,9 @@ const userSchema = new Schema({
   subscriptions: [SubscriptionSchema],
 },{ timestamps: true });
 
+userSchema.methods.currentBet = function currentBet() {
+  const self = this;
+  return self.bets.find(bet => !bet.game.result)
+ };
+
 module.exports = mongoose.model('users', userSchema);

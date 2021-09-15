@@ -5,7 +5,6 @@ mongoose.connect(keys.mongoURI,  {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 });
-
 module.exports = class Job {
   static closeConnection() {
     mongoose.disconnect()

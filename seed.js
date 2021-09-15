@@ -107,7 +107,18 @@ const dbSeed = async () => {
     away_score: 2
   })
 
-  const games = [gameAlex, gameMax, gameAlexWin, gameMaxWin, gameAlexLoose, gameMaxLoose]
+  const otherGame = new Game({
+    _id: "7",
+    sport_key: "SportKey",
+    home_team: `homeTeam7`,
+    away_team: `awayTeam7`,
+    commence_time: new Date(),
+    home_odd: 2.34,
+    away_odd: 1.36,
+    draw_odd: 2.65
+  })
+
+  const games = [gameAlex, gameMax, gameAlexWin, gameMaxWin, gameAlexLoose, gameMaxLoose, otherGame]
 
   // Bets creation
 
