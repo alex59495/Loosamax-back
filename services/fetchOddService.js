@@ -1,12 +1,8 @@
 const axios = require('axios')
 const keys = require('../config/keys')
 
-const mongoose = require('mongoose');
-
-require('../models/Game');
-
-const Game = mongoose.model('games');
-module.exports = class FetchOddService {
+const Game = require('../models/Game');
+module.exports = class fetchOddService {
 
   constructor(league) {
     this.league = league

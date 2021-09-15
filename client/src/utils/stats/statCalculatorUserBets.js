@@ -1,10 +1,20 @@
-import StatCalculator from "./statCalculator"
+import StatCalculator from "./statCalculator";
+
+import { isWeekend } from "../isWeekend";
 
 export default class StatCalculatorUserBets extends StatCalculator {
   constructor({ userBets }) {
     super()
     this.bets = userBets.filter(bet => bet.game.result)
-    this.currentBet = userBets.find(bet => !bet.game.result)
+    let bet
+    if(isWeekend()) {
+      bet = userBets[userBets.length - 1]
+    } else if(userBets.some(bet => !bet.game.result)) {
+      bet = userBets.find(bet => !bet.game.result)
+    } else {
+      bet = null
+    }
+    this.currentBet = bet
   }
 
   get numberBets() { return this.bets.length }
@@ -29,7 +39,7 @@ export default class StatCalculatorUserBets extends StatCalculator {
     return sum + this.betOdd(bet)
   }, 0) / this.numberBets).toFixed(2) }
   
-  get winPourcentage() { return (this.numberWin / this.numberBets)*100 }
+  get winPourcentage() { return Math.round((this.numberWin / this.numberBets)*100) }
   
   get sumEarnings() { return (this.bets.reduce((sum, bet) => {
     if (bet.game.result === bet.choice) {

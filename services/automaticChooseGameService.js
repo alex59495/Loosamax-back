@@ -1,15 +1,6 @@
-const axios = require('axios')
-const keys = require('../config/keys')
-
-const mongoose = require('mongoose');
-
-require('../models/Game');
-require('../models/User');
-require('../models/Bet');
-
-const Game = mongoose.model('games');
-const User = mongoose.model('users');
-const Bet = mongoose.model('bets');
+const Game = require('../models/Game')
+const User = require('../models/User')
+const Bet = require('../models/Bet')
 module.exports = class AutomaticChooseGameService {
 
   call = async () => {

@@ -3,12 +3,7 @@ const keys = require('../config/keys')
 const leaguesIdentifiers = require('../helpers/leaguesIdentifiers')
 const teamNameStandard = require('../helpers/teamNameStandard')
 
-const mongoose = require('mongoose');
-
-require('../models/Game');
-
-const Game = mongoose.model('games');
-
+const Game = require('../models/Game');
 module.exports = class UpdateResultsService {
   
   constructor() {

@@ -5,9 +5,11 @@ import { faCheck, faTimes } from '@fortawesome/free-solid-svg-icons';
 import Loader from "react-loader-spinner";
 
 import {fetchUsers} from '../../actions/userActions';
-
+import {isWeekend} from '../../utils/isWeekend';
 
 import BetPreview from './BetPreview';
+
+import StatCalculatorUserBets from '../../utils/stats/statCalculatorUserBets';
 
 const WeeklyBets = ({users, fetchUsers}) => {
   const [isLoading, setIsLoading] = useState(true)
@@ -22,20 +24,26 @@ const WeeklyBets = ({users, fetchUsers}) => {
       return () => { isMounted = false };
   }, [])
 
-  const betsWeek = users.map(user => ({
-    bet: user.bets.find(bet => !bet.game.result),
-    user: user
-  }))
+
+  const betsWeek = users.map(user => {
+    const statCalculatorUserBets = new StatCalculatorUserBets({userBets: user.bets})
+    return {
+      bet: statCalculatorUserBets.currentBet,
+      user: user
+    }
+  })
 
   const renderUsers = users.map(user => {
-    if(user.bets.some(bet => !bet.game.result)) {
-      return(
-        <div key={user._id} className="card-bet green"><FontAwesomeIcon icon={faCheck} className='mr-1' />{user.pseudo}</div>
-      )
-    } else {
-      return(
-        <div key={user._id} className="card-bet red" ><FontAwesomeIcon icon={faTimes} className='mr-1'/>{user.pseudo}</div>
-      )
+    if(!isWeekend()) {
+      if(user.bets.some(bet => !bet.game.result)) {
+        return(
+          <div key={user._id} className="card-bet green"><FontAwesomeIcon icon={faCheck} className='mr-1' />{user.pseudo}</div>
+        )
+      } else {
+        return(
+          <div key={user._id} className="card-bet red" ><FontAwesomeIcon icon={faTimes} className='mr-1'/>{user.pseudo}</div>
+        )
+      }
     }
   })
 
@@ -51,7 +59,7 @@ const WeeklyBets = ({users, fetchUsers}) => {
       return(
         <React.Fragment key={user._id}>
           <h3>{user.pseudo}</h3>
-          <div className="text-comment">Il n'a pas encore fait son pari, ce feignant !</div>
+          <div className="text-comment text-center">Il n'a pas encore fait son pari, ce feignant !</div>
         </React.Fragment>
       )
     }

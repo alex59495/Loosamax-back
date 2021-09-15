@@ -30,7 +30,7 @@ const Header = ({user}) => {
 
     switch(user) {
       case false:
-        return <ul><li><a href="/auth/google">Se connecter avec Google</a></li></ul>
+        return <ul><li data-test='login'><a href="/auth/google">Se connecter avec Google</a></li></ul>
       default:
         return (
             <ul>
@@ -38,7 +38,7 @@ const Header = ({user}) => {
               <li><Link to='/stats'>Stats</Link></li>
               <li><Link to='/mesparis'>Mes Paris</Link></li>
               <li><Link to={`/profile/${user._id}`}>Mon profil</Link></li>
-              <li><a href="/api/logout">Déconnexion</a></li>
+              <li data-test='logout'><a href="/api/logout">Déconnexion</a></li>
             </ul>
         )
     }

@@ -1,12 +1,11 @@
-const mongoose = require('mongoose');
-const Game = mongoose.model('games');
+const Game = require('../models/Game');
 const leaguesIdentifiers = require('../helpers/leaguesIdentifiers')
 
 const noGamesInWeekEnd = async (leagueName) => {
   // On ne retourne pas de games si on est Samedi / Dimanche ou Lundi
   switch (new Date().getDay()) {
-    // case 6:
-    // case 7:
+    case 6:
+    case 7:
     case 1:
       return []
     default:

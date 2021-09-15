@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const { Schema } = mongoose;
 
-const BetSchema = require('./Bet');
+const {betSchema} = require('./Bet');
 const SubscriptionSchema = require('./Subscription');
 
 const userSchema = new Schema({
@@ -12,7 +12,7 @@ const userSchema = new Schema({
     default: "LooserMax"
   },
   color: String,
-  bets: [BetSchema],
+  bets: [betSchema],
   subscriptions: [SubscriptionSchema],
 },{ timestamps: true });
 
@@ -21,4 +21,4 @@ userSchema.methods.currentBet = function currentBet() {
   return self.bets.find(bet => !bet.game.result)
  };
 
-mongoose.model('users', userSchema);
+module.exports = mongoose.model('users', userSchema);
