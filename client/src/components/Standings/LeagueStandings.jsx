@@ -4,7 +4,7 @@ const LeagueStanding = ({leagueStanding}) => {
   const renderLeagueStanding = leagueStanding.map(data => {
     return(
       <tr key={data.position}>
-        <td className='text-center'>{data.position}</td>
+        <td className='text-center'>{data.position}.</td>
         <td>{data.team.name}</td>
         <td className='text-center'>{data.playedGames}</td>
         <td className='text-center'>{data.won}</td>
