@@ -11,4 +11,8 @@ export default class StatCalculator {
         return
     }
   }
+
+  betWinCondition = (bet) => {
+    return bet.game.result === bet.choice
+  }
 }
