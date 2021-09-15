@@ -113,6 +113,7 @@ const WeeklyBets = ({users, fetchUsers}) => {
     } else {
       return (
         <>
+          {!isWeekend() ? statsLastWeek() : null}
           <div className="d-flex">
             {renderUsers}
           </div>
@@ -126,7 +127,6 @@ const WeeklyBets = ({users, fetchUsers}) => {
   return (
     <div className="container-center inherit-min-height">
       <h1>Les paris de la semaine</h1>
-      {!isWeekend() ? statsLastWeek() : null}
       {renderWeekBets()}
     </div>
   )
