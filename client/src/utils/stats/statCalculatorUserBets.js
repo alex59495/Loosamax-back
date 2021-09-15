@@ -5,8 +5,8 @@ import { isWeekend } from "../isWeekend";
 export default class StatCalculatorUserBets extends StatCalculator {
   constructor({ userBets }) {
     super()
-    this.bets = userBets.filter(bet => bet.game.result)
-    this.lastBet = this.bets.slice(-1)[0]
+    this.bets = userBets.filter(bet => bet.game.result).sort((a, b) => new Date(b.game.updatedAt) - new Date(a.game.updatedAt))
+    this.lastBet = this.bets[0]
     let bet
     if(isWeekend()) {
       bet = userBets[userBets.length - 1]
