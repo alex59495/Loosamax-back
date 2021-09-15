@@ -56,15 +56,15 @@ const WeeklyBets = ({users, fetchUsers}) => {
 
     return (
       <>
-        <div className="text-center card-bet">
+        <div className="text-center card-resume-stats">
           <p className="mb-1"><b>🏆 Le champion de la semaine dernière</b></p>
           {renderBestUser()}
         </div>
-        <div className="text-center card-bet">
+        <div className="text-center card-resume-stats">
           <p className="mb-1"><b>⛔ Le zéro de la semaine de la semaine dernière</b></p>
           {renderWorstUser()}
         </div>
-        <div className="text-center card-bet">
+        <div className="text-center card-resume-stats">
           <p className="mb-1"><b>💸 Le flambeur (raté) de la semaine dernière</b></p>
           {renderWorstUserHigestBetLastWeek()}
         </div>
