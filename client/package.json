@@ -29,9 +29,7 @@
     "react-scripts": "4.0.3",
     "redux-thunk": "^2.3.0",
     "sweetalert2": "^11.1.4",
-    "web-vitals": "^1.0.1",
-    "config": "file:./../config",
-    "helpers": "file:./../helpers"
+    "web-vitals": "^1.0.1"
   },
   "devDependencies": {
     "@babel/core": "^7.9.0",

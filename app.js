@@ -21,6 +21,7 @@ require('./routes/userRoutes')(app);
 require('./routes/gamesRoutes')(app);
 require('./routes/betRoutes')(app);
 require('./routes/subscribeRoutes')(app);
+require('./routes/standingsRoutes')(app);
 
 
 // const myJobQueue = new Queue('myJob', keys.redisUrl );

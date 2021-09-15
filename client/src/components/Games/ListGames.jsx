@@ -11,17 +11,14 @@ import LeagueStandings from '../Standings/LeagueStandings';
 
 import { snakeToCamel, capitalize } from '../../utils/textTransformation';
 import { isWeekend } from '../../utils/isWeekend';
-import leaguesIdentifiers from 'helpers/leaguesIdentifiers';
 
 const ListGames = ({league, leaguesStandings, fetchGames, fetchStanding, games}) => {
   const [isLoading, setIsLoading] = useState(true)
 
-  const leagueAlias = leaguesIdentifiers[league].alias
-
   useEffect(() => {
     async function fetchAsync() {    
       await fetchGames(league)
-      await fetchStanding(leagueAlias)
+      await fetchStanding(league)
       setIsLoading(false)
     }
     fetchAsync()
@@ -69,8 +66,6 @@ const ListGames = ({league, leaguesStandings, fetchGames, fetchStanding, games})
     }
   }
 
-  
-
   return (
     <div data-test="list-games">
       <div className="link">
@@ -78,7 +73,7 @@ const ListGames = ({league, leaguesStandings, fetchGames, fetchStanding, games})
       </div>
       <h1 className="text-center">{capitalize(snakeToCamel(league))}</h1>
       {renderListGames()}
-      <LeagueStandings leagueStanding={leaguesStandings[leagueAlias]} />
+      <LeagueStandings leagueStanding={leaguesStandings[league]} />
     </div>
   )
 }
