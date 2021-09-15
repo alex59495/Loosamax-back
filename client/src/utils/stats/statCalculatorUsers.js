@@ -22,13 +22,23 @@ export default class StatCalculatorUsers extends StatCalculator {
   }
 
   get bestUserLastWeek() {
-    const lastResults = this.getUserLastResult();
-    return(lastResults.sort((a, b) => b.oddWin - a.oddWin)[0])
+    const userLastResults = this.getUserLastResult();
+    const user = userLastResults.sort((a, b) => b.oddWin - a.oddWin)[0]
+    return user ? user : null
   }
 
+  // Perd avec la plus faible cote
   get worstUserLastWeek() {
-    const lastResults = this.getUserLastResult();
-    return(lastResults.sort((a, b) => b.oddLoose - a.oddLoose)[0])
+    const userLastResults = this.getUserLastResult();
+    const user = userLastResults.filter(user => user.oddLoose).sort((a, b) => a.oddLoose - b.oddLoose)[0]
+    return user ? user : null
+  }
+
+// Perd avec la plus haute cote cote
+  get worstUserHigestBetLastWeek() {
+    const userLastResults = this.getUserLastResult();
+    const user = userLastResults.sort((a, b) => b.oddLoose - a.oddLoose)[0]
+    return user ? user : null
   }
 
   get usersPseudo() { return this.users.map(user => user.pseudo) }
