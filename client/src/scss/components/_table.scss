@@ -1,11 +1,22 @@
 table {
-  background-color: white;
-  border-radius: 4px;
-  border: solid 1px black;
-  padding: 8px;
-  margin: 0px 20px;
+  border-collapse: collapse;
 }
 
-td {
-  min-width: 25px;
+.table {
+  width: 100%;
+  margin-bottom: 1rem;
+  border-radius: 5px;
+  overflow: hidden;
+}
+
+.table thead th {
+  vertical-align: bottom;
+  border-bottom: 2px solid $orange;
+}
+
+.table td, .table th {
+  padding: .75rem;
+  vertical-align: top;
+  border-top: 1px solid $orange;
+  text-align: center;
 }
