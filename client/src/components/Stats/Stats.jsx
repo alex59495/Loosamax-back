@@ -34,7 +34,7 @@ const GlobalStats = ({users, fetchUsers}) => {
       return (
         <tr key={user._id}>
           <th>{index + 1}.</th>
-          <td>{user.pseudo}</td>
+          <td className='start'>{user.pseudo}</td>
         </tr>
       )
     })
@@ -90,7 +90,7 @@ const GlobalStats = ({users, fetchUsers}) => {
           <table className="table max-width-300 bg-white opacity-80">
             <thead>
                 <tr>
-                    <th colSpan="2">Le classement</th>
+                  <th colSpan="2">Le classement</th>
                 </tr>
             </thead>
             <tbody>
