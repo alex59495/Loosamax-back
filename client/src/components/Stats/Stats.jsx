@@ -33,7 +33,7 @@ const GlobalStats = ({users, fetchUsers}) => {
     return usersSorted.map((user, index) => {
       return (
         <tr key={user._id}>
-          <td>{index + 1}.</td>
+          <th>{index + 1}.</th>
           <td>{user.pseudo}</td>
         </tr>
       )
@@ -86,6 +86,18 @@ const GlobalStats = ({users, fetchUsers}) => {
     } else {
       return (
         <>
+          <h1>Les Stats des champions</h1>
+          <table className="table max-width-300 bg-white opacity-80">
+            <thead>
+                <tr>
+                    <th colSpan="2">Le classement</th>
+                </tr>
+            </thead>
+            <tbody>
+              {renderRanking()}
+            </tbody>
+          </table>
+          <h2>Les stats en détails</h2>
           {renderStatPerUser()}
           <h3>Graphs</h3>
           {renderStatsGraph()}
@@ -96,18 +108,6 @@ const GlobalStats = ({users, fetchUsers}) => {
 
   return (
     <div className="container-center inherit-min-height">
-      <h1>Les Stats des champions</h1>
-      <table>
-        <thead>
-            <tr>
-                <th colSpan="2">Le classement</th>
-            </tr>
-        </thead>
-        <tbody>
-          {renderRanking()}
-        </tbody>
-      </table>
-      <h2>Les stats en détails</h2>
       {renderStats()}
     </div>
   )

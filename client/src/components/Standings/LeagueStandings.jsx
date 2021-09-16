@@ -29,7 +29,7 @@ const LeagueStanding = ({leagueStanding}) => {
       return(
         <div className="container-center">
         <p className="text-comment text-center">Allez on va t'aider avec un petit classement actuel ! (ça sent la victoire de <b>{lastTeam}</b> ce we)</p>
-        <table>
+        <table className="table bg-white opacity-80">
           <thead>
             <tr>
               <th></th>
