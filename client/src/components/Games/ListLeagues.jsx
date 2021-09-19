@@ -9,7 +9,7 @@ const ListLeagues = () => {
 
   const renderLeagues = LEAGUES.map(({name, country}) => {
     return (
-      <div key={name} className="card-country" style={{backgroundImage: `linear-gradient(rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.1) 20%), url(images/${country}.png)` }}>
+      <div key={name} className="card-country" style={{backgroundImage: `linear-gradient(rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0.4) 20%), url(images/${country}.png)` }}>
         <Link className="bold text-center" to={`/games/${name}`}>
           {capitalize(snakeToCamel(name))}
         </Link>

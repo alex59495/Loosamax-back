@@ -18,5 +18,13 @@ module.exports = {
   ligue_1: {
     name: 'soccer_france_ligue_one',
     alias: 'FL1',
+  },
+  liga_portugal: {
+    name: 'soccer_portugal_primeira_liga',
+    alias: 'PPL',
+  },
+  eredivisie: {
+    name: 'soccer_netherlands_eredivisie',
+    alias: 'DED',
   }
 }
