@@ -29,10 +29,11 @@ const ListGames = ({league, leaguesStandings, fetchGames, fetchStanding, games})
       return null
     }
 
+    if (isWeekend()) {
+      return <p className="text-comment">Alors comme ça on veut parier les week-end (oui, Lundi c'est we aussi !) ? On aime pas les faillots ici, va falloir attendre.</p>
+    }
+
     if(games[league].length === 0) {
-      if (isWeekend()) {
-        return <p className="text-comment">Alors comme ça on veut parier les week-end (oui, Lundi c'est we aussi !) ? On aime pas les faillots ici, va falloir attendre.</p>
-      }
       return <p className="text-comment">Pas encore de paris disponibles pour cette ligue jeune impétueux. Il va falloir patienter</p>
     }
 
