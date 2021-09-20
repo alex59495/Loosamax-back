@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const Subscription = mongoose.model('subscriptions');
+const Subscription = require('../models/Subscription');
 
 module.exports = async (req, res, next) => {
   if (req.user) {

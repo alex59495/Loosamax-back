@@ -28,4 +28,4 @@ subscription.statics.updateOneOrCreate = function updateOneOrCreate(condition, d
   });
  };
 
-mongoose.model('subscriptions', subscription);
+ module.exports = mongoose.model('subscriptions', subscription);
