@@ -30,6 +30,8 @@ describe('Games endpoints', () => {
     const res = await request(app)
       .get('/api/games/ligue_1')
       .expect('Content-Type', /json/)
+
+      console.log(res.body)
     
     expect(res.body).toHaveLength(numGamesFoundFrance)
   })
