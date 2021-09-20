@@ -24,7 +24,7 @@ module.exports.connect = async () => {
  */
 module.exports.closeDatabase = async () => {
     await mongoose.connection.dropDatabase();
-    await mongoose.disconnect();
+    await mongoose.connection.close();
     await mongo.stop();
 }
 
