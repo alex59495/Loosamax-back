@@ -26,12 +26,11 @@ describe('Games endpoints', () => {
       const gameDb = new Game(game);
       await gameDb.save();
     };
+
     const numGamesFoundFrance = games.filter(game => game.sport_key === leaguesIdentifiers['ligue_1'].name).length
     const res = await request(app)
       .get('/api/games/ligue_1')
       .expect('Content-Type', /json/)
-
-      console.log(res.body)
     
     expect(res.body).toHaveLength(numGamesFoundFrance)
   })

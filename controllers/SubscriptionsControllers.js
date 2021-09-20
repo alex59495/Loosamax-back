@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const Subscription = require('../models/Subscription');
+const Subscription = mongoose.model('subscriptions');
 const webpush = require("web-push");
 const keys = require("../config/keys")
 const ObjectId = mongoose.Types.ObjectId;
