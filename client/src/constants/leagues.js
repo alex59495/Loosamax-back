@@ -4,4 +4,6 @@ export const LEAGUES = [
   { name: 'bundesliga', country: 'allemagne' },
   { name: 'serie_a', country: 'italie' },
   { name: 'liga', country: 'espagne' },
+  { name: 'liga_portugal', country: 'portugal'},
+  { name: 'eredivisie', country: 'pays-bas'}
 ]

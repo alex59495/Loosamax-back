@@ -1,4 +1,5 @@
 module.exports = {
+  // France
   'Paris Saint-Germain FC': 'Paris Saint Germain',
   'FC Nantes': 'Nantes',
   'Stade Brestois 29': 'Brest',
@@ -19,6 +20,7 @@ module.exports = {
   'FC Girondins de Bordeaux': 'Bordeaux',
   'FC Metz': 'Metz',
   'Montpellier HSC': 'Montpellier',
+  // Allemagne
   '1. FC Köln': 'FC Koln',
   'VfL Bochum 1848': 'VfL Bochum',
   'Arminia Bielefeld': 'Arminia Bielefeld',
@@ -37,6 +39,7 @@ module.exports = {
   'RB Leipzig': 'RB Leipzig',
   'Borussia Dortmund': 'Borussia Dortmund',
   'TSG 1899 Hoffenheim': 'TSG Hoffenheim',
+  // Angleterre
   'Crystal Palace FC': 'Crystal Palace',
   'Tottenham Hotspur FC': 'Tottenham Hotspur',
   'Arsenal FC': 'Arsenal',
@@ -57,6 +60,7 @@ module.exports = {
   'Liverpool FC': 'Liverpool',
   'Everton FC': 'Everton',
   'Burnley FC': 'Burnley',
+  // Italie
   'Empoli FC': 'Empoli',
   'Venezia FC': 'Venezia',
   'SSC Napoli': 'Napoli',
@@ -77,6 +81,7 @@ module.exports = {
   'US Sassuolo Calcio': 'Sassuolo',
   'Bologna FC 1909': 'Bologna',
   'Hellas Verona FC': 'Hellas Verona FC',
+  // Espagne
   'Villarreal CF': 'Villarreal',
   'Deportivo Alavés': 'Alavés',
   'Levante UD': 'Levante',
@@ -96,5 +101,43 @@ module.exports = {
   'Getafe CF': 'Getafe',
   'Elche CF': 'Elche CF',
   'Granada CF': 'Granada CF',
-  'Real Betis Balompié': 'Real Betis'
+  'Real Betis Balompié': 'Real Betis',
+  // Pays-Bas
+  'Fortuna Sittard': 'Fortuna Sittard',
+  'Ajax': 'AFC Ajax',
+  'RKC Waalwijk': 'RKC Waalwijk',
+  'Willem II': 'Willem II Tilburg',
+  'NEC Nijmegen': 'NEC',
+  'FC Utrecht': 'FC Utrecht',
+  'Go Ahead Eagles': 'Go Ahead Eagles',
+  'PSV Eindhoven': 'PSV',
+  'Groningen': 'FC Groningen',
+  'Vitesse Arnhem': 'SBV Vitesse',
+  'FC Zwolle': 'RKC Waalwijk',
+  'Sparta Rotterdam': 'Sparta Rotterdam',
+  'Feyenoord': 'Feyenoord Rotterdam',
+  'Heerenveen': 'SC Heerenveen',
+  'SC Cambuur': 'SC Cambuur-Leeuwarden',
+  'Heracles Almelo': 'Heracles Almelo',
+  'FC Twente Enschede': "FC Twente '65",
+  'AZ Alkmaar': 'AZ',
+  // Portugal
+  'Estoril': 'GD Estoril Praia',
+  'Sporting Lisbon': 'Sporting Clube de Portugal',
+  'Benfica': 'Sport Lisboa e Benfica',
+  'Boavista Porto': 'Boavista FC',
+  'Braga': 'Sporting Clube de Braga',
+  'Tondela': 'CD Tondela',
+  'CS Maritimo': 'CS Marítimo',
+  'Gil Vicente': 'Gil Vicente FC',
+  'FC Porto': 'FC Porto',
+  'Moreirense FC': 'Moreirense FC',
+  'Arouca': 'FC Arouca',
+  'Vitória SC': 'Vitória SC',
+  'Famalicão': 'FC Famalicão',
+  'Santa Clara': 'CD Santa Clara',
+  'Portimonense': 'Portimonense SC',
+  'Vizela': 'FC Vizela',
+  'Pacos de Ferreira': 'FC Paços de Ferreira',
+  'Belenenses': 'Os Belenenses Futebol',
 }
