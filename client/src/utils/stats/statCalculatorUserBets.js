@@ -57,7 +57,7 @@ export default class StatCalculatorUserBets extends StatCalculator {
     return sum
   }, 0)).toFixed(2) }
 
-  get tableEarnings() { return (this.bets.map((bet) => {
+  get tableEarnings() { return (this.bets.reverse().map((bet) => {
     if (this.betWinCondition(bet)) {
       return this.betOdd(bet) * 2 - 2
     }
