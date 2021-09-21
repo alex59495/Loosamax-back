@@ -22,12 +22,16 @@ const createBets = async (req, res) => {
 
     const existingBet = usersBets.some(user => {
       return user.bets.some(bet => bet.game.result === null && bet.game._id === game_id)
-    })
+    });
+
+    const lastBetLooseAndMoreThan2 = req.user.lastBetLooseAndMoreThan2
 
     if (existingBet) {
       res.status(200).send({res: 'Bet already taken'})
     } else if(actualBet) {
       res.status(200).send({res: 'You already have a bet'})
+    } else if(lastBetLooseAndMoreThan2) {
+      res.status(200).send({res: 'Your last bet was above 2 and lost'})
     } else {
 
       const bet = await new betModel({

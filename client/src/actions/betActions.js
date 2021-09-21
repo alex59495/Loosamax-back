@@ -35,7 +35,7 @@ export const createBet = ({choice, team, user_id, game}, history) => async (disp
             Swal.fire({
               icon: 'error',
               iconColor: '#bc4b51',
-              title: 'Oops...',
+              title: 'Un peu trop gourmand ?',
               confirmButtonColor: '#4c956c',
               confirmButtonText: "J'ai compris",
               html: 'Tu as déjà un pari en cours vil chenapan, tu ne peux pas en créer un nouveau pour le moment.<br> Pour supprimer ton pari actuel rends toi dans ton Profil.',
@@ -45,10 +45,20 @@ export const createBet = ({choice, team, user_id, game}, history) => async (disp
             Swal.fire({
               icon: 'warning',
               iconColor: '#bc4b51',
-              title: 'Oops...',
+              title: "Bah alors, on attend pas Patrick ?",
               confirmButtonColor: '#4c956c',
               confirmButtonText: "J'ai compris",
               html: 'Ce pari a déjà été sélectionné par un autre joueur qui a eu le nez fin (#Valé #Loic ?).<br> Pas le choix il va falloir en prendre un autre.',
+            })
+            break;
+          case 'Your last bet was above 2 and lost':
+            Swal.fire({
+              icon: 'warning',
+              iconColor: '#bc4b51',
+              title: 'Alerte au flambeur !',
+              confirmButtonColor: '#4c956c',
+              confirmButtonText: "Je ne recommencerai plus",
+              html: "Hop hop hop 'môsieur je claque mes sous à tout va' ! T'as déjà raté une côte à plus de 2 la semaine dernière, désolé mais il va falloir prendre un pari en-dessous de 2 cette semaine.",
             })
             break;
           default:

@@ -21,4 +21,19 @@ userSchema.methods.currentBet = function currentBet() {
   return self.bets.find(bet => !bet.game.result)
  };
 
+ userSchema.methods.lastBetLooseAndMoreThan2 = function lastBetLooseAndMoreThan2() {
+  const self = this;
+  const lastBet = self.filter(bet => bet.game.result)[0]
+  let odd
+  switch (lastBet) {
+    case "N":
+      odd = bet.game.draw_odd
+    case "1":
+      odd = bet.game.home_odd
+    default:
+      odd = bet.game.away_odd
+  }
+  return lastBet.choice !== lastBet.game.result && odd > 2
+ };
+
 module.exports = mongoose.model('users', userSchema);
