@@ -42,15 +42,18 @@ module.exports = class fetchOddService {
     await Promise.all(games.map(async (game) => {
       const { id, home_team, away_team, commence_time, sport_key, bookmakers } = game
       const unibet = bookmakers.find(bookmaker => bookmaker.key == 'unibet');
+      const betclic = bookmakers.find(bookmaker => bookmaker.key == 'betclic');
   
       let home_odd = null
       let away_odd = null
       let draw_odd = null
-  
-      if (unibet) {
 
-        const market = unibet.markets[0]
-    
+      let market
+      if (unibet) { market = unibet.markets[0] }
+      if (betclic) { market = betclic.markets[0] }
+  
+      if (market) {
+
         market.outcomes.forEach(({name, price}) => {
           switch(name) {
             case home_team:
