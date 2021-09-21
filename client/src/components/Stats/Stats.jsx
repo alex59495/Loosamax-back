@@ -41,8 +41,8 @@ const GlobalStats = ({users, fetchUsers}) => {
     return usersSorted.map((user, index) => {
       return (
         <tr key={user._id}>
-          <th>{index + 1}. {renderIcon(index)}</th>
-          <td className='start'>{user.pseudo}</td>
+          <th>{index + 1}.</th>
+          <td className='start'>{renderIcon(index)} {user.pseudo}</td>
         </tr>
       )
     })
