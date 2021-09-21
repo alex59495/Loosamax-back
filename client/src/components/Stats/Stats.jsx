@@ -29,11 +29,19 @@ const GlobalStats = ({users, fetchUsers}) => {
     return new StatCalculatorUserBets({userBets: userB.bets}).globalEarning - new StatCalculatorUserBets({userBets: userA.bets}).globalEarning 
   })
 
+  const renderIcon = (index) => {
+    if(index === 0) {
+      return <>👑</>
+    } else if(index === users.length - 1) {
+      return <>💩</>
+    }
+  }
+
   const renderRanking = () => {
     return usersSorted.map((user, index) => {
       return (
         <tr key={user._id}>
-          <th>{index + 1}.</th>
+          <th>{index + 1}. {renderIcon(index)}</th>
           <td className='start'>{user.pseudo}</td>
         </tr>
       )
