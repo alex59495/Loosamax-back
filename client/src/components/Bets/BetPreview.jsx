@@ -68,7 +68,7 @@ const BetPreview = ({game, bet, createBet, user, history}) => {
     <div className="card-odd">
       <div className="match">
         <div 
-            className={`card-odd-detail ${bet && bet.choice === "1" ? 'active-odd' : null} ${!bet ? 'clickable' : null}`}
+            className={`card-odd-detail ${bet && bet.choice === "1" ? 'active-odd' : ''} ${!bet ? 'clickable' : ''}`}
             onClick={() => clickable("1")}
             style={bet ? null : {cursor: 'pointer'}}
           >
@@ -76,7 +76,7 @@ const BetPreview = ({game, bet, createBet, user, history}) => {
             <span className={oddRisk(game.home_odd)}>{game.home_odd}</span>
           </div>
           <div 
-            className={`card-odd-detail ${bet && bet.choice === "N" ? 'active-odd' : null} ${!bet ? 'clickable' : null}`}
+            className={`card-odd-detail ${bet && bet.choice === "N" ? 'active-odd' : ''} ${!bet ? 'clickable' : ''}`}
             onClick={() => clickable("N")}
             style={bet ? null : {cursor: 'pointer'}}
           >
@@ -84,7 +84,7 @@ const BetPreview = ({game, bet, createBet, user, history}) => {
             <span className={oddRisk(game.draw_odd)}>{game.draw_odd}</span>
           </div>
           <div 
-            className={`card-odd-detail ${bet && bet.choice === "2" ? 'active-odd' : null} ${!bet ? 'clickable' : null}`}
+            className={`card-odd-detail ${bet && bet.choice === "2" ? 'active-odd' : ''} ${!bet ? 'clickable' : ''}`}
             onClick={() => clickable("2")}
             style={bet ? null : {cursor: 'pointer'}}
           >
