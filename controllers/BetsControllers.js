@@ -23,23 +23,26 @@ const createBets = async (req, res) => {
     )
 
     const existingBet = usersBets.some(user => {
-      return user.bets.some(bet => bet.game.result === null && bet.game._id === game_id)
+      return user.bets.some(bet => bet.game.result === null && bet.game._id === game_id);
     });
 
-    const lastBetLooseAndMoreThan2 = req.user.lastBetLooseAndMoreThan2
+    const lastBetLooseAndMoreThan2 = req.user.lastBetLooseAndMoreThan2();
+    
+    let actualOddMoreThan2
 
-    const gameChosenByUser = await Game.findOne({_id: game_id})
-
-    let oddMoreThan2
-    switch(choice) {
-      case "1":
-        oddMoreThan2 = gameChosenByUser.home_odd >= 2
-        break;
-      case "2":
-        oddMoreThan2 = gameChosenByUser.away_odd >= 2
-        break;
-      default:
-        oddMoreThan2 = gameChosenByUser.draw_odd >= 2
+    if(lastBetLooseAndMoreThan2) {
+      const gameChosenByUser = await Game.findOne({_id: game_id});
+  
+      switch(choice) {
+        case "1":
+          actualOddMoreThan2 = gameChosenByUser.home_odd >= 2
+          break;
+        case "2":
+          actualOddMoreThan2 = gameChosenByUser.away_odd >= 2
+          break;
+        default:
+          actualOddMoreThan2 = gameChosenByUser.draw_odd >= 2
+      }
     }
 
     const bet = await new betModel({
@@ -51,7 +54,7 @@ const createBets = async (req, res) => {
       res.status(200).send({res: 'Bet already taken'})
     } else if(actualBet) {
       res.status(200).send({res: 'You already have a bet'})
-    } else if(lastBetLooseAndMoreThan2 && oddMoreThan2) {
+    } else if(lastBetLooseAndMoreThan2 && actualOddMoreThan2) {
       res.status(200).send({res: 'Your last bet was above 2 and lost'})
     } else {
   

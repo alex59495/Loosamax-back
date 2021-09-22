@@ -23,15 +23,18 @@ userSchema.methods.currentBet = function currentBet() {
 
  userSchema.methods.lastBetLooseAndMoreThan2 = function lastBetLooseAndMoreThan2() {
   const self = this;
-  const lastBet = self.filter(bet => bet.game.result)[0]
+  const lastBet = self.bets.filter(bet => bet.game.result)[self.bets.length - 1]
   let odd
-  switch (lastBet) {
+  switch (lastBet.choice) {
     case "N":
-      odd = bet.game.draw_odd
+      odd = lastBet.game.draw_odd;
+      break;
     case "1":
-      odd = bet.game.home_odd
+      odd = lastBet.game.home_odd;
+      break;
     default:
-      odd = bet.game.away_odd
+      odd = lastBet.game.away_odd;
+      break;
   }
   return lastBet.choice !== lastBet.game.result && odd > 2
  };
