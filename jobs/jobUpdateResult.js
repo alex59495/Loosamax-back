@@ -3,7 +3,7 @@ const UpdateResultsService = require('../services/updateResultsService')
 
 class JobFetchOdd extends Job {
   static call = async () => {
-    if ([0, 1, 2, 6].includes(new Date().getDay())) {
+    if (new Date().getHours() > 7) {
       await new UpdateResultsService().call()
       super.closeConnection()
     }
