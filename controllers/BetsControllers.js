@@ -3,6 +3,8 @@ const ObjectId = mongoose.Types.ObjectId;
 
 const {betModel} = require('../models/Bet');
 const User = require('../models/User');
+const Game = require('../models/Game');
+
 
 const createBets = async (req, res) => {
 
@@ -21,19 +23,40 @@ const createBets = async (req, res) => {
     )
 
     const existingBet = usersBets.some(user => {
-      return user.bets.some(bet => bet.game.result === null && bet.game._id === game_id)
+      return user.bets.some(bet => bet.game.result === null && bet.game._id === game_id);
+    });
+
+    const lastBetLooseAndMoreThan2 = req.user.lastBetLooseAndMoreThan2();
+    
+    let actualOddMoreThan2
+
+    if(lastBetLooseAndMoreThan2) {
+      const gameChosenByUser = await Game.findOne({_id: game_id});
+  
+      switch(choice) {
+        case "1":
+          actualOddMoreThan2 = gameChosenByUser.home_odd >= 2
+          break;
+        case "2":
+          actualOddMoreThan2 = gameChosenByUser.away_odd >= 2
+          break;
+        default:
+          actualOddMoreThan2 = gameChosenByUser.draw_odd >= 2
+      }
+    }
+
+    const bet = await new betModel({
+      choice,
+      game: game_id
     })
 
     if (existingBet) {
       res.status(200).send({res: 'Bet already taken'})
     } else if(actualBet) {
       res.status(200).send({res: 'You already have a bet'})
+    } else if(lastBetLooseAndMoreThan2 && actualOddMoreThan2) {
+      res.status(200).send({res: 'Your last bet was above 2 and lost'})
     } else {
-
-      const bet = await new betModel({
-        choice,
-        game: game_id
-      })
   
       await User.updateOne({_id: req.user._id}, {$push: {"bets": bet}})
 
