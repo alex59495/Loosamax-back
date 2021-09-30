@@ -119,7 +119,7 @@ module.exports = {
   'SC Heerenveen': 'Heerenveen',
   'SC Cambuur-Leeuwarden': 'SC Cambuur',
   'Heracles Almelo': 'Heracles Almelo',
-  "FC Twente '5": 'FC Twente Enschede',
+  "FC Twente '65": 'FC Twente Enschede',
   'AZ': 'AZ Alkmaar',
   // Portugal
   'GD Estoril Praia':'Estoril',
