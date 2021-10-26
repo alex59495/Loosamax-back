@@ -50,10 +50,10 @@ const createBets = async (req, res) => {
       game: game_id
     })
 
-    if (existingBet) {
-      res.status(200).send({res: 'Bet already taken'})
-    } else if(actualBet) {
+    if(actualBet) {
       res.status(200).send({res: 'You already have a bet'})
+    } else if (existingBet) {
+      res.status(200).send({res: 'Bet already taken'})
     } else if(lastBetLooseAndMoreThan2 && actualOddMoreThan2) {
       res.status(200).send({res: 'Your last bet was above 2 and lost'})
     } else {
