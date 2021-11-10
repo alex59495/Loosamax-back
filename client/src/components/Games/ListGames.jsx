@@ -39,7 +39,10 @@ const ListGames = ({league, leaguesStandings, fetchGames, fetchStanding, games})
 
     return games[league].map(game => {
       return (
+        <>
           <BetPreview key={game._id} game={game} />
+          <LeagueStandings leagueStanding={leaguesStandings[league]} />
+        </>
       )
     })
   }
@@ -74,7 +77,6 @@ const ListGames = ({league, leaguesStandings, fetchGames, fetchStanding, games})
       </div>
       <h1 className="text-center">{capitalize(snakeToCamel(league))}</h1>
       {renderListGames()}
-      <LeagueStandings leagueStanding={leaguesStandings[league]} />
     </div>
   )
 }
