@@ -1,6 +1,6 @@
 const Game = require('../models/Game')
 const User = require('../models/User')
-const Bet = require('../models/Bet')
+const {betModel} = require('../models/Bet');
 module.exports = class AutomaticChooseGameService {
 
   call = async () => {
@@ -51,7 +51,7 @@ module.exports = class AutomaticChooseGameService {
 
     await Promise.all(usersToUpdate.map(async user => {
       // On crée un bet pour les utilisateurs qui n'en ont pas encore avec la côte la plus faible
-      const bet = await new Bet({
+      const bet = await new betModel({
         choice: games[0].choice,
         game: games[0]._id
       })
