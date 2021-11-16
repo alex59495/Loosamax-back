@@ -37,14 +37,20 @@ const ListGames = ({league, leaguesStandings, fetchGames, fetchStanding, games})
       return <p className="text-comment">Pas encore de paris disponibles pour cette ligue jeune impétueux. Il va falloir patienter</p>
     }
 
-    return games[league].map(game => {
+    const listGames = games[league].map(game => {
       return (
         <>
           <BetPreview key={game._id} game={game} />
-          <LeagueStandings leagueStanding={leaguesStandings[league]} />
         </>
       )
     })
+    
+    return (
+      <>
+        {listGames}
+        <LeagueStandings leagueStanding={leaguesStandings[league]} />
+      </>
+    )
   }
 
   const renderListGames = () => {

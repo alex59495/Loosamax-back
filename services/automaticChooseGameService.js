@@ -51,7 +51,7 @@ module.exports = class AutomaticChooseGameService {
 
     await Promise.all(usersToUpdate.map(async user => {
       // On crée un bet pour les utilisateurs qui n'en ont pas encore avec la côte la plus faible
-      const bet = await new betModel({
+      const bet = new betModel({
         choice: games[0].choice,
         game: games[0]._id
       })
@@ -60,6 +60,6 @@ module.exports = class AutomaticChooseGameService {
 
       // On update l'user avec ce bet
       await User.findOneAndUpdate({_id: user._id}, {$push: {"bets": bet}})
-    }))
+    }));
   }
 }
