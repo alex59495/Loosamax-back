@@ -3,7 +3,7 @@ const AutomaticChooseGameService = require('../services/automaticChooseGameServi
 
 class JobAutomaticChooseGame extends Job {
   static call = async () => {
-    if (Date.new().getDay() === 5) {
+    if (new Date().getDay() === 5) {
       await new AutomaticChooseGameService().call()
       super.closeConnection()
     };
