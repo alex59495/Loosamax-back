@@ -5,7 +5,7 @@ export const fetchGames = (league) => async (dispatch) =>
 {
   const res = await axios.get(`/api/games/${league}`)
   const filterGames = res.data.filter(game => {
-    return game.commence_time > Date.now()
+    return new Date(game.commence_time) > Date.now()
   });
   const payload = {
     [league]: filterGames
