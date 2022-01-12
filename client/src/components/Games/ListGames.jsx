@@ -47,7 +47,9 @@ const ListGames = ({league, leaguesStandings, fetchGames, fetchStanding, games})
     
     return (
       <>
-        {listGames}
+        <div className="grid_wrap">
+          {listGames}
+        </div>
         <LeagueStandings leagueStanding={leaguesStandings[league]} />
       </>
     )
@@ -68,9 +70,7 @@ const ListGames = ({league, leaguesStandings, fetchGames, fetchStanding, games})
     } else {
       return (
         <div className="d-flex">
-          <div className="grid_wrap">
-            {renderGames()}
-          </div>
+          {renderGames()}
         </div>
       )
     }
