@@ -22,7 +22,7 @@ module.exports = class AutomaticChooseGameService {
         $match: { 
           result: null, _id: { "$nin": gamesIdAlreadySelected } 
         } 
-      }, 
+      },
       { 
         $project: {
           "id": 1,
@@ -46,17 +46,21 @@ module.exports = class AutomaticChooseGameService {
       { $sort: { lower_odd: 1 } }
     ]))
 
+    // On enlève les matchs ayant été reportés
+    const gamesFiltered = games.filter(game => {
+      return game.commence_time > new Date()
+    });
 
     const usersToUpdate = users.filter(user => !user.currentBet())
 
-    await Promise.all(usersToUpdate.map(async user => {
+    await Promise.all(usersToUpdate.map(async user => {   
       // On crée un bet pour les utilisateurs qui n'en ont pas encore avec la côte la plus faible
       const bet = new betModel({
-        choice: games[0].choice,
-        game: games[0]._id
+        choice: gamesFiltered[0].choice,
+        game: gamesFiltered[0]._id
       })
       // On supprime du tableau le game qui a servi pour crée ce bet (puisqu'il appartient a un currentBet désormais)
-      games.shift()
+      gamesFiltered.shift()
 
       // On update l'user avec ce bet
       await User.findOneAndUpdate({_id: user._id}, {$push: {"bets": bet}})
