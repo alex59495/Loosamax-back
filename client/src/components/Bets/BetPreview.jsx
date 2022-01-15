@@ -9,7 +9,7 @@ import { formatDate } from '../../utils/textTransformation';
 import BandResult from './BandResult';
 import GameResult from '../Games/GameResult'
 
-const BetPreview = ({game, bet, createBet, user, history}) => {
+const BetPreview = ({game, bet, createBet, user, history, group}) => {
 
   const clickable = (x) => {
     if(bet) {

@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import {connect} from 'react-redux';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCheck, faTimes } from '@fortawesome/free-solid-svg-icons';
+import { faCheck, faTimes, faToiletPaper, faFire } from '@fortawesome/free-solid-svg-icons';
 import Loader from "react-loader-spinner";
 
 import {fetchUsers} from '../../actions/userActions';
@@ -11,9 +11,11 @@ import BetPreview from './BetPreview';
 
 import StatCalculatorUsers from '../../utils/stats/statCalculatorUsers';
 import StatCalculatorUserBets from '../../utils/stats/statCalculatorUserBets';
+import UsersSorted from '../../utils/stats/usersSorted';
 
 const WeeklyBets = ({users, fetchUsers}) => {
   const [isLoading, setIsLoading] = useState(true)
+  const usersSorted = new UsersSorted(users).sorted();
 
   useEffect(() => {
     let isMounted = true
@@ -71,11 +73,13 @@ const WeeklyBets = ({users, fetchUsers}) => {
       </>
     )
   }
-  const betsWeek = users.map(user => {
+  const betsWeek = usersSorted.map((user, index) => {
     const statCalculatorUserBets = new StatCalculatorUserBets({userBets: user.bets})
+    const group = index < 5 ? 1 : 2;
     return {
       bet: statCalculatorUserBets.currentBet,
-      user: user
+      user: user,
+      group: group
     }
   })
 
@@ -93,11 +97,12 @@ const WeeklyBets = ({users, fetchUsers}) => {
     }
   })
 
-  const renderBets = betsWeek.map(({bet, user}) => {
+  const renderBets = betsWeek.map(({bet, user, group}) => {
     if(bet) {
+      const groupIcon = group === 1 ? { icon: faFire, color: 'orange' } : {icon: faToiletPaper, color: 'pink' }
       return (
         <React.Fragment key={bet._id}>
-          <h3>{user.pseudo}</h3>
+          <h3>{user.pseudo} - <FontAwesomeIcon icon={groupIcon.icon} style={{color: groupIcon.color}} /></h3>
           <BetPreview bet={bet} game={bet.game}/>
         </React.Fragment>
       )
