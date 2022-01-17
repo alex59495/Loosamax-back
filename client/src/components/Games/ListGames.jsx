@@ -30,11 +30,11 @@ const ListGames = ({league, leaguesStandings, fetchGames, fetchStanding, games})
     }
 
     if (isWeekend()) {
-      return <p className="text-comment">Alors comme ça on veut parier les week-end {new Date().getDay() === 1 ? "(oui, Lundi c'est we aussi !)" : null} ? On aime pas les faillots ici, va falloir attendre.</p>
+      return <p className="text-comment text-center">Alors comme ça on veut parier les week-end {new Date().getDay() === 1 ? "(oui, Lundi c'est we aussi !)" : null} ? On aime pas les faillots ici, va falloir attendre.</p>
     }
 
     if(games[league].length === 0) {
-      return <p className="text-comment">Pas encore de paris disponibles pour cette ligue jeune impétueux. Il va falloir patienter</p>
+      return <p className="text-comment text-center">Pas encore de paris disponibles pour cette ligue jeune impétueux. Il va falloir patienter</p>
     }
 
     const listGames = games[league].map(game => {
@@ -69,7 +69,7 @@ const ListGames = ({league, leaguesStandings, fetchGames, fetchStanding, games})
       )
     } else {
       return (
-        <div className="d-flex">
+        <div className="d-flex justify-content-center">
           {renderGames()}
         </div>
       )
