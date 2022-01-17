@@ -2,11 +2,23 @@ import StatCalculatorUserBets from '../../utils/stats/statCalculatorUserBets';
 
 export default class UsersSorted {
   constructor(users) {
-    this.usersSortedLastWeek = this.usersLastWeekBets(users).sort((userA, userB) => {
+    this.users = users
+  }
+
+  get usersSortedLive() {
+    return this.users.sort((userA, userB) => {
       return new StatCalculatorUserBets({userBets: userB.bets}).globalEarning - new StatCalculatorUserBets({userBets: userA.bets}).globalEarning 
     });
-    this.usersSortedLive = users.sort((userA, userB) => {
+  }
+
+  get usersSortedLastWeek() {
+    const usersOrdered = this.usersLastWeekBets(this.users).sort((userA, userB) => {
       return new StatCalculatorUserBets({userBets: userB.bets}).globalEarning - new StatCalculatorUserBets({userBets: userA.bets}).globalEarning 
+    });
+
+    // Pour chaque utilisateurs, après avoir ordonner on vient remmetre le dernier paris si nécessaire
+    return usersOrdered.map(user => {
+      return {...user, bets: this.users.find(u => u._id === user._id).bets }
     });
   }
 
