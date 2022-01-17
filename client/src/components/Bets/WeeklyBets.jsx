@@ -15,7 +15,7 @@ import UsersSorted from '../../utils/stats/usersSorted';
 
 const WeeklyBets = ({users, fetchUsers}) => {
   const [isLoading, setIsLoading] = useState(true)
-  const usersSorted = new UsersSorted(users).sorted();
+  const usersSorted = new UsersSorted(users).sortedLastWeek;
 
   useEffect(() => {
     let isMounted = true

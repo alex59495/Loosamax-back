@@ -25,7 +25,7 @@ const GlobalStats = ({users, fetchUsers}) => {
       return () => { isMounted = false };
   }, [])
 
-  const usersSorted = new UsersSorted(users).sorted();
+  const usersSorted = new UsersSorted(users).sortedLive;
 
   const renderIcon = (index) => {
     if(index === 0) {
