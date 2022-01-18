@@ -1,5 +1,5 @@
 import StatCalculatorUserBets from '../../utils/stats/statCalculatorUserBets'; 
-
+import { isWeekend } from '../isWeekend';
 export default class UsersSorted {
   constructor(users) {
     this.users = users
@@ -27,7 +27,7 @@ export default class UsersSorted {
       const betsLength = user.bets.length;
       const today = new Date();
       const dateMinus3Days = today.setDate(today.getDate() + 1);
-      if (user.bets[betsLength - 1] && user.bets[betsLength -1].game.result && new Date (user.bets[betsLength -1].game.commence_time) < dateMinus3Days) {
+      if (user.bets[betsLength - 1] && user.bets[betsLength -1].game.result && (new Date (user.bets[betsLength -1].game.commence_time) < dateMinus3Days) && isWeekend()) {
         const withoutLastBet = user.bets.slice(0, -1);
         return { ...user, bets: withoutLastBet };
       };
