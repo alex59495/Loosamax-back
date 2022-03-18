@@ -26,6 +26,7 @@ module.exports = class AutomaticChooseGameService {
       { 
         $project: {
           "id": 1,
+          commence_time: "$commence_time",
           lower_odd: {
             $min: ["$away_odd", "$home_odd", "$draw_odd"]
           },
