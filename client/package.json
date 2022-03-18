@@ -21,7 +21,7 @@
     "http-proxy-middleware": "^2.0.1",
     "materialize-css": "^1.0.0",
     "moxios": "^0.4.0",
-    "node-sass": "^6.0.1",
+    "node-sass": "^7.0.0",
     "react": "^17.0.2",
     "react-chartjs-2": "^3.0.4",
     "react-color": "^2.19.3",
