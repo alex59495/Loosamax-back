@@ -2,6 +2,9 @@
   "name": "client",
   "version": "0.1.0",
   "private": true,
+  "engines": {
+    "node": "16.x"
+  },
   "dependencies": {
     "@babel/preset-env": "^7.15.4",
     "@fortawesome/fontawesome-svg-core": "^1.2.36",
@@ -18,7 +21,7 @@
     "http-proxy-middleware": "^2.0.1",
     "materialize-css": "^1.0.0",
     "moxios": "^0.4.0",
-    "node-sass": "5",
+    "node-sass": "^6.0.1",
     "react": "^17.0.2",
     "react-chartjs-2": "^3.0.4",
     "react-color": "^2.19.3",
@@ -61,6 +64,8 @@
     ]
   },
   "jest": {
-    "setupFilesAfterEnv": ["./test/setupTests.js"] 
+    "setupFilesAfterEnv": [
+      "./test/setupTests.js"
+    ]
   }
 }
