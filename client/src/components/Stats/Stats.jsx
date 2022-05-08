@@ -1,6 +1,9 @@
 import React, {useEffect, useState} from 'react';
 import {connect} from 'react-redux';
 import Loader from "react-loader-spinner";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faArrowUp, faArrowsAltV } from '@fortawesome/free-solid-svg-icons';
+import Swal from 'sweetalert2';
 
 import UserStats from './UserStats';
 import DoughnutGraph from './DoughnutGraph';
@@ -14,6 +17,7 @@ import UsersSorted from '../../utils/stats/usersSorted';
 const GlobalStats = ({users, fetchUsers}) => {
 
   const [isLoading, setIsLoading] = useState(true)
+  const [paramsSorted, setParamsSorted] = useState("globalEarning")
 
   useEffect(() => {
     let isMounted = true
@@ -25,31 +29,24 @@ const GlobalStats = ({users, fetchUsers}) => {
       return () => { isMounted = false };
   }, [])
 
-  const usersSorted = new UsersSorted(users).sortedLive;
+  const changeParamsSorted = (value) => {
+    setParamsSorted(value)
+  }
 
-  const renderIcon = (index) => {
-    if(index === 0) {
-      return <>👑</>
-    } else if(index === users.length - 1) {
-      return <>💩</>
+  const renderArrowSort = (params) => {
+    if (params === paramsSorted) {
+      return <FontAwesomeIcon icon={faArrowUp} size='xs'/>
+    } else {
+      return <FontAwesomeIcon icon={faArrowsAltV} size='xs'/>
     }
-  }
+  } 
 
-  const renderRanking = () => {
-    return usersSorted.map((user, index) => {
-      return (
-        <tr key={user._id}>
-          <th>{index + 1}.</th>
-          <td className='start'>{renderIcon(index)} {user.pseudo}</td>
-        </tr>
-      )
-    })
-  }
+  const usersSorted = new UsersSorted(users).sortedLive(paramsSorted);
 
   const renderStatPerUser = () => {
-    return usersSorted.map(user => {
+    return usersSorted.map((user, index) => {
       return (
-        <UserStats key={user._id} user={user}/>
+        <UserStats key={user._id} user={user} order={index + 1}/>
       )
     })
   }
@@ -77,6 +74,55 @@ const GlobalStats = ({users, fetchUsers}) => {
     }
   }
 
+  const htmlHeadersExplanation = `
+  <table class='table'>
+    <thead>
+      <tr>
+        <th colspan="2">Stats</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>G</td>
+        <td>Gagnés</td>
+      </tr>
+      <tr>
+        <td>P</td>
+        <td>Perdus</td>
+      </tr>
+      <tr>
+        <td>% G</td>
+        <td>Pourcentage de match gagnés</td>
+      </tr>
+      <tr>
+        <td>MCR</td>
+        <td>Moyenne de côtes réussies</td>
+      </tr>
+      <tr>
+        <td>MCP</td>
+        <td>Moyenne de côtes perdues</td>
+      </tr>
+      <tr>
+        <td>MCT</td>
+        <td>Moyenne de côtes tentées</td>
+      </tr>
+      <tr>
+        <td>GG</td>
+        <td>Gains Globaux</td>
+      </tr>
+    </tbody>
+  </table>
+  `
+
+  const showHeadersExplanation = () => {
+    Swal.fire({
+      title: `On t'explique tout`,
+      confirmButtonColor: '#4c956c',
+      confirmButtonText: "J'ai pigé !",
+      html: htmlHeadersExplanation, 
+    })
+  }
+
   const renderStats = () => {
     if(isLoading){
       return(
@@ -93,18 +139,26 @@ const GlobalStats = ({users, fetchUsers}) => {
       return (
         <>
           <h1>Les Stats des champions</h1>
-          <table className="table max-width-300 bg-white opacity-80">
+          <h2>Les stats en détails</h2>
+          <button className="btn-orange" onClick={() => showHeadersExplanation()}>Je ne comprends pas les colonnes</button>
+          <br />
+          <table className='table' style={{background: "white"}}>
             <thead>
-                <tr>
-                  <th colSpan="2">Le classement</th>
-                </tr>
+              <tr>
+                <th>Joueur</th>
+                <th className="sortable" onClick={() => changeParamsSorted('numberWin')}>{renderArrowSort('numberWin')} G</th>
+                <th className="sortable" onClick={() => changeParamsSorted('numberLoose')}>{renderArrowSort('numberLoose')} P</th>
+                <th className="sortable" onClick={() => changeParamsSorted('winPourcentage')}>{renderArrowSort('winPourcentage')}% G</th>
+                <th className="sortable" onClick={() => changeParamsSorted('averageOddWin')}>{renderArrowSort('averageOddWin')} MCR</th>
+                <th className="sortable" onClick={() => changeParamsSorted('averageOddLoose')}>{renderArrowSort('averageOddLoose')} MCP</th>
+                <th className="sortable" onClick={() => changeParamsSorted('averageOdd')}>{renderArrowSort('averageOdd')} MCT</th>
+                <th className="sortable" onClick={() => changeParamsSorted('globalEarning')}>{renderArrowSort('globalEarning')} GG</th>
+              </tr>
             </thead>
             <tbody>
-              {renderRanking()}
+              {renderStatPerUser()}
             </tbody>
           </table>
-          <h2>Les stats en détails</h2>
-          {renderStatPerUser()}
           <h3>Graphs</h3>
           {renderStatsGraph()}
         </>

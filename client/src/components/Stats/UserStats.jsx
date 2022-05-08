@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 
 import StatCalculatorUserBets from '../../utils/stats/statCalculatorUserBets';
 
-const UserStats = ({user}) => {
+const UserStats = ({user, order}) => {
 
   const statCalculatorUserBets = new StatCalculatorUserBets({userBets: user.bets})
 
@@ -19,47 +19,31 @@ const UserStats = ({user}) => {
     return 'intermediate'
   }
 
+  const renderIcon = (order) => {
+    if(order === 1) {
+      return <>👑</>
+    } else if(order === 9) {
+      return <>💩</>
+    }
+  }
+
   const winPoucentage = statCalculatorUserBets.winPourcentage
 
   const globalEarning = statCalculatorUserBets.globalEarning
 
-  const renderStats = (bets) => {
-
+  const renderStats = () => {
     if (statCalculatorUserBets.bets.length > 0) {
       return (
-        <>
-          <div className="d-flex justify-content-center">
-            <div className="card-stat">
-              <div className="title">Gagné</div>
-              <div className="content">{statCalculatorUserBets.numberWin}</div>
-            </div>
-            <div className="card-stat">
-              <div className="title">Perdu</div>
-              <div className="content">{statCalculatorUserBets.numberLoose}</div>
-            </div>
-            <div className="card-stat">
-              <div className="title">Pourcentage Gagné</div>
-              <div className={`content ${colorResultPourcentage(winPoucentage)}`}>{winPoucentage}%</div>
-            </div>
-            <div className="card-stat">
-              <div className="title">Moyenne côte réussie</div>
-              <div className="content">{statCalculatorUserBets.averageOddWin}</div>
-            </div>
-            <div className="card-stat">
-              <div className="title">Moyenne côte ratée</div>
-              <div className="content">{statCalculatorUserBets.averageOddLoose}</div>
-            </div>
-            <div className="card-stat">
-              <div className="title">Moyenne côte tentée</div>
-              <div className="content">{statCalculatorUserBets.averageOdd}</div>
-            </div>
-            <div className="card-stat">
-              <div className="title">Gain global</div>
-              <div className={`content ${colorResultEarning(globalEarning)}`}>{globalEarning}€</div>
-            </div>
-
-          </div>
-        </>
+        <tr>
+          <td>{renderIcon(order)} {user.pseudo}</td>
+          <td>{statCalculatorUserBets.numberWin}</td>
+          <td>{statCalculatorUserBets.numberLoose}</td>
+          <td className={`content ${colorResultPourcentage(winPoucentage)}`}>{winPoucentage}</td>
+          <td>{statCalculatorUserBets.averageOddWin}</td>
+          <td>{statCalculatorUserBets.averageOddLoose}</td>
+          <td>{statCalculatorUserBets.averageOdd}</td>
+          <td className={`content ${colorResultEarning(globalEarning)}`}>{globalEarning}€</td>
+        </tr>
       )
     } else {
       return <p className="text-comment">Pas encore de paris...</p>
@@ -67,10 +51,7 @@ const UserStats = ({user}) => {
   }
 
   return (
-    <div className="container-center">
-      <h3>{user.pseudo}</h3>
-      {renderStats(user.bets)}
-    </div>
+    renderStats()
   )
 }
 

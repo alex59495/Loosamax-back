@@ -14,6 +14,10 @@ table {
   border-bottom: 2px solid $orange;
 }
 
+.sortable {
+  cursor: pointer;
+}
+
 .table td, .table th {
   padding: .75rem;
   vertical-align: top;
@@ -25,7 +29,23 @@ table {
   text-align: start !important;
 }
 
-@media (max-width: 550px) {
+th[data-title]{
+  position: relative;
+  &:hover:after{
+    font-size: 1rem;
+    font-weight: normal;
+    display: block;
+    position: absolute;
+    bottom: 2em;
+    padding: 2px;
+    content:  attr(data-title);
+    background-color: white;
+    width: fit-content;
+    text-align: center;
+  }
+}
+
+@media (max-width: 660px) {
   .table td, .table th {
     padding: .25rem;
     font-size: 10px;

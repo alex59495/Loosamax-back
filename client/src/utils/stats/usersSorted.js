@@ -5,9 +5,9 @@ export default class UsersSorted {
     this.users = users
   }
 
-  get usersSortedLive() {
+  usersSortedLive(paramSort) {
     return this.users.sort((userA, userB) => {
-      return new StatCalculatorUserBets({userBets: userB.bets}).globalEarning - new StatCalculatorUserBets({userBets: userA.bets}).globalEarning 
+      return new StatCalculatorUserBets({userBets: userB.bets})[`${paramSort}`] - new StatCalculatorUserBets({userBets: userA.bets})[`${paramSort}`] 
     });
   }
 
@@ -40,7 +40,7 @@ export default class UsersSorted {
     return this.usersSortedLastWeek
   }
 
-  get sortedLive() {
-    return this.usersSortedLive
+  sortedLive(paramsSort) {
+    return this.usersSortedLive(paramsSort)
   }
 }
