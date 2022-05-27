@@ -10,24 +10,27 @@ import DoughnutGraph from './DoughnutGraph';
 import RadarGraph from './RadarGraph';
 import LineGraph from './LineGraph';
 
+import {fetchYears} from '../../actions/seasonActions';
 import {fetchUsers} from '../../actions/userActions';
 import StatCalculatorUsers from '../../utils/stats/statCalculatorUsers';
 import UsersSorted from '../../utils/stats/usersSorted';
 
-const GlobalStats = ({users, fetchUsers}) => {
+const GlobalStats = ({users, fetchUsers, fetchYears, years}) => {
 
-  const [isLoading, setIsLoading] = useState(true)
-  const [paramsSorted, setParamsSorted] = useState("globalEarning")
+  const [isLoading, setIsLoading] = useState(true);
+  const [paramsSorted, setParamsSorted] = useState("globalEarning");
+  const [selectedYear, setSelectedYear] = useState("actual")
 
   useEffect(() => {
     let isMounted = true
       async function fetchData() {
-        await fetchUsers()
+        await fetchYears()
+        await fetchUsers(selectedYear)
         if(isMounted) setIsLoading(false)
       }
       fetchData();
       return () => { isMounted = false };
-  }, [])
+  }, [selectedYear])
 
   const changeParamsSorted = (value) => {
     setParamsSorted(value)
@@ -138,6 +141,10 @@ const GlobalStats = ({users, fetchUsers}) => {
     } else {
       return (
         <>
+          <select name="years" id="year" onChange={(e) => setSelectedYear(e.target.value)}>
+            <option value='actual'>Année en cours</option>
+            {renderYears()}
+          </select>
           <h1>Les Stats des champions</h1>
           <h2>Les stats en détails</h2>
           <button className="btn-orange" onClick={() => showHeadersExplanation()}>Je ne comprends pas les colonnes</button>
@@ -166,6 +173,12 @@ const GlobalStats = ({users, fetchUsers}) => {
     }
   }
 
+  const renderYears = () => {
+    return years.map(year => {
+      return <option key={year} value={year}>{year}</option>
+    })
+  }
+
   return (
     <div className="container-center inherit-min-height">
       {renderStats()}
@@ -173,10 +186,11 @@ const GlobalStats = ({users, fetchUsers}) => {
   )
 }
 
-const mapStateToProps = ({users}) => {
+const mapStateToProps = ({users, years}) => {
   return {
-    users
+    users,
+    years
   }
 }
 
-export default connect(mapStateToProps, {fetchUsers})(GlobalStats)
+export default connect(mapStateToProps, {fetchUsers, fetchYears})(GlobalStats)

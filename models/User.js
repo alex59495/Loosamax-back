@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const { Schema } = mongoose;
 
-const {betSchema} = require('./Bet');
+const { betSchema } = require('./Bet');
 const SubscriptionSchema = require('./Subscription');
 
 const userSchema = new Schema({
@@ -39,4 +39,7 @@ userSchema.methods.currentBet = function currentBet() {
   return lastBet.choice !== lastBet.game.result && odd > 2
  };
 
-module.exports = mongoose.model('users', userSchema);
+module.exports = {
+  userSchema,
+  userModel: mongoose.model('users', userSchema)
+}

@@ -12,6 +12,7 @@ const webpush = require('web-push');
 webpush.setVapidDetails('mailto:maxence.lenoir1206@gmail.com', keys.publicVapid, keys.privateVapid);
 
 // models
+require('./models/Season');
 require('./models/User');
 require('./models/Game');
 require('./models/Bet');
@@ -47,6 +48,7 @@ mongoose.connect(keys.mongoURI,  {
 require('./routes/userRoutes')(app);
 require('./routes/gamesRoutes')(app);
 require('./routes/betRoutes')(app);
+require('./routes/seasonRoutes')(app);
 require('./routes/subscribeRoutes')(app);
 
 const myJobQueue = new Queue('myJob', keys.redisUrl );

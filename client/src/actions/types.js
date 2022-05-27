@@ -13,3 +13,6 @@ export const FETCH_STANDING = 'FETCH_STANDING';
 export const CREATE_BET = 'CREATE_BET';
 export const DELETE_BET = 'DELETE_BET';
 export const GET_BETS = 'GET_BETS';
+
+// Season
+export const FETCH_YEARS = 'FETCH_YEARS';

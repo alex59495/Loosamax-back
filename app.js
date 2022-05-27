@@ -1,6 +1,7 @@
 const express = require('express');
 
 // models
+require('./models/Season');
 require('./models/User');
 require('./models/Game');
 require('./models/Bet');
@@ -22,6 +23,7 @@ require('./routes/gamesRoutes')(app);
 require('./routes/betRoutes')(app);
 require('./routes/subscribeRoutes')(app);
 require('./routes/standingsRoutes')(app);
+require('./routes/seasonRoutes')(app);
 
 
 // const myJobQueue = new Queue('myJob', keys.redisUrl );
