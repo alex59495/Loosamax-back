@@ -9,7 +9,7 @@ export const fetchUser = () => async (dispatch) =>
 
 export const fetchUsers = (selectedYear = null) => async (dispatch) => 
 {
-  if(selectedYear !== "actual") {
+  if(selectedYear && selectedYear !== "actual") {
     const season = await axios.get(`/api/seasons/${selectedYear}`);
     const users = season?.data?.users ?? [];
     dispatch({ type: FETCH_USERS, payload: users })
