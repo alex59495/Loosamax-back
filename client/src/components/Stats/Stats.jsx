@@ -19,16 +19,17 @@ const GlobalStats = ({users, fetchUsers, fetchYears, years}) => {
 
   const [isLoading, setIsLoading] = useState(true);
   const [paramsSorted, setParamsSorted] = useState("globalEarning");
-  const [selectedYear, setSelectedYear] = useState("actual")
+  const [selectedYear, setSelectedYear] = useState("actual");
 
   useEffect(() => {
     let isMounted = true
       async function fetchData() {
+        setIsLoading(true)
         await fetchYears()
         await fetchUsers(selectedYear)
         if(isMounted) setIsLoading(false)
       }
-      fetchData();
+       fetchData();
       return () => { isMounted = false };
   }, [selectedYear])
 
@@ -55,26 +56,16 @@ const GlobalStats = ({users, fetchUsers, fetchYears, years}) => {
   }
 
   const renderStatsGraph = () => {
-    const statCalculatorUsers = new StatCalculatorUsers({users})
-
-    if (statCalculatorUsers.usersMadeBets) {
-      return (
-        <p className="text-comment">
-          Il n'y a même pas encore de paris, t'as cru qu'on allait bosser et faire des jolis graphs ?
-        </p>
-      )
-    } else {
-      return (
-        <>
-          <div className="grid_wrap">
-            <DoughnutGraph users={users}/>
-            <RadarGraph title="Moyenne côtes réussies" users={users} avgType="usersAvgOddWin"/>
-            <RadarGraph title="Moyenne côtes ratées" users={users} avgType="usersAvgOddLoose"/>
-          </div>
-          <LineGraph users={users}/>  
-        </>
-      )
-    }
+    return (
+      <>
+        <div className="grid_wrap">
+          <DoughnutGraph users={users}/>
+          <RadarGraph title="Moyenne côtes réussies" users={users} avgType="usersAvgOddWin"/>
+          <RadarGraph title="Moyenne côtes ratées" users={users} avgType="usersAvgOddLoose"/>
+        </div>
+        <LineGraph users={users}/>  
+      </>
+    )
   }
 
   const htmlHeadersExplanation = `
@@ -127,6 +118,8 @@ const GlobalStats = ({users, fetchUsers, fetchYears, years}) => {
   }
 
   const renderStats = () => {
+    const existingBets = new StatCalculatorUsers({ users }).usersMadeBets;
+
     if(isLoading){
       return(
       <div className="container-center margin-auto">
@@ -138,14 +131,16 @@ const GlobalStats = ({users, fetchUsers, fetchYears, years}) => {
         />
       </div>
       )
+    } else if (!existingBets) {
+      return (
+        <div className="text-comment">
+          <p>Il n'y a même pas encore de paris, t'as cru qu'on allait bosser et faire des jolis graphs ?</p>
+          <p>Puis de toute façon tu vas encore être naze cette année, soit pas pressé.</p>
+        </div>
+      )
     } else {
       return (
         <>
-          <select name="years" id="year" onChange={(e) => setSelectedYear(e.target.value)}>
-            <option value='actual'>Année en cours</option>
-            {renderYears()}
-          </select>
-          <h1>Les Stats des champions</h1>
           <h2>Les stats en détails</h2>
           <button className="btn-orange" onClick={() => showHeadersExplanation()}>Je ne comprends pas les colonnes</button>
           <br />
@@ -181,6 +176,11 @@ const GlobalStats = ({users, fetchUsers, fetchYears, years}) => {
 
   return (
     <div className="container-center inherit-min-height">
+      <select name="years" id="year" onChange={(e) => setSelectedYear(e.target.value)}>
+        <option value='actual'>Année en cours</option>
+        {renderYears()}
+      </select>
+      <h1>Les Stats des champions</h1>
       {renderStats()}
     </div>
   )

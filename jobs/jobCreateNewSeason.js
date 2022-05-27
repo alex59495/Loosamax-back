@@ -1,5 +1,5 @@
-const Job = require('./job')
-const CreateNewSeasonService = require('../services/createNewSeasonService')
+const Job = require('./job');
+const CreateNewSeasonService = require('../services/createNewSeasonService');
 
 class JobCreateNewSeason extends Job {
   static call = async () => {
