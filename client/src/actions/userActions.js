@@ -7,10 +7,18 @@ export const fetchUser = () => async (dispatch) =>
   dispatch({ type: FETCH_USER, payload: res.data })
 };
 
-export const fetchUsers = () => async (dispatch) => 
+export const fetchUsers = (selectedYear = null) => async (dispatch) => 
 {
-  const res = await axios.get('/api/users')
-  dispatch({ type: FETCH_USERS, payload: res.data })
+  if(selectedYear !== "actual") {
+    const season = await axios.get(`/api/seasons/${selectedYear}`);
+    const users = season?.data?.users ?? [];
+    dispatch({ type: FETCH_USERS, payload: users })
+    return;
+  }
+
+  const { data } = await axios.get('/api/users')
+
+  dispatch({ type: FETCH_USERS, payload: data })
 };
 
 export const updateUser = (user, values) => {

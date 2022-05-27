@@ -1,11 +1,11 @@
 const Game = require('../models/Game')
-const User = require('../models/User')
-const {betModel} = require('../models/Bet');
+const { userModel } = require('../models/User');
+const { betModel } = require('../models/Bet');
 module.exports = class AutomaticChooseGameService {
 
   call = async () => {
     // On recupere tous les utilisateurs avec leurs games et bets
-    const users = await User.find().populate({
+    const users = await userModel.find().populate({
       path: 'bets',
       populate: {
         path: 'game',
@@ -64,7 +64,7 @@ module.exports = class AutomaticChooseGameService {
       gamesFiltered.shift()
 
       // On update l'user avec ce bet
-      await User.findOneAndUpdate({_id: user._id}, {$push: {"bets": bet}})
+      await userModel.findOneAndUpdate({_id: user._id}, {$push: {"bets": bet}})
     }));
   }
 }

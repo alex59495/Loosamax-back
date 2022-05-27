@@ -1,8 +1,8 @@
 const mongoose = require('mongoose');
 const ObjectId = mongoose.Types.ObjectId;
 
-const {betModel} = require('../models/Bet');
-const User = require('../models/User');
+const { betModel } = require('../models/Bet');
+const { userModel } = require('../models/User');
 const Game = require('../models/Game');
 
 
@@ -12,7 +12,7 @@ const createBets = async (req, res) => {
 
   try {
     const actualBet = req.user.bets.find(bet => bet.game.result === null);
-    const usersBets = await User.find().populate(
+    const usersBets = await userModel.find().populate(
       {
         path: 'bets',
         populate: {
@@ -58,7 +58,7 @@ const createBets = async (req, res) => {
       res.status(200).send({res: 'Your last bet was above 2 and lost'})
     } else {
   
-      await User.updateOne({_id: req.user._id}, {$push: {"bets": bet}})
+      await userModel.updateOne({_id: req.user._id}, {$push: {"bets": bet}})
 
       // Redirection
       res.status(200).send({res: 'Fire redirect', _id: bet._id})
@@ -73,7 +73,7 @@ const deleteBet = async (req, res) => {
   const id = req.params.id
 
   try {
-    await User.updateOne({_id: req.user._id}, {$pull: {"bets": { _id: new ObjectId(id) }}})
+    await userModel.updateOne({_id: req.user._id}, {$pull: {"bets": { _id: new ObjectId(id) }}})
     res.status(200).send('Deleted');
 
   } catch(err) {

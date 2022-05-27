@@ -4,7 +4,6 @@ import {connect} from 'react-redux';
 import StatCalculatorUserBets from '../../utils/stats/statCalculatorUserBets';
 
 const UserStats = ({user, order}) => {
-
   const statCalculatorUserBets = new StatCalculatorUserBets({userBets: user.bets})
 
   const colorResultPourcentage = (result) => {
