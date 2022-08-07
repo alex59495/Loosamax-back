@@ -19,7 +19,10 @@ module.exports = {
   'OGC Nice': 'Nice',
   'FC Girondins de Bordeaux': 'Bordeaux',
   'FC Metz': 'Metz',
+  'AC Ajaccio': 'AC Ajaccio',
   'Montpellier HSC': 'Montpellier',
+  'AJ Auxerre': 'Auxerre',
+  'Toulouse FC': 'Toulouse',
   // Allemagne
   '1. FC Köln': 'FC Koln',
   'VfL Bochum 1848': 'VfL Bochum',
@@ -39,6 +42,8 @@ module.exports = {
   'RB Leipzig': 'RB Leipzig',
   'Borussia Dortmund': 'Borussia Dortmund',
   'TSG 1899 Hoffenheim': 'TSG Hoffenheim',
+  'FC Schalke 04': 'Schalke 04',
+  'SV Werder Bremen': 'Werder Bremen',
   // Angleterre
   'Crystal Palace FC': 'Crystal Palace',
   'Tottenham Hotspur FC': 'Tottenham Hotspur',
@@ -60,6 +65,9 @@ module.exports = {
   'Liverpool FC': 'Liverpool',
   'Everton FC': 'Everton',
   'Burnley FC': 'Burnley',
+  'Fulham FC': 'Fulham',
+  'AFC Bournemouth': 'Bournemouth',
+  'Nottingham Forest FC': 'Nottingham Forest',
   // Italie
   'Empoli FC': 'Empoli',
   'Venezia FC': 'Venezia',
@@ -81,6 +89,9 @@ module.exports = {
   'US Sassuolo Calcio': 'Sassuolo',
   'Bologna FC 1909': 'Bologna',
   'Hellas Verona FC': 'Hellas Verona FC',
+  'US Lecce': 'Lecce',
+  'US Cremonese': 'Cremonese',
+  'AC Monza': 'Monza',
   // Espagne
   'Villarreal CF': 'Villarreal',
   'Deportivo Alavés': 'Alavés',
@@ -102,6 +113,9 @@ module.exports = {
   'Elche CF': 'Elche CF',
   'Granada CF': 'Granada CF',
   'Real Betis Balompié': 'Real Betis',
+  'UD Almería': 'Almería',
+  'Real Valladolid CF': 'Valladolid',
+  'Girona F': 'Girona',
   // Pays-Bas
   'Fortuna Sittard': 'Fortuna Sittard',
   'AFC Ajax': 'Ajax',
@@ -121,6 +135,9 @@ module.exports = {
   'Heracles Almelo': 'Heracles Almelo',
   "FC Twente '65": 'FC Twente Enschede',
   'AZ': 'AZ Alkmaar',
+  'FC Emmen': 'FC Emmen',
+  'FC Volendam': 'FC Volendam',
+  'SBV Excelsior': 'Excelsior',
   // Portugal
   'GD Estoril Praia':'Estoril',
   'Sporting Clube de Portugal': 'Sporting Lisbon',
@@ -140,4 +157,6 @@ module.exports = {
   'FC Vizela': 'Vizela',
   'FC Paços de Ferreira': 'Pacos de Ferreira',
   'Os Belenenses Futebol': 'Belenenses',
+  'Rio Ave FC': 'Rio Ave FC',
+  'Casa Pia AC': 'Casa Pia',
 }
