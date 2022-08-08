@@ -41,7 +41,7 @@ passport.use(new googleStrategy(
       return done(null, false)
     }
 
-    const user = await new User({ 
+    const user = await new userModel({ 
       googleId: profile.id,
       color: "#bc4b51",
       emails: profile.emails
