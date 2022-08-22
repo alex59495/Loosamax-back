@@ -38,8 +38,8 @@ const UserStats = ({user, order}) => {
           <td>{statCalculatorUserBets.numberWin}</td>
           <td>{statCalculatorUserBets.numberLoose}</td>
           <td className={`content ${colorResultPourcentage(winPoucentage)}`}>{winPoucentage}</td>
-          <td>{statCalculatorUserBets.averageOddWin ?? 'Un bon gros zéro !'}</td>
-          <td>{statCalculatorUserBets.averageOddLoose ?? '0 défaite, champion !'}</td>
+          <td>{statCalculatorUserBets.averageOddWin || 'Un bon gros zéro !'}</td>
+          <td>{statCalculatorUserBets.averageOddLoose || '0 défaite, champion !'}</td>
           <td>{statCalculatorUserBets.averageOdd}</td>
           <td className={`content ${colorResultEarning(globalEarning)}`}>{globalEarning}€</td>
         </tr>
