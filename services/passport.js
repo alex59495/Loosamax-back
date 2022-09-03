@@ -1,7 +1,6 @@
 const passport = require('passport');
 const googleStrategy = require('passport-google-oauth20').Strategy;
 const keys = require('../config/keys');
-const mongoose = require('mongoose');
 
 const { userModel } = require('../models/User');
 
@@ -46,6 +45,7 @@ passport.use(new googleStrategy(
       color: "#bc4b51",
       emails: profile.emails
     }).save()
+
     done(null, user)
   }
 ));

@@ -1,4 +1,5 @@
 const passport = require('passport');
+const keys = require('../config/keys')
 
 const UsersControllers = require('../controllers/UsersControllers.js')
 const userSubscription = require('../middlewares/userSubscriptions')
@@ -13,15 +14,15 @@ module.exports = (app) => {
   );
   
   app.get('/auth/google/callback', 
-    passport.authenticate('google', { failureRedirect: '/', failureFlash: "Dejá 9 joueurs inscrits, tu ne peux pas t'inscrire." }),
+    passport.authenticate('google', { failureRedirect: '/', failureFlash: "Dejá 10 joueurs inscrits, tu ne peux pas t'inscrire." }),
     (req, res) => {
-      res.redirect(`/profile/${req.user.id}`)
+      res.redirect(`${keys.frontUrl}/profile/${req.user.id}`)
     }
   );
 
   app.get('/api/logout', (req, res) => {
     req.logout();
-    res.redirect('/')
+    res.redirect(keys.frontUrl)
   })
 
   app.get('/api/current_user', userSubscription, UsersControllers.fetchCurrentUser);

@@ -15,6 +15,14 @@ module.exports = (app) => {
   app.set('view engine', 'ejs');
   app.set('view options', { layout: false });
   app.set('views', __dirname + '/views');
+
+  // Resolve CORS issues
+  app.use(function(req, res, next) {
+    res.header("Access-Control-Allow-Origin", keys.frontUrl);
+    res.header("Access-Control-Allow-Credentials", true);
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    next();
+});
   
   app.use(device.capture());
   // Middlewares

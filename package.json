@@ -7,15 +7,10 @@
   },
   "scripts": {
     "start": "node server.js",
-    "server": "NODE_ENV=development nodemon --delay 1500ms server.js",
-    "client": "yarn --cwd client start",
-    "dev": "concurrently \"yarn run server\" \"yarn run client\" ",
-    "client-install": "yarn --cwd client install",
-    "inst-all": "yarn install && yarn --cwd client install",
-    "client-build": "yarn --cwd client build",
-    "heroku-postbuild": "YARN_PRODUCTION=false yarn inst-all && yarn client-build",
+    "server": "NODE_ENV=development PORT=3148 nodemon --delay 1500ms server.js",
+    "heroku-postbuild": "YARN_PRODUCTION=false yarn install",
     "console": "node --experimental-repl-await ./console.js",
-    "test": "yarn jest && yarn --cwd client jest"
+    "test": "yarn jest"
   },
   "license": "MIT",
   "dependencies": {
