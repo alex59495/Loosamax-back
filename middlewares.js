@@ -12,16 +12,14 @@ module.exports = (app) => {
 
   webpush.setVapidDetails('mailto:maxence.lenoir1206@gmail.com', keys.publicVapid, keys.privateVapid);
 
-  app.set('view engine', 'ejs');
-  app.set('view options', { layout: false });
-  app.set('views', __dirname + '/views');
+  app.set('trust proxy', 1);
 
   // Resolve CORS issues
   app.use(function(req, res, next) {
     res.header("Access-Control-Allow-Origin", keys.frontUrl);
     res.header("Access-Control-Allow-Credentials", true);
     res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,UPDATE,OPTIONS');
-    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, X-HTTP-Method-Override, Content-Type, Accept");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, X-HTTP-Method-Override, Content-Type, Accept, Set-Cookie, Cookie");
     next();
 });
   
