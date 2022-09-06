@@ -10,5 +10,5 @@ module.exports = {
   googleIDAlex: process.env.GOOGLE_ID_ALEX,
   publicVapid: process.env.PUBLIC_VAPID,
   privateVapid: process.env.PRIVATE_VAPID,
-  frontUrl: process.env.FRONT_URL,
+  frontUrl: process.env.FRONT_URL
 }

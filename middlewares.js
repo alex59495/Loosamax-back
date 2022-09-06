@@ -33,7 +33,6 @@ module.exports = (app) => {
       // 30 days
       maxAge: 30 * 24 * 60 * 60 * 1000,
       keys: [keys.cookieKey],
-      domain: keys.frontUrl,
     })
   );
   app.use(flash());
