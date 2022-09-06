@@ -33,6 +33,8 @@ module.exports = (app) => {
       // 30 days
       maxAge: 30 * 24 * 60 * 60 * 1000,
       keys: [keys.cookieKey],
+      domain: process.env.NODE_ENV === 'production' ? '.netlify.app' : null,
+      sameSite: false
     })
   );
   app.use(flash());
