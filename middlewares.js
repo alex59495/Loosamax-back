@@ -14,14 +14,14 @@ module.exports = (app) => {
 
   app.set('trust proxy', 1);
 
-  // Resolve CORS issues
-  app.use(function(req, res, next) {
+   // Resolve CORS issues
+   app.use(function(req, res, next) {
     res.header("Access-Control-Allow-Origin", keys.frontUrl);
     res.header("Access-Control-Allow-Credentials", true);
     res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,UPDATE,OPTIONS');
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, X-HTTP-Method-Override, Content-Type, Accept, Set-Cookie, Cookie");
     next();
-});
+  });
   
   app.use(device.capture());
   // Middlewares
@@ -30,9 +30,7 @@ module.exports = (app) => {
     cookieSession({
       // 30 days
       maxAge: 30 * 24 * 60 * 60 * 1000,
-      keys: [keys.cookieKey],
-      domain: process.env.NODE_ENV === 'production' ? '.netlify.app' : null,
-      sameSite: false
+      keys: [keys.cookieKey]
     })
   );
   app.use(flash());
