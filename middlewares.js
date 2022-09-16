@@ -12,7 +12,11 @@ module.exports = (app) => {
 
   webpush.setVapidDetails('mailto:maxence.lenoir1206@gmail.com', keys.publicVapid, keys.privateVapid);
 
-  app.set('trust proxy', 1);
+  app.set('trust proxy', (ip) => {
+    // https://expressjs.com/en/guide/behind-proxies.html
+    if (ip === '168.220.95.234') return true;
+    return false;
+  });
 
    // Resolve CORS issues
    app.use(function(req, res, next) {
