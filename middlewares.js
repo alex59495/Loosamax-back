@@ -3,6 +3,7 @@ const passport = require('passport');
 const flash = require('connect-flash');
 const express = require('express');
 const device = require('express-device');
+const cors = require('cors');
 // const Queue = require('bull');
 
 const keys = require('./config/keys');
@@ -17,6 +18,8 @@ module.exports = (app) => {
     if (ip === '168.220.95.234') return true;
     return false;
   });
+
+  app.use(cors({ credentials: true }))
 
    // Resolve CORS issues
    app.use(function(req, res, next) {
