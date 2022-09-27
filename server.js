@@ -1,5 +1,8 @@
 const app = require('./app');
 const express = require('express');
+const initScheduledJobs = require('./cronJobs');
+
+process.env.TZ = 'Europe/Paris';
 
 if(process.env.NODE_ENV === 'production') {
   // Express will serve up production assets like main.css or main.js
@@ -10,6 +13,8 @@ if(process.env.NODE_ENV === 'production') {
     res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
   });
 }
+
+initScheduledJobs()
 
 const PORT = process.env.PORT || 5000
 app.listen(PORT);

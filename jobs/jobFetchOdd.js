@@ -7,8 +7,7 @@ class JobFetchOdd extends Job {
     await Promise.all(Object.entries(leagueIdentifiers).map(async (league) => {
       await new FetchOddService(league[1].name).call()
     }))
-    super.closeConnection()
   }
 }
 
-JobFetchOdd.call()
+module.exports = JobFetchOdd
