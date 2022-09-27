@@ -13,16 +13,12 @@ module.exports = (app) => {
 
   webpush.setVapidDetails('mailto:maxence.lenoir1206@gmail.com', keys.publicVapid, keys.privateVapid);
 
-  app.set('trust proxy', (ip) => {
-    // https://expressjs.com/en/guide/behind-proxies.html
-    if (ip === '168.220.95.234') return true;
-    return false;
-  });
+  app.set('trust proxy', 1);
 
-  app.use(cors({ credentials: true }))
+  app.use(cors({ credentials: true, origin: keys.frontUrl }))
 
-   // Resolve CORS issues
-   app.use(function(req, res, next) {
+  // Resolve CORS issues
+  app.use(function(req, res, next) {
     res.header("Access-Control-Allow-Origin", keys.frontUrl);
     res.header("Access-Control-Allow-Credentials", true);
     res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,UPDATE,OPTIONS');

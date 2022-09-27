@@ -1,15 +1,12 @@
-# fly.toml file generated for loosamax on 2022-08-30T20:33:47+02:00
+# fly.toml file generated for loosamax on 2022-09-25T10:12:47+02:00
 
 app = "loosamax"
 kill_signal = "SIGINT"
 kill_timeout = 5
 processes = []
 
-[build]
-  builder = "heroku/buildpacks:20"
-
 [env]
-  PORT = "5000"
+  PORT = "8080"
 
 [experimental]
   allowed_public_ports = []
@@ -17,7 +14,7 @@ processes = []
 
 [[services]]
   http_checks = []
-  internal_port = 5000
+  internal_port = 8080
   processes = ["app"]
   protocol = "tcp"
   script_checks = []
