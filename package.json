@@ -17,7 +17,6 @@
     "@tsed/testing-mongoose": "^6.67.0",
     "axios": "^0.21.2",
     "body-parser": "^1.19.0",
-    "bull": "^3.29.1",
     "concurrently": "^6.2.1",
     "connect-flash": "^0.1.1",
     "cookie-session": "^1.4.0",

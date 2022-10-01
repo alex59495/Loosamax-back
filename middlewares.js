@@ -11,7 +11,11 @@ const keys = require('./config/keys');
 module.exports = (app) => {
   const webpush = require('web-push');
 
-  webpush.setVapidDetails('mailto:maxence.lenoir1206@gmail.com', keys.publicVapid, keys.privateVapid);
+  webpush.setVapidDetails(
+    'mailto:maxence.lenoir1206@gmail.com',
+    keys.publicVapid,
+    keys.privateVapid
+  );
 
   app.use(
     cookieSession({
@@ -28,24 +32,30 @@ module.exports = (app) => {
 
   // Resolve CORS issues
   app.use(
-    cors({ 
-      credentials: true, 
-      origin: keys.frontUrl 
+    cors({
+      credentials: true,
+      origin: keys.frontUrl,
     })
   );
 
-  // app.use(function(req, res, next) {
-  //   res.header("Access-Control-Allow-Origin", keys.frontUrl);
-  //   res.header("Access-Control-Allow-Credentials", true);
-  //   res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,UPDATE,OPTIONS');
-  //   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, X-HTTP-Method-Override, Content-Type, Accept, Set-Cookie, Cookie");
-  //   next();
-  // });
-  
+  app.use(function (req, res, next) {
+    res.header('Access-Control-Allow-Origin', keys.frontUrl);
+    res.header('Access-Control-Allow-Credentials', true);
+    res.header(
+      'Access-Control-Allow-Methods',
+      'GET,PUT,POST,DELETE,UPDATE,OPTIONS'
+    );
+    res.header(
+      'Access-Control-Allow-Headers',
+      'Origin, X-Requested-With, X-HTTP-Method-Override, Content-Type, Accept, Set-Cookie, Cookie'
+    );
+    next();
+  });
+
   app.use(device.capture());
   // Middlewares
   app.use(express.json());
   app.use(flash());
   app.use(passport.initialize());
   app.use(passport.session());
-}
+};
