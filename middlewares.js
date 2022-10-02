@@ -4,7 +4,6 @@ const flash = require('connect-flash');
 const express = require('express');
 const device = require('express-device');
 const cors = require('cors');
-// const Queue = require('bull');
 
 const keys = require('./config/keys');
 
