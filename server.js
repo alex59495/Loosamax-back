@@ -1,7 +1,7 @@
+require('dotenv').config();
 const app = require('./app');
 const express = require('express');
 const initScheduledJobs = require('./cronJobs');
-require('dotenv').config();
 
 process.env.TZ = 'Europe/Paris';
 
