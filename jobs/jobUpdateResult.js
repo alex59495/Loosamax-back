@@ -1,10 +1,10 @@
-const Job = require('./job')
-const UpdateResultsService = require('../services/updateResultsService')
+const Job = require('./job');
+const UpdateResultsService = require('../services/updateResultsService');
 
-class JobFetchOdd extends Job {
+class JobUpdateResult extends Job {
   static call = async () => {
-    await new UpdateResultsService().call()
-  }
+    await new UpdateResultsService().call();
+  };
 }
 
-module.exports = JobFetchOdd;
+module.exports = JobUpdateResult;

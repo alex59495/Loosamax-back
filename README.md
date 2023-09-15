@@ -23,7 +23,7 @@ C'est surement parce que les `process.env.NODE_ENV` renvoit `undefined`, dans ce
 
 Pour créer une nouvelle saison il suffit de faire tourner le job
 ```
-node jobs/jobCreateNewSeason.js
+node jobs/manualCalls/jobCreateNewSeason.js
 ```
 
 Le job s'occupe de copier les stats de chaque user dans une nouvelle table `season` avec comme infos :
