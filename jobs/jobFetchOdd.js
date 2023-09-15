@@ -6,7 +6,6 @@ class JobFetchOdd extends Job {
   static call = async () => {
     await Promise.all(
       Object.entries(leagueIdentifiers).map(async (league) => {
-        console.log(`Fetching odds for : ${league}`);
         await new FetchOddService(league[1].name).call();
       })
     );

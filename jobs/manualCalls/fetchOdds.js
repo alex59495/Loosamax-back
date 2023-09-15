@@ -1,3 +1,3 @@
-const FetchOdd = require('./jobs/jobFetchOdd.js');
+const FetchOdd = require('../jobFetchOdd.js');
 
 FetchOdd.call();

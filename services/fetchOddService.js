@@ -54,12 +54,10 @@ module.exports = class fetchOddService {
   };
 
   call = async () => {
-    console.log(`before axios call ${this.league}`);
     const fetchGames = await axios({
       method: 'get',
       url: `https://api.the-odds-api.com/v4/sports/${this.league}/odds/?apiKey=${keys.oddsApi}&regions=eu&markets=h2h`,
     });
-    console.log(`after axios call ${this.league}`);
 
     const games = this.dataForWeek(fetchGames.data);
     await Promise.all(
@@ -73,10 +71,10 @@ module.exports = class fetchOddService {
           bookmakers,
         } = game;
         const unibet = bookmakers.find(
-          (bookmaker) => bookmaker.key == 'unibet'
+          (bookmaker) => bookmaker.key == 'unibet_eu'
         );
-        const betclic = bookmakers.find(
-          (bookmaker) => bookmaker.key == 'betclic'
+        const betfair = bookmakers.find(
+          (bookmaker) => bookmaker.key == 'betfair_ex_eu'
         );
 
         let home_odd = null;
@@ -87,8 +85,8 @@ module.exports = class fetchOddService {
         if (unibet) {
           market = unibet.markets[0];
         }
-        if (betclic) {
-          market = betclic.markets[0];
+        if (betfair) {
+          market = betfair.markets[0];
         }
 
         if (market) {

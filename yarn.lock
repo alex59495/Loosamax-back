@@ -21,7 +21,7 @@
   "resolved" "https://registry.npmjs.org/@babel/compat-data/-/compat-data-7.17.7.tgz"
   "version" "7.17.7"
 
-"@babel/core@^7.0.0", "@babel/core@^7.0.0-0", "@babel/core@^7.1.0", "@babel/core@^7.12.3", "@babel/core@^7.7.5":
+"@babel/core@^7.1.0", "@babel/core@^7.12.3", "@babel/core@^7.7.5":
   "integrity" "sha512-djHlEfFHnSnTAcPb7dATbiM5HxGOP98+3JLBZtjRb5I7RXrw7kFRoG2dXM8cm3H+o11A8IFH/uprmJpwFynRNQ=="
   "resolved" "https://registry.npmjs.org/@babel/core/-/core-7.17.7.tgz"
   "version" "7.17.7"
@@ -2894,7 +2894,7 @@
     "jest-regex-util" "^26.0.0"
     "jest-snapshot" "^26.6.2"
 
-"jest-resolve@*", "jest-resolve@^26.6.2":
+"jest-resolve@^26.6.2":
   "integrity" "sha512-sOxsZOq25mT1wRsfHcbtkInS+Ek7Q8jCHUB0ZUTP0tc/c41QHriU/NunqMfCUWsL4H3MHpvQD4QR9kSYhS7UvQ=="
   "resolved" "https://registry.npmjs.org/jest-resolve/-/jest-resolve-26.6.2.tgz"
   "version" "26.6.2"
@@ -3499,7 +3499,7 @@
   optionalDependencies:
     "saslprep" "^1.0.3"
 
-"mongodb@3.x.x || 4.x", "mongodb@4.3.1":
+"mongodb@4.3.1":
   "integrity" "sha512-sNa8APSIk+r4x31ZwctKjuPSaeKuvUeNb/fu/3B6dRM02HpEgig7hTHM8A/PJQTlxuC/KFWlDlQjhsk/S43tBg=="
   "resolved" "https://registry.npmjs.org/mongodb/-/mongodb-4.3.1.tgz"
   "version" "4.3.1"
@@ -3511,7 +3511,7 @@
   optionalDependencies:
     "saslprep" "^1.0.3"
 
-"mongoose@^5.12.2", "mongoose@^6.0.2":
+"mongoose@^6.0.2":
   "integrity" "sha512-yqTZcM3u0+aLzl6cirtXy6vr24kt+kFyTucCQ3pyncvO1jGn/M1R09qkC/v54QoPXeVJdpcuS5eQWn0NLlDvKA=="
   "resolved" "https://registry.npmjs.org/mongoose/-/mongoose-6.2.7.tgz"
   "version" "6.2.7"
