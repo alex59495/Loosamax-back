@@ -8,14 +8,6 @@ const cors = require('cors');
 const keys = require('./config/keys');
 
 module.exports = (app) => {
-  const webpush = require('web-push');
-
-  webpush.setVapidDetails(
-    'mailto:maxence.lenoir1206@gmail.com',
-    keys.publicVapid,
-    keys.privateVapid
-  );
-
   app.use(
     cookieSession({
       // 30 days
