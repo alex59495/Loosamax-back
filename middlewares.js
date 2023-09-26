@@ -21,7 +21,7 @@ module.exports = (app) => {
       // 30 days
       maxAge: 30 * 24 * 60 * 60 * 1000,
       keys: [keys.cookieKey],
-      secure: process.env.NODE_ENV === 'development' ? false : true,
+      secure: false,
       httpOnly: process.env.NODE_ENV === 'development' ? false : true,
       sameSite: process.env.NODE_ENV === 'development' ? false : 'none',
     })
