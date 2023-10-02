@@ -14,15 +14,13 @@ jobs:
     - name: Use Node.js
       uses: actions/setup-node@v2
       with:
-        node-version: '14'
+        node-version: '16'
         cache: 'yarn'
     - name: Install dependencies
-      run: yarn inst-all
+      run: yarn install
     - run: yarn test
       env:
         NODE_ENV: ${{ secrets.NODE_ENV }}
         COOKIE_KEY: ${{ secrets.COOKIE_KEY }}
         GOOGLE_CLIENT_ID: ${{ secrets.GOOGLE_CLIENT_ID }}
         GOOGLE_CLIENT_SECRET: ${{ secrets.GOOGLE_CLIENT_SECRET }}
-        PRIVATE_VAPID: ${{ secrets.PRIVATE_VAPID }}
-        PUBLIC_VAPID: ${{ secrets.PUBLIC_VAPID }}

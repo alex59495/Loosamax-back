@@ -5,7 +5,6 @@ require('./models/Season');
 require('./models/User');
 require('./models/Game');
 require('./models/Bet');
-require('./models/Subscription');
 
 // service
 require('./services/passport');
@@ -21,10 +20,8 @@ require('./database');
 require('./routes/userRoutes')(app);
 require('./routes/gamesRoutes')(app);
 require('./routes/betRoutes')(app);
-require('./routes/subscribeRoutes')(app);
 require('./routes/standingsRoutes')(app);
 require('./routes/seasonRoutes')(app);
 
-
 // const myJobQueue = new Queue('myJob', keys.redisUrl );
-module.exports = app
+module.exports = app;

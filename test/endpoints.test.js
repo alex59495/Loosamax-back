@@ -1,3 +1,4 @@
+require('dotenv').config();
 const request = require('supertest');
 const dbHandler = require('./db-handler');
 
@@ -8,30 +9,31 @@ const app = require('../app');
 const leaguesIdentifiers = require('../helpers/leaguesIdentifiers');
 
 describe('Games endpoints', () => {
-
   beforeAll(async () => {
-    await dbHandler.connect()
+    await dbHandler.connect();
   });
 
   afterEach(async () => {
-    await dbHandler.clearDatabase()
+    await dbHandler.clearDatabase();
   });
 
   afterAll(async () => {
-    await dbHandler.closeDatabase()
+    await dbHandler.closeDatabase();
   });
 
   it('should access the games', async () => {
-    for(const game of games) {
+    for (const game of games) {
       const gameDb = new Game(game);
       await gameDb.save();
-    };
+    }
 
-    const numGamesFoundFrance = games.filter(game => game.sport_key === leaguesIdentifiers['ligue_1'].name).length
+    const numGamesFoundFrance = games.filter(
+      (game) => game.sport_key === leaguesIdentifiers['ligue_1'].name
+    ).length;
     const res = await request(app)
       .get('/api/games/ligue_1')
-      .expect('Content-Type', /json/)
-    
-    expect(res.body).toHaveLength(numGamesFoundFrance)
-  })
-})
+      .expect('Content-Type', /json/);
+
+    expect(res.body).toHaveLength(numGamesFoundFrance);
+  });
+});
