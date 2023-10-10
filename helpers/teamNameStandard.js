@@ -107,7 +107,7 @@ module.exports = {
   'Elche CF': 'Elche CF',
   'FC Barcelona': 'Barcelona',
   'Getafe CF': 'Getafe',
-  'Girona F': 'Girona',
+  'Girona FC': 'Girona',
   'Granada CF': 'Granada CF',
   'Levante UD': 'Levante',
   'Rayo Vallecano de Madrid': 'Rayo Vallecano',
