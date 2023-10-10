@@ -19,6 +19,14 @@ MongooseError: The `uri` parameter to `openUri()` must be a string, got "undefin
 
 C'est surement parce que les `process.env.NODE_ENV` renvoit `undefined`, dans ce cas il suffit d'ajouter `NODE_ENV=development` devant la commande pour forcer la définition de la variable.
 
+## Testing
+Pour lancer les tests utiliser la commande
+```
+yarn test
+```
+
+Pour que les test run avec ubuntu 22.04 il faut spécifier une version de Mongo db >= 6.0.4. Pour cela ajouter MONGOMS_VERSION=6.0.4 dans le .env (voir [ce thread](https://github.com/nodkz/mongodb-memory-server/issues/480))
+
 ## Créer une nouvelle saison pour sauvegarder les résultats
 
 Pour créer une nouvelle saison il suffit de faire tourner le job
