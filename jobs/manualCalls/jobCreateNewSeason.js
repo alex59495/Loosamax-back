@@ -5,6 +5,8 @@ class JobCreateNewSeason extends Job {
   static call = async () => {
     await new CreateNewSeasonService().call();
     super.closeConnection();
+    console.log('Season has been created');
+    process.exit(0);
   };
 }
 
