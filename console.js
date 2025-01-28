@@ -1,3 +1,4 @@
+require('dotenv').config();
 const repl = require('repl');
 const mongoose = require('mongoose');
 const keys = require('./config/keys');

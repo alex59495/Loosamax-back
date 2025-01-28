@@ -10,9 +10,7 @@
       "protocol": "inspector",
       "restart": true,
       "name": "Debug Program",
-      "skipFiles": [
-        "<node_internals>/**"
-      ],
+      "skipFiles": ["<node_internals>/**"]
     }
   ]
 }
